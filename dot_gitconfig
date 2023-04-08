@@ -10,7 +10,7 @@
 	gpgSign = true
 [alias]
 	yolo = !git add -A && git commit -m \"$(curl --silent --fail https://whatthecommit.com/index.txt)\"
-	yeet = git yolo && git push
+	yeet = !git yolo && git push
   # *********************
   # Rebase workflow
     mainbranch = "!git remote show origin | sed -n '/HEAD branch/s/.*: //p'"
