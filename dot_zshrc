@@ -133,5 +133,3 @@ export PATH="$PNPM_HOME:$PATH"
 source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
 source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 
-alias docker=podman
-alias docker-compose=podman-compose
