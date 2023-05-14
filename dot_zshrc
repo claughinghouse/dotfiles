@@ -107,8 +107,8 @@ export EDITOR="/usr/local/bin/code --wait"
 export VISUAL=/usr/local/bin/code
 eval "$(direnv hook zsh)"
 
-export GOPATH="$HOME/go"
-PATH="$GOPATH/bin:$PATH"
+# export GOPATH="$HOME/go"
+# PATH="$GOPATH/bin:$PATH"
 
 # get zsh complete kubectl
 source <(kubectl completion zsh)
