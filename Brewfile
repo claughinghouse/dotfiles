@@ -25,7 +25,7 @@ brew "ansible"
 brew "yamllint"
 brew "ansible-lint"
 brew "asciinema"
-brew "awscli"
+brew "awscli", link: false
 brew "bmon"
 brew "python@3.9"
 brew "chezmoi"
