@@ -11,14 +11,15 @@
 [alias]
 	yolo = !git add -A && git commit -m \"$(curl --silent --fail https://whatthecommit.com/index.txt)\"
 	yeet = !git yolo && git push
+  cleanup = "!git fetch -p && for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do git branch -D $branch; done"
   # *********************
   # Rebase workflow
-    mainbranch = "!git remote show origin | sed -n '/HEAD branch/s/.*: //p'"
-    synced = "!git pull origin $(git mainbranch) --rebase"
-    update = "!git pull origin $(git rev-parse --abbrev-ref HEAD) --rebase"
-    squash = "!git rebase -v -i $(git mainbranch)"
-    publish = push origin HEAD --force-with-lease
-    pub = publish 
+  mainbranch = "!git remote show origin | sed -n '/HEAD branch/s/.*: //p'"
+  synced = "!git pull origin $(git mainbranch) --rebase"
+  update = "!git pull origin $(git rev-parse --abbrev-ref HEAD) --rebase"
+  squash = "!git rebase -v -i $(git mainbranch)"
+  publish = push origin HEAD --force-with-lease
+  pub = publish 
 
   # ********************
   # My dumbass typos
