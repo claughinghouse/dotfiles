@@ -9,7 +9,7 @@
 [commit]
 	gpgSign = true
 [alias]
-	yolo = !git add -A && git commit -m \"$(curl --silent --fail https://whatthecommit.com/index.txt)\"
+	yolo = !git add -A && git commit -m \"$(curl --silent --fail https://timmoc.dev)\"
 	yeet = !git yolo && git push
   # *********************
   # Rebase workflow
