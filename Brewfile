@@ -83,7 +83,6 @@ brew "task", link: false
 brew "terraform-docs"
 brew "terrascan"
 brew "tflint"
-brew "tfsec"
 brew "tmux"
 brew "tnftpd"
 brew "tree"
