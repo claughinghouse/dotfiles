@@ -106,7 +106,7 @@ brew "johanhaleby/kubetail/kubetail"
 brew "kubeshark/kubeshark/kubeshark"
 brew "norwoodj/tap/helm-docs"
 brew "proxmark/proxmark3/proxmark3"
-brew "siderolabs/talos/talosctl"
+brew "siderolabs/talos/talosctl", link: false
 cask "bruno"
 cask "font-fira-code"
 cask "lens"
