@@ -85,7 +85,6 @@ brew "speedtest-cli"
 brew "ssh-audit"
 brew "starship"
 brew "task", link: false
-brew "terraform"
 brew "terraform-docs"
 brew "terrascan"
 brew "tflint"
