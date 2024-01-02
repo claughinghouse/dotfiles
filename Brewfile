@@ -110,7 +110,6 @@ brew "planetscale/tap/pscale"
 brew "proxmark/proxmark3/proxmark3"
 brew "siderolabs/talos/talosctl", link: false
 brew "sst/tap/sst"
-brew "withgraphite/tap/graphite"
 cask "bruno"
 cask "syncthing"
 cask "talosctl"
