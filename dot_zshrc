@@ -132,3 +132,5 @@ export PATH="$PNPM_HOME:$PATH"
 export PATH=/usr/local/sbin/:$PATH
 
 source <(pkgx --shellcode)  #docs.pkgx.sh/shellcode
+. <(flux completion bash)
+
