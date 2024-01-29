@@ -101,7 +101,6 @@ GPG_TTY=$(tty)
 export GPG_TTY
 
 autoload -U +X bashcompinit && bashcompinit
-# complete -o nospace -C /usr/local/bin/terraform terraform
 
 export EDITOR="/usr/local/bin/code --wait"
 export VISUAL=/usr/local/bin/code
