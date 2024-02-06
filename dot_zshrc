@@ -68,7 +68,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git gcloud kubectl helm)
+plugins=(git kubectl helm)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -130,6 +130,7 @@ export PATH="$PNPM_HOME:$PATH"
 
 export PATH=/usr/local/sbin/:$PATH
 
-source <(pkgx --shellcode)  #docs.pkgx.sh/shellcode
 . <(flux completion bash)
+
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
