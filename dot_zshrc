@@ -130,7 +130,6 @@ export PATH="$PNPM_HOME:$PATH"
 
 export PATH=/usr/local/sbin/:$PATH
 
-. <(flux completion bash)
 
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
