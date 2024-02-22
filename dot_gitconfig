@@ -51,3 +51,6 @@
 	required = true
 [push]
 	autoSetupRemote = true
+[diff "lockb"]
+	textconv = bun
+	binary = true
