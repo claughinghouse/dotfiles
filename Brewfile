@@ -123,7 +123,6 @@ brew "kubeshark/kubeshark/kubeshark"
 brew "norwoodj/tap/helm-docs"
 brew "oven-sh/bun/bun"
 brew "pkgxdev/made/pkgx"
-brew "planetscale/tap/pscale"
 brew "powershell/tap/powershell"
 brew "proxmark/proxmark3/proxmark3"
 brew "siderolabs/talos/talosctl", link: false
