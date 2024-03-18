@@ -86,7 +86,7 @@ brew "p7zip"
 brew "pandoc"
 brew "pinentry-mac"
 brew "plow"
-brew "pnpm", link: false
+brew "pnpm"
 brew "podman"
 brew "podman-compose"
 brew "pre-commit"
