@@ -130,6 +130,7 @@ brew "proxmark/proxmark3/proxmark3"
 brew "siderolabs/talos/talosctl", link: false
 brew "sst/tap/sst"
 brew "tursodatabase/tap/turso"
+cask "alacritty"
 cask "font-0xproto-nerd-font"
 cask "font-3270-nerd-font"
 cask "font-agave-nerd-font"
