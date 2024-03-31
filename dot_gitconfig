@@ -1,0 +1,51 @@
+[user]
+	email = claughinghouse@users.noreply.github.com
+	name = claughinghouse
+	signingKey = B3BB654B6CAAA312F49C37DF9CEFDEA122154047
+[init]
+	defaultBranch = main
+[gpg]
+	program = /usr/local/bin/gpg
+[commit]
+	gpgSign = true
+[alias]
+	yolo = !git add -A && git commit -m \"$(curl --silent --fail https://timmoc.dev)\"
+	yeet = !git yolo && git push
+  # *********************
+  # Rebase workflow
+  mainbranch = "!git remote show origin | sed -n '/HEAD branch/s/.*: //p'"
+  synced = "!git pull origin $(git mainbranch) --rebase"
+  update = "!git pull origin $(git rev-parse --abbrev-ref HEAD) --rebase"
+  squash = "!git rebase -v -i $(git mainbranch)"
+  publish = push origin HEAD --force-with-lease
+  pub = publish 
+
+  # *********************
+  # Github
+  # From - https://salferrarello.com/git-alias-open-pull-request-github/
+    pr = "!f() { \
+       open \"$(git ls-remote --get-url $(git config --get branch.$(git rev-parse --abbrev-ref HEAD).remote) \
+       | sed 's|git@github.com:\\(.*\\)$|https://github.com/\\1|' \
+       | sed 's|\\.git$||'; \
+       )/compare/$(\
+       git config --get branch.$(git rev-parse --abbrev-ref HEAD).merge | cut -d '/' -f 3- \
+       )?expand=1\"; \
+  }; f"
+    hub = "!f() { \
+       open \"$(git ls-remote --get-url \
+       | sed 's|git@github.com:\\(.*\\)$|https://github.com/\\1|' \
+       | sed 's|\\.git$||'; \
+       )\"; \
+  }; f"
+	cleanup = "git fetch -p && for branch in ; do git branch -D ; done\n fetch -p && for branch in ; do git branch -D ; done"
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[push]
+	autoSetupRemote = true
+[diff "lockb"]
+	textconv = bun
+	binary = true
