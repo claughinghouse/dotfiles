@@ -36,11 +36,12 @@ packages:
       - "k9s"
       - "sst"
       - "siderolabs/tap/talosctl"
-      - "flux"
+      - "fluxcd/tap/flux"
     casks:
       - "alacritty"
+      - "iterm2"
       - "powershell"
     taps:
-      - "fluxcd/tap/flux"
+      - "fluxcd/tap"
       - "sst/tap"
       - "siderolabs/tap"
