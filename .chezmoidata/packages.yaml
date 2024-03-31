@@ -37,11 +37,11 @@ packages:
       - "sst"
       - "siderolabs/tap/talosctl"
       - "fluxcd/tap/flux"
-      - "font-intel-one-mono"
     casks:
       - "alacritty"
       - "iterm2"
       - "powershell"
+      - "font-intel-one-mono"
     taps:
       - "fluxcd/tap"
       - "sst/tap"
