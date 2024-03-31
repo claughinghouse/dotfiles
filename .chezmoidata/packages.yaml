@@ -37,6 +37,7 @@ packages:
       - "sst"
       - "siderolabs/tap/talosctl"
       - "fluxcd/tap/flux"
+      - "font-intel-one-mono"
     casks:
       - "alacritty"
       - "iterm2"
@@ -45,3 +46,4 @@ packages:
       - "fluxcd/tap"
       - "sst/tap"
       - "siderolabs/tap"
+      - "homebrew/cask-fonts"
