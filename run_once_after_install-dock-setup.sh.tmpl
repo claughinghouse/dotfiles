@@ -20,6 +20,8 @@ declare -a folders=(
 	~/Downloads
 )
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 printf '\n\nSetting Global Mac Settings...\n'
 # better key repeat
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
