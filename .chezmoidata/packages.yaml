@@ -45,5 +45,6 @@ packages:
     taps:
       - "fluxcd/tap"
       - "homebrew/cask-fonts"
+      - "oven-sh/bun"
       - "siderolabs/tap"
       - "sst/tap"
