@@ -20,6 +20,7 @@ fi
 if test ! $(which brew); then
    printf '\n\n\eHomebrew not found. \e[0mInstalling Homebrew...'
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+   eval "$(/opt/homebrew/bin/brew shellenv)"
 else
   printf '\n\n\e[0mHomebrew found. Continuing...'
 fi
