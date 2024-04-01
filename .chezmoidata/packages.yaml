@@ -41,7 +41,7 @@ packages:
       - "alacritty"
       - "iterm2"
       - "powershell"
-      - "font-intel-one-mono"
+      - "font-intone-mono-nerd-font"
     taps:
       - "fluxcd/tap"
       - "sst/tap"

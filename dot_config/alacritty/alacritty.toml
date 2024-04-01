@@ -13,18 +13,18 @@ TERM = "xterm-256color"
 size = 12
 
   [font.normal]
-  family = "IntelOne Mono"
+  family = "IntoneMono Nerd Font"
   style = "Regular"
 
   [font.bold]
-  family = "IntelOne Mono"
+  family = "IntoneMono Nerd Font"
   style = "Bold"
 
   [font.italic]
-  family = "IntelOne Mono"
+  family = "IntoneMono Nerd Font"
   style = "Italic"
 
   [font.bold_italic]
-  family = "IntelOne Mono"
+  family = "IntoneMono Nerd Font"
   style = "Bold Italic"
 
