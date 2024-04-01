@@ -19,6 +19,20 @@ declare -a folders=(
 	~/Downloads
 )
 
+printf '\n\nSetting Global Mac Settings...\n'
+# better key repeat
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
+defaults write NSGlobalDomain KeyRepeat -int 5
+defaults write com.apple.finder "AppleShowAllFiles" -bool "true"
+defaults write com.apple.finder "FXRemoveOldTrashItems" -bool "true"
+defaults write NSGlobalDomain com.apple.mouse.scaling -float "3.0"
+
+printf '\n\nDock Settings...\n'
+# configure Dock
+defaults write com.apple.dock "orientation" -string "left"
+defaults write com.apple.dock "tilesize" -int "20"
+defaults write com.apple.dock "show-recents" -bool "false"
+
 clear_dock
 disable_recent_apps_from_dock
 
