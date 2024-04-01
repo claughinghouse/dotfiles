@@ -1,0 +1,14 @@
+{{- if (eq .chezmoi.os "darwin") -}}
+#!/bin/zsh
+
+target_directory="~/.config/alacritty/themes"
+
+# Check if the directory is empty
+if [ -z "$(ls -A $target_directory)" ]; then
+    echo "Directory is empty, proceeding with cloning..."
+    git clone https://github.com/alacritty/alacritty-theme $target_directory
+else
+    echo "Directory is not empty. Skipping cloning."
+fi
+
+{{ end -}}
