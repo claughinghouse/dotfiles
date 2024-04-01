@@ -1,1 +1,2 @@
-store-dir=/Users/cody/git/pnpm
+@jsr:registry=https://npm.jsr.io
+
