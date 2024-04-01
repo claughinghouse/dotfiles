@@ -50,3 +50,8 @@ packages:
       - "oven-sh/bun"
       - "siderolabs/tap"
       - "sst/tap"
+    mas:
+      - "497799835" # "Xcode"
+      - "1136220934" # "Infuse"
+      - "1440147259" # "AdGuard for Safari"
+      - "803453959" # "Slack"
