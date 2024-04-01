@@ -3,25 +3,6 @@
 
 xcode-select --install
 
-# If Homebrew is not installed on the system, it will be installed here
-if test ! $(which brew); then
-   printf '\n\n\e[33mHomebrew not found. \e[0mInstalling Homebrew...'
-   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-  # shellcheck disable=SC2016
-  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >>"${HOME}/.bash_profile"
-  # shellcheck disable=SC2016
-  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >>"${HOME}/.zprofile"
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-  set +o errexit
-  set +o nounset
-  set +o pipefail
-  # shellcheck disable=SC1091
-  source "${HOME}/.bash_profile"
-  set -o errexit
-  set -o nounset
-  set -o pipefail
-else
-  printf '\n\n\eHomebrew found. Continuing...'
-fi
+
 
 {{- end }}
