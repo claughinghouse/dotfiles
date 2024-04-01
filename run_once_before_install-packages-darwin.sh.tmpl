@@ -1,17 +1,30 @@
 {{- if (eq .chezmoi.os "darwin") -}}
 #!/bin/bash -x
 
+xcode-select --install
+
 # If Homebrew is not installed on the system, it will be installed here
 if test ! $(which brew); then
    printf '\n\n\e[33mHomebrew not found. \e[0mInstalling Homebrew...'
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 else
-  printf '\n\n\e[0mHomebrew found. Continuing...'
+  printf '\n\n\eHomebrew found. Continuing...'
 fi
 
 printf '\n\nSetting Global Mac Settings...\n'
 # better key repeat
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
 defaults write NSGlobalDomain KeyRepeat -int 5
+defaults write com.apple.finder "AppleShowAllFiles" -bool "true"
+defaults write com.apple.finder "FXRemoveOldTrashItems" -bool "true"
+defaults write NSGlobalDomain com.apple.mouse.scaling -float "3.0"
+
+printf '\n\nDock Settings...\n'
+# configure Dock
+defaults write com.apple.dock "orientation" -string "left"
+defaults write com.apple.dock "tilesize" -int "20"
+defaults write com.apple.dock "show-recents" -bool "false"
+
+killall Dock
 
 {{- end }}
