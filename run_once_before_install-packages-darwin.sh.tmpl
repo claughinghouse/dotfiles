@@ -19,7 +19,7 @@ fi
 # If Homebrew is not installed on the system, it will be installed here
 if test ! $(which brew); then
    printf '\n\n\eHomebrew not found. \e[0mInstalling Homebrew...'
-   /bin/zsh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+   NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 else
   printf '\n\n\e[0mHomebrew found. Continuing...'
 fi
