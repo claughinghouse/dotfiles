@@ -12,7 +12,6 @@ packages:
       - "fluxcd/tap/flux"
       - "gh"
       - "git"
-      - "gnupg"
       - "go"
       - "helm"
       - "httpie"
