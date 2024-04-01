@@ -1,13 +1,14 @@
 [user]
 	email = claughinghouse@users.noreply.github.com
 	name = claughinghouse
-	signingKey = B3BB654B6CAAA312F49C37DF9CEFDEA122154047
+	signingkey = /Users/cody/.ssh/id_ed25519_githubSigningKey.pub
 [init]
 	defaultBranch = main
 [gpg]
-	program = /usr/local/bin/gpg
+	format = ssh
 [commit]
-	gpgSign = true
+	gpgsign = true
+
 [alias]
 	yolo = !git add -A && git commit -m \"$(curl --silent --fail https://timmoc.dev)\"
 	yeet = !git yolo && git push
