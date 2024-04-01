@@ -5,7 +5,6 @@ source "./dock_functions.sh"
 
 declare -a apps=(
 	'/System/Applications/Messages.app'
-	'/System/Applications/System Settings.app'
 	'/Applications/Safari.app'
 	'/Applications/Slack.app'
 	'/Applications/Alacritty.app'
@@ -14,13 +13,12 @@ declare -a apps=(
 	'/System/Applications/Reminders.app'
 	'/System/Applications/Music.app'
 	'/System/Applications/Notes.app'
+	'/System/Applications/System Settings.app'
 )
 
 declare -a folders=(
 	~/Downloads
 )
-
-eval "$(/opt/homebrew/bin/brew shellenv)"
 
 printf '\n\nSetting Global Mac Settings...\n'
 # better key repeat

@@ -3,7 +3,7 @@ packages:
     brews:
       - "age"
       - "awscli"
-      - "bun"
+      - "oven-sh/bun/bun"
       - "chezmoi"
       - "cloudflared"
       - "esbuild"
@@ -30,7 +30,7 @@ packages:
       - "sops"
       - "speedtest-cli"
       - "ssh-audit"
-      - "sst"
+      - "sst/tap/sst"
       - "talhelper"
       - "tailscale"
       - "tmux"
