@@ -18,6 +18,7 @@ packages:
       - "k9s"
       - "kustomize"
       - "lazygit"
+      - "mas"
       - "mkcert"
       - "mosh"
       - "neovim"
