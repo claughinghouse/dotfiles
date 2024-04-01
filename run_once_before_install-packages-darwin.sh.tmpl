@@ -8,5 +8,10 @@ if test ! $(which brew); then
 else
   printf '\n\n\e[0mHomebrew found. Continuing...'
 fi
-{{- end }}
 
+printf '\n\nSetting Global Mac Settings...\n'
+# better key repeat
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
+defaults write NSGlobalDomain KeyRepeat -int 5
+
+{{- end }}

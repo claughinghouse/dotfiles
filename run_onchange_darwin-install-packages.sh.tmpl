@@ -12,4 +12,18 @@ brew {{ . | quote }}
 cask {{ . | quote }}
 {{ end -}}
 EOF
+
+
+MASPACKAGES=(
+497799835 # "Xcode"
+1136220934 # "Infuse"
+1440147259 # "AdGuard for Safari"
+803453959 # "Slack"
+)
+
+
+printf '\nInstalling MacAppStore apps...\n'
+for app in ${MASPACKAGES[@]}; do
+    mas install ${app}
+done
 {{ end -}}

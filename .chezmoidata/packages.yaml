@@ -39,6 +39,7 @@ packages:
       - "yt-dlp"
     casks:
       - "alacritty"
+      - "discord"
       - "font-intone-mono-nerd-font"
       - "iterm2"
       - "powershell"
