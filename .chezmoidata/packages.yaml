@@ -43,6 +43,7 @@ packages:
       - "font-intone-mono-nerd-font"
       - "iterm2"
       - "powershell"
+      - "zoom"
     taps:
       - "fluxcd/tap"
       - "homebrew/cask-fonts"
