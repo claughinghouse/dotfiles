@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 # https://github.com/rpavlick/add_to_dock
 
