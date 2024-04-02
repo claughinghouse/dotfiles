@@ -15,10 +15,6 @@
 
 sourceDir: "{{ .chezmoi.sourceDir }}"
 
-data:
-  name: "{{ $name }}"
-  email: "{{ $email }}"
-
 encryption: age
 age:
   identity: "~/chezmoi-agekey.txt"
