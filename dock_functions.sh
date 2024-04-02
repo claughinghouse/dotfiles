@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # https://github.com/rpavlick/add_to_dock
 
 # adds an application to macOS Dock
@@ -136,3 +134,4 @@ function reset_dock {
 	defaults delete com.apple.dock
 	killall Dock
 }
+
