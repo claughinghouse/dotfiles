@@ -25,4 +25,7 @@ else
   printf '\n\n\e[0mHomebrew found. Continuing...'
 fi
 
+(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+
 {{ end -}}
