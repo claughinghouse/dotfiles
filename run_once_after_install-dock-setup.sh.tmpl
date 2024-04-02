@@ -1,7 +1,7 @@
 {{- if (eq .chezmoi.os "darwin") -}}
 #!/bin/zsh
 
-source "./dock_functions.sh"
+source "{{ .chezmoi.sourceDir }}/dock_functions.sh"
 
 declare -a apps=(
 	'/System/Applications/Messages.app'
