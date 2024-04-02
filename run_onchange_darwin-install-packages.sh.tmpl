@@ -1,7 +1,7 @@
 {{- if (eq .chezmoi.os "darwin") -}}
 #!/bin/zsh
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# eval "$(/opt/homebrew/bin/brew shellenv)"
 
 brew bundle --no-lock --file=/dev/stdin <<EOF
 {{ range .packages.darwin.taps -}}
