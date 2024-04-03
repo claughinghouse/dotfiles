@@ -16,6 +16,7 @@ packages:
       - "helm"
       - "httpie"
       - "k9s"
+      - "kubectl"
       - "kustomize"
       - "lazygit"
       - "mas"
