@@ -14,5 +14,5 @@
 -- { "kepano/flexoki-neovim", name = "flexoki" },
 -- }
 return {
-  { "catppuccin/nvim", name = "catppuccin" },
+  { "catppuccin/nvim", name = "catppuccin-mocha" },
 }
