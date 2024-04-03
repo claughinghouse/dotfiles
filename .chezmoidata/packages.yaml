@@ -44,8 +44,12 @@ packages:
       - "alacritty"
       - "discord"
       - "font-intone-mono-nerd-font"
+      - "grammarly-desktop"
       - "iterm2"
+      - "lens"
       - "powershell"
+      - "shottr"
+      - "viscosity"
       - "zoom"
     taps:
       - "fluxcd/tap"
@@ -58,4 +62,5 @@ packages:
       - "1136220934" # "Infuse"
       - "1440147259" # "AdGuard for Safari"
       - "803453959" # "Slack"
-
+      - "1519867270" # Refined GitHub Safari Extension
+      - "1447330651" # Copilot Money
