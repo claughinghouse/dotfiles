@@ -8,7 +8,8 @@ if [ -z "$(ls -A $themeFolder)" ]; then
     echo "Directory is empty, proceeding with cloning..."
     git clone https://github.com/alacritty/alacritty-theme $themeFolder
 else
-    echo "Directory is not empty. Skipping cloning."
+    git -C $themeFolder pull
+    echo "Directory is not empty. Skipping cloning and pulling latest."
 fi
 
 {{ end -}}
