@@ -1,0 +1,25 @@
+{{- if (eq .chezmoi.os "darwin") -}}
+#!/bin/zsh
+
+cat <<EOF | sudo tee /usr/local/bin/brewup > /dev/null
+#!/bin/bash
+# Update homebrew, and local base of available packages and versions
+printf "Updating homebrew and local base of available packages and versions...\n"
+brew update
+
+# Install new versions of outdated packages
+printf "Upgrading outdated homebrew packages...\n"
+brew upgrade
+
+# Cache cleanup of unfinished downloads
+printf "Cleaning cache of unfinished downloads...\n"
+brew cleanup
+
+# Show problems if any
+printf "Checking for issues...\n"
+brew doctor
+EOF
+
+sudo chmod +x /usr/local/bin/brewup
+
+{{ end -}}
