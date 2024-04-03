@@ -41,4 +41,5 @@ export EDITOR=nvim
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias k=kubectl
-alias v=nvim
+alias n=nvim
+alias c=chezmoi
