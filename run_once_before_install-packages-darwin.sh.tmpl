@@ -20,7 +20,19 @@ fi
 if test ! $(which brew); then
    printf '\n\n\eHomebrew not found. \e[0mInstalling Homebrew...'
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-   eval "$(/opt/homebrew/bin/brew shellenv)"
+
+    {{ if eq .chezmoi.arch "arm64" }}
+      (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ${HOME}/.zprofile
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    {{ else if eq .chezmoi.arch "amd64" }}
+      (echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> ${HOME}/.zprofile
+        eval "$(/usr/local/bin/brew shellenv)"
+    {{ end }}
+
+
+
+
+
 else
   printf '\n\n\e[0mHomebrew found. Continuing...'
 fi
