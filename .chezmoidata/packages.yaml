@@ -26,6 +26,7 @@ packages:
       - "pre-commit"
       - "prettier"
       - "prettyping"
+      - "ripgrep"
       - "siderolabs/tap/talosctl"
       - "sops"
       - "speedtest-cli"
@@ -55,3 +56,4 @@ packages:
       - "1136220934" # "Infuse"
       - "1440147259" # "AdGuard for Safari"
       - "803453959" # "Slack"
+
