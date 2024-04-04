@@ -12,7 +12,7 @@
 [alias]
 	yolo = !git add -A && git commit -m \"$(curl --silent --fail https://timmoc.dev)\"
 	yeet = !git yolo && git push
-	cleanup = "git fetch -p && for branch in ; do git branch -D ; done\n fetch -p && for branch in ; do git branch -D ; done"
+	cleanup = "!git fetch -p && for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do git branch -D $branch; done"
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
@@ -24,5 +24,3 @@
 [diff "lockb"]
 	textconv = bun
 	binary = true
-[fetch]
-	prune = true
