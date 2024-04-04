@@ -21,7 +21,7 @@ plugins=(colorize cp gh git git-commit git-prompt httpie kubectl mosh transfer)
 
 source $ZSH/oh-my-zsh.sh
 export EDITOR=nvim
-
+export ZSH_THEME_GIT_PROMPT_CACHE=yes
 # User configuration
 
 # Preferred editor for local and remote sessions
