@@ -3,8 +3,10 @@
 
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
 	echo "Getting ohmyz.sh"
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+#	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+  git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
 else
+  git -C "$HOME/.oh-my-zsh" pull https://github.com/ohmyzsh/ohmyzsh.git --quiet
 	echo ".oh-my-zsh already found, skipping."
 fi
 
