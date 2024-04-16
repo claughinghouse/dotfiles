@@ -42,4 +42,5 @@ export ZSH_THEME_GIT_PROMPT_CACHE=yes
 
 alias k=kubectl
 alias n=nvim
+alias n.="nvim ."
 alias c=chezmoi
