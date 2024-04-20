@@ -15,6 +15,7 @@ packages:
       - "go"
       - "helm"
       - "httpie"
+      - "jq"
       - "k9s"
       - "kubectl"
       - "kustomize"
