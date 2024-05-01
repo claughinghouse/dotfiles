@@ -37,4 +37,4 @@
 	textconv = bun
 	binary = true
 [oh-my-zsh]
-	git-commit-alias = 31f2025e0fa963788655fe197e0179c47588b175
+	git-commit-alias = 803e1a784cd520f101d126b47deea3297e6a82fc
