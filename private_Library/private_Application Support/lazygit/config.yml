@@ -1,1 +1,2 @@
+---
 promptToReturnFromSubprocess: true # display confirmation when subprocess terminates
