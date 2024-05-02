@@ -6,5 +6,3 @@ Template dotfiles repository, managed with [chezmoi](https://chezmoi.io/).
 
 MIT
 
-test
-
