@@ -1,1 +1,1 @@
-promptToReturnFromSubprocess: true # display confirmation when subprocess terminates
+promptToReturnFromSubprocess: false # do not display confirmation when subprocess terminates
