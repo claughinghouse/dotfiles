@@ -3,6 +3,7 @@ packages:
     brews:
       - "age"
       - "awscli"
+      - "biome"
       - "oven-sh/bun/bun"
       - "chezmoi"
       - "cloudflared"
@@ -27,7 +28,7 @@ packages:
       - "neovim"
       - "pinentry"
       - "pre-commit"
-      - "prettier"
+      # - "prettier"
       - "prettyping"
       - "ripgrep"
       - "siderolabs/tap/talosctl"
