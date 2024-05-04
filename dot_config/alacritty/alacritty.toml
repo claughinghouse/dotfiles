@@ -28,3 +28,14 @@ size = 13
   family = "IntoneMono Nerd Font"
   style = "Bold Italic"
 
+[window]
+decorations = "full"
+dynamic_padding = false
+
+  [window.dimensions]
+  columns = 80
+  lines = 24
+
+  [window.padding]
+  x = 0
+  y = 0
