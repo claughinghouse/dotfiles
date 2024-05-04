@@ -12,10 +12,10 @@ return {
     --   svelte = { "eslint_d" },
     -- }
     lint.linters_by_ft = {
-      javascript = { "biome" },
-      typescript = { "biome" },
-      javascriptreact = { "biome" },
-      typescriptreact = { "biome" },
+      javascript = { "biomejs" },
+      typescript = { "biomejs" },
+      javascriptreact = { "biomejs" },
+      typescriptreact = { "biomejs" },
     }
 
     local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
