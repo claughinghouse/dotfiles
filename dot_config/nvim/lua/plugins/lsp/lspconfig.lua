@@ -85,26 +85,44 @@ return {
           capabilities = capabilities,
         })
       end,
-      ["svelte"] = function()
-        -- configure svelte server
-        lspconfig["svelte"].setup({
+      -- ["svelte"] = function()
+      --   -- configure svelte server
+      --   lspconfig["svelte"].setup({
+      --     capabilities = capabilities,
+      --     on_attach = function(client, bufnr)
+      --       vim.api.nvim_create_autocmd("BufWritePost", {
+      --         pattern = { "*.js", "*.ts" },
+      --         callback = function(ctx)
+      --           -- Here use ctx.match instead of ctx.file
+      --           client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
+      --         end,
+      --       })
+      --     end,
+      --   })
+      -- end,
+      -- ["emmet_ls"] = function()
+      --   -- configure emmet language server
+      --   lspconfig["emmet_ls"].setup({
+      --     capabilities = capabilities,
+      --     filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
+      --   })
+      -- end,
+      ["biome"] = function()
+        -- configure biome language server
+        lspconfig["biome"].setup({
           capabilities = capabilities,
-          on_attach = function(client, bufnr)
-            vim.api.nvim_create_autocmd("BufWritePost", {
-              pattern = { "*.js", "*.ts" },
-              callback = function(ctx)
-                -- Here use ctx.match instead of ctx.file
-                client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
-              end,
-            })
-          end,
-        })
-      end,
-      ["emmet_ls"] = function()
-        -- configure emmet language server
-        lspconfig["emmet_ls"].setup({
-          capabilities = capabilities,
-          filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
+          filetypes = {
+            "javascript",
+            "javascriptreact",
+            "json",
+            "jsonc",
+            "typescript",
+            "typescript.tsx",
+            "typescriptreact",
+            "astro",
+            "svelte",
+            "vue",
+          },
         })
       end,
       ["lua_ls"] = function()
