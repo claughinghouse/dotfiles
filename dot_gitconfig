@@ -45,3 +45,6 @@
 	binary = true
 [oh-my-zsh]
 	git-commit-alias = 0fabd5f22f4e0378b09c92607789fdb17cab3c20
+[gitbutler]
+	signCommits = true
+	gitbutlerCommitter = 1
