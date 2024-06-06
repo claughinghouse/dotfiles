@@ -28,6 +28,8 @@ packages:
       - "mosh"
       - "neovim"
       - "pinentry"
+      - "podman"
+      - "podman-compose"
       - "pre-commit"
       - "prettyping"
       - "ripgrep"
