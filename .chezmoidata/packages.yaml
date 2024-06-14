@@ -72,3 +72,10 @@ packages:
       - "1519867270" # Refined GitHub Safari Extension
       - "1447330651" # Copilot Money
       - "1458969831" #JSON Peep for Safari
+  linux:
+    apt:
+      - "gh"
+      - "neovim"
+      - "tmux"
+    snap:
+      - "httpstat"
