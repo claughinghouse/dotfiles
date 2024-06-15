@@ -43,8 +43,13 @@
 [diff "lockb"]
 	textconv = bun
 	binary = true
+{{ if not (eq (.chezmoi.hostname) "excluded-hostname") }}
 [oh-my-zsh]
-	git-commit-alias = 8510847ff38a142850e4a065dc3cf09555260ff7
+	git-commit-alias = 0c9b42a863778d67aee22bbd43f296110fe1f047
+{{ end }}
+
+{{ if (eq .chezmoi.os "darwin") }}
 [gitbutler]
 	signCommits = true
 	gitbutlerCommitter = 1
+{{ end }}
