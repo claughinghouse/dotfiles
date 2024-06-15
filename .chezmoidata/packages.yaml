@@ -74,6 +74,8 @@ packages:
       - "1458969831" #JSON Peep for Safari
   linux:
     apt:
+      - "build-essential"
+      - "fzf"
       - "gh"
       - "neovim"
       - "tmux"
