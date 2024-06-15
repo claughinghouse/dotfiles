@@ -1,7 +1,7 @@
-i{{- if (eq .chezmoi.os "darwin") -}}
+{{- if (eq .chezmoi.os "darwin") -}}
 #!/bin/bash
 
-f [ ! -d "$HOME/.oh-my-zsh" ]; then
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
 	echo "Getting ohmyz.sh"
 #	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
   git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
