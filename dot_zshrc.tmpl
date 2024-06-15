@@ -41,9 +41,7 @@ export ZSH_THEME_GIT_PROMPT_CACHE=yes
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 {{ if eq .chezmoi.os "linux" }}
-if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
-    export PATH="$HOME/.local/bin:$PATH"
-fi
+export PATH=$PATH:$HOME/.local/bin
 {{ end }}
 
 alias k=kubectl
