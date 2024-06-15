@@ -41,7 +41,7 @@ export ZSH_THEME_GIT_PROMPT_CACHE=yes
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 {{ if eq .chezmoi.os "linux" }}
-PROMPT="${PROMPT} %m"
+PROMPT="%m ${PROMPT}"
 {{ end }}
 alias k=kubectl
 alias n=nvim
