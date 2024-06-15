@@ -79,8 +79,10 @@ packages:
       - "fzf"
       - "gh"
       - "neovim"
+      - "nodejs"
       - "ripgrep"
       - "tmux"
+      - "unzip"
       - "zsh"
     snap:
       - "httpstat"
