@@ -13,3 +13,19 @@ else
 fi
 
 {{ end -}}
+
+{{- if (eq .chezmoi.os "linux") -}}
+#!/bin/zsh
+
+tmuxPluginFolder="$HOME/.tmux/plugins/tpm"
+
+# Check if the directory is empty
+if [ -z "$(ls -A $tmuxPluginFolder)" ]; then
+    echo "Directory is empty, proceeding with cloning..."
+    git clone https://github.com/tmux-plugins/tpm $tmuxPluginFolder
+else
+    git -C $tmuxPluginFolder pull
+    echo "Directory is not empty. Skipping cloning and pulling latest version."
+fi
+
+{{ end -}}
