@@ -40,6 +40,12 @@ export ZSH_THEME_GIT_PROMPT_CACHE=yes
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+{{ if eq .chezmoi.os "linux" }}
+if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
+{{ end }}
+
 alias k=kubectl
 alias n=nvim
 alias n.="nvim ."

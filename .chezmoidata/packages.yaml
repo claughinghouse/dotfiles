@@ -75,9 +75,11 @@ packages:
   linux:
     apt:
       - "build-essential"
+      - "fd-find"
       - "fzf"
       - "gh"
       - "neovim"
+      - "ripgrep"
       - "tmux"
     snap:
       - "httpstat"
