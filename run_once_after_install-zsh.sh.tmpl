@@ -1,0 +1,26 @@
+{{- if (eq .chezmoi.os "linux") -}}
+#!/bin/bash
+# Define the path to the .zshrc file
+ZSHRC="$HOME/.zshrc"
+
+# Define the path to be checked and added
+LOCAL_BIN_PATH='$HOME/.local/bin'
+
+# Check if the path is already in the .zshrc file
+if grep -Fxq "export PATH=\$PATH:$LOCAL_BIN_PATH" "$ZSHRC"; then
+    echo "$LOCAL_BIN_PATH is already in the PATH."
+else
+    # If the path is not found, add it to the .zshrc file
+    echo "export PATH=\$PATH:$LOCAL_BIN_PATH" >> "$ZSHRC"
+    echo "$LOCAL_BIN_PATH has been added to the PATH."
+fi
+
+
+# Change the shell to /usr/bin/zsh
+if [ "$SHELL" != "/usr/bin/zsh" ]; then
+    chsh -s /usr/bin/zsh
+    echo "Default shell changed to /usr/bin/zsh. Please log out and log back in for the changes to take effect."
+else
+    echo "The default shell is already /usr/bin/zsh."
+fi
+{{ end -}}
