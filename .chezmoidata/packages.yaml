@@ -81,5 +81,6 @@ packages:
       - "neovim"
       - "ripgrep"
       - "tmux"
+      - "zsh"
     snap:
       - "httpstat"
