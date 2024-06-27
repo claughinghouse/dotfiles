@@ -7,6 +7,7 @@ packages:
       - "oven-sh/bun/bun"
       - "chezmoi"
       - "cloudflared"
+      - "direnv"
       - "esbuild"
       - "fd"
       - "ffmpeg"
@@ -75,6 +76,7 @@ packages:
   linux:
     apt:
       - "build-essential"
+      - "direnv"
       - "fd-find"
       - "fzf"
       - "gh"
