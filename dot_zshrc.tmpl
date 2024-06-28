@@ -66,3 +66,8 @@ fi
 # sst
 export PATH=$HOME/.sst/bin:$PATH
 {{- end }}
+
+{{- if (eq .chezmoi.os "darwin" )}}
+# Updated SQLite3
+export PATH="/usr/local/opt/sqlite/bin:$PATH"
+{{- end }}
