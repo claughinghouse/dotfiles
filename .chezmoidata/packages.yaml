@@ -37,6 +37,7 @@ packages:
       - "siderolabs/tap/talosctl"
       - "sops"
       - "speedtest-cli"
+      - "sqlite"
       - "ssh-audit"
       - "sst/tap/sst"
       - "talhelper"
