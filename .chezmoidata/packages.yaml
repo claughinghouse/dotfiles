@@ -7,6 +7,7 @@ packages:
       - "oven-sh/bun/bun"
       - "chezmoi"
       - "cloudflared"
+      - "d2"
       - "direnv"
       - "esbuild"
       - "fd"
