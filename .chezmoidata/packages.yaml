@@ -9,6 +9,7 @@ packages:
       - "cloudflared"
       - "d2"
       - "direnv"
+      - "dos2unix"
       - "esbuild"
       - "fd"
       - "ffmpeg"
