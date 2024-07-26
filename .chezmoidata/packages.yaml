@@ -41,7 +41,7 @@ packages:
       - "speedtest-cli"
       - "sqlite3"
       - "ssh-audit"
-      - "sst/tap/sst"
+      # - "sst/tap/sst"
       - "talhelper"
       - "tailscale"
       - "tmux"
@@ -67,7 +67,7 @@ packages:
       # - "homebrew/cask-fonts"
       - "oven-sh/bun"
       - "siderolabs/tap"
-      - "sst/tap"
+      # - "sst/tap"
     mas:
       - "497799835" # "Xcode"
       - "1136220934" # "Infuse"
