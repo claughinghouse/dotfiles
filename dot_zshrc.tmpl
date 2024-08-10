@@ -55,7 +55,6 @@ alias n=nvim
 alias n.="nvim ."
 alias c=chezmoi
 alias t=tmux
-alias sst='nocorrect sst' 
 
 {{ if (eq .chezmoi.hostname "dev") }}
 if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
@@ -63,10 +62,10 @@ if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
 fi
 {{ end }}
 
-{{- if (eq .chezmoi.os "linux" )}}
-# sst
-export PATH=$HOME/.sst/bin:$PATH
-{{- end }}
+# {{- if (eq .chezmoi.os "linux" )}}
+# # sst
+# export PATH=$HOME/.sst/bin:$PATH
+# {{- end }}
 
 {{- if (eq .chezmoi.os "darwin" )}}
 # Updated SQLite3
