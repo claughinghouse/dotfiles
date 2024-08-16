@@ -15,6 +15,7 @@ packages:
       - "ffmpeg"
       - "fluxcd/tap/flux"
       - "charmbracelet/tap/freeze"
+      - "fzf"
       - "gh"
       - "git"
       - "go"
