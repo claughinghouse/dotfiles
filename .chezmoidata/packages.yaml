@@ -2,6 +2,7 @@ packages:
   darwin:
     brews:
       - "age"
+      - "asciinema"
       - "awscli"
       - "biome"
       - "oven-sh/bun/bun"
