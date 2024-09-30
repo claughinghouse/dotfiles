@@ -96,5 +96,6 @@ packages:
       - "zsh"
     snap:
       - "httpstat"
+      - "lazygit"
     snapclassic:
       - "aws-cli"
