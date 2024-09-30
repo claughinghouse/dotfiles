@@ -94,4 +94,5 @@ packages:
       - "unzip"
       - "zsh"
     snap:
+      - "aws-cli"
       - "httpstat"
