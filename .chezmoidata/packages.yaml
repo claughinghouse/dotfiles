@@ -76,12 +76,17 @@ packages:
   linux:
     apt:
       - "build-essential"
+      - "cmake"
+      - "curl"
       - "direnv"
       - "fd-find"
       - "fzf"
+      - "gcc"
       - "gh"
       - "git"
+      - "make"
       - "neovim"
+      - "ninja-build"
       - "nodejs"
       - "ripgrep"
       - "tmux"
