@@ -80,6 +80,7 @@ packages:
       - "fd-find"
       - "fzf"
       - "gh"
+      - "git"
       - "neovim"
       - "nodejs"
       - "ripgrep"
