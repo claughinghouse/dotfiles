@@ -86,7 +86,7 @@ packages:
       - "gh"
       - "git"
       - "make"
-      - "neovim"
+      # - "neovim" # disabled until nvim 0.10.1 is in the main repo
       - "ninja-build"
       - "nodejs"
       - "ripgrep"
