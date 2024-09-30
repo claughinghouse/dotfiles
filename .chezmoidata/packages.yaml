@@ -95,5 +95,5 @@ packages:
       - "zsh"
     snap:
       - "httpstat"
-    snap-classic:
+    snapclassic:
       - "aws-cli"

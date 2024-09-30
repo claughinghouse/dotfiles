@@ -14,7 +14,7 @@ sudo snap install {{ . }}
 {{- end }}
 
 # Although you can install multiple snaps on one line, this errors if already installed
-{{- range .packages.linux.snap-classic }}
+{{- range .packages.linux.snapclassic }}
 sudo snap install {{ . }} --classic
 {{- end }}
 
