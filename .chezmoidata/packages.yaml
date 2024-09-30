@@ -82,6 +82,7 @@ packages:
       - "fd-find"
       - "fzf"
       - "gcc"
+      - "gettext"
       - "gh"
       - "git"
       - "make"
