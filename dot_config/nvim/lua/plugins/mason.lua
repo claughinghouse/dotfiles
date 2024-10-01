@@ -1,6 +1,6 @@
 return {
-  "williamboman/mason.nvim",
-  opts = {
-    ensure_installed = { "biome" },
-  },
+	"williamboman/mason.nvim",
+	opts = {
+		ensure_installed = { "biome" },
+	},
 }
