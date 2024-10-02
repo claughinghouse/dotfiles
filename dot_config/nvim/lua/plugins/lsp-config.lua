@@ -20,7 +20,7 @@ return {
 					"bashls",
 					"cssls",
 					"dockerls",
-					"helm_ls",
+					-- "helm_ls",
 					"html",
 					"marksman",
 					"tflint",
@@ -45,7 +45,7 @@ return {
 			lspconfig.bashls.setup({})
 			lspconfig.cssls.setup({})
 			lspconfig.dockerls.setup({})
-			lspconfig.helm_ls.setup({})
+			-- lspconfig.helm_ls.setup({})
 			lspconfig.marksman.setup({})
 			lspconfig.tflint.setup({})
 			lspconfig.terraformls.setup({})
