@@ -80,6 +80,7 @@ packages:
       - "curl"
       - "direnv"
       - "fd-find"
+      - "fontconfig"
       - "fzf"
       - "gcc"
       - "gettext"
