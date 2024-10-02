@@ -9,34 +9,69 @@ return {
 	{
 		"williamboman/mason-lspconfig.nvim",
 		lazy = false,
-		opts = {
-			auto_install = true,
-		},
+		config = function()
+			require("mason-lspconfig").setup({
+				opts = { auto_install = true },
+				ensure_installed = {
+					"ansiblels",
+					"astro",
+					"lua_ls",
+					"biome",
+					"bashls",
+					"cssls",
+					"dockerls",
+					"helm_ls",
+					"html",
+					"marksman",
+					"tflint",
+					"terraformls",
+					"tailwindcss",
+					"yamlls",
+					"ts_ls",
+				},
+			})
+		end,
 	},
 	{
 		"neovim/nvim-lspconfig",
 		lazy = false,
 		config = function()
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+			-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			local lspconfig = require("lspconfig")
-			lspconfig.tsserver.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.solargraph.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.html.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.lua_ls.setup({
-				capabilities = capabilities,
-			})
-
+			lspconfig.ansiblels.setup({})
+			lspconfig.astro.setup({})
+			lspconfig.biome.setup({})
+			lspconfig.bashls.setup({})
+			lspconfig.cssls.setup({})
+			lspconfig.dockerls.setup({})
+			lspconfig.helm_ls.setup({})
+			lspconfig.marksman.setup({})
+			lspconfig.tflint.setup({})
+			lspconfig.terraformls.setup({})
+			lspconfig.tailwindcss.setup({})
+			lspconfig.yamlls.setup({})
+			lspconfig.ts_ls.setup({})
+			lspconfig.html.setup({})
+			lspconfig.lua_ls.setup({})
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
 			vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
 			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
 		end,
 	},
+	-- {
+	--   "nvim-telescope/telescope-ui-select.nvim",
+	--   config = function()
+	--     require("telescope").setup({
+	--       extensions = {
+	--         ["ui-select"] = {
+	--           require("telescope.themes").get_dropdown {
+	--           }
+	--         }
+	--       }
+	--     })
+	--       require("telescope").load_extension("ui-select")
+	--   end
+	-- },
 }

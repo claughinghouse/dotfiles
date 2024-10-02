@@ -1,7 +1,7 @@
 return {
 	{
 		"stevearc/conform.nvim",
-		optional = true,
+    optional = true,
 		opts = {
 			-- for language support
 			-- @see https://biomejs.dev/internals/language-support/
@@ -12,11 +12,6 @@ return {
 				["typescriptreact"] = { "biome" },
 				["json"] = { "biome" },
 				["jsonc"] = { "biome" },
-				-- ["vue"] = { "biome" },
-				-- ["css"] = { "biome" },
-				-- ["scss"] = { "biome" },
-				-- ["less"] = { "biome" },
-				-- ["html"] = { "biome" },
 			},
 		},
 	},

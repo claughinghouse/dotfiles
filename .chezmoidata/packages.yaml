@@ -1,6 +1,7 @@
 packages:
   darwin:
     brews:
+      - "actionlint"
       - "age"
       - "asciinema"
       - "awscli"
@@ -27,6 +28,7 @@ packages:
       - "kubectl"
       - "kustomize"
       - "lazygit"
+      - "luarocks"
       - "mas"
       - "mkcert"
       - "nss"
@@ -38,12 +40,13 @@ packages:
       - "pre-commit"
       - "prettyping"
       - "ripgrep"
-      - "siderolabs/tap/talosctl"
+      - "shfmt"
+      - "siderolabs/tap/sidero-tools"
       - "sops"
       - "speedtest-cli"
       - "sqlite3"
       - "ssh-audit"
-      - "talhelper"
+      - "stylua"
       - "tailscale"
       - "tmux"
       - "tree"
@@ -65,7 +68,6 @@ packages:
       - "charmbracelet/tap"
       - "fluxcd/tap"
       - "oven-sh/bun"
-      - "siderolabs/tap"
     mas:
       - "497799835" # "Xcode"
       - "1136220934" # "Infuse"
@@ -86,6 +88,7 @@ packages:
       - "gettext"
       - "gh"
       - "git"
+      - "luarocks"
       - "make"
       # - "neovim" # disabled until nvim 0.10.1 is in the main repo
       - "ninja-build"
