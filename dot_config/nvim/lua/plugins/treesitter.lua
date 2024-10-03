@@ -32,6 +32,8 @@ return {
 				"jsdoc",
 				"jq",
 				"lua",
+				"markdown",
+				"markdown_inline",
 				"powershell",
 				"query",
 				"regex",
