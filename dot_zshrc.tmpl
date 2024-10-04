@@ -62,12 +62,17 @@ if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
 fi
 {{ end }}
 
-# {{- if (eq .chezmoi.os "linux" )}}
-# # sst
-# export PATH=$HOME/.sst/bin:$PATH
-# {{- end }}
+{{- if (eq .chezmoi.os "linux" )}}
+tmux-git-autofetch() {($HOME/.tmux/plugins/tmux-git-autofetch/git-autofetch.tmux --current &)}
+add-zsh-hook chpwd tmux-git-autofetch
+{{- end }}
 
 {{- if (eq .chezmoi.os "darwin" )}}
 # Updated SQLite3
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
+
+tmux-git-autofetch() {(/Users/cody/.tmux/plugins/tmux-git-autofetch/git-autofetch.tmux --current &)}
+add-zsh-hook chpwd tmux-git-autofetch
 {{- end }}
+
+
