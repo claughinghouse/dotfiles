@@ -48,6 +48,7 @@ packages:
       - "ssh-audit"
       - "stylua"
       - "tailscale"
+      - "talhelper"
       - "tmux"
       - "tree"
       - "watch"
