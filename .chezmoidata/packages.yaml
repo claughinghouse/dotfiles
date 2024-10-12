@@ -91,6 +91,7 @@ packages:
       - "git"
       - "luarocks"
       - "make"
+      - "mkcert"
       # - "neovim" # disabled until nvim 0.10.1 is in the main repo
       - "ninja-build"
       - "nodejs"
