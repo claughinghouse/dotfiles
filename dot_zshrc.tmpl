@@ -58,7 +58,7 @@ alias t=tmux
 
 {{ if (eq .chezmoi.hostname "dev") }}
 if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
-    tmux attach || tmux new
+    tmux attach -d || tmux new
 fi
 {{ end }}
 
