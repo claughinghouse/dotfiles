@@ -49,6 +49,7 @@ packages:
       - "stylua"
       - "tailscale"
       - "talhelper"
+      - "go-task"
       - "tmux"
       - "tree"
       - "watch"
