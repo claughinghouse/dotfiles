@@ -56,6 +56,8 @@ alias n.="nvim ."
 alias c=chezmoi
 alias t=tmux
 
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
 {{ if (eq .chezmoi.hostname "dev") }}
 if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
     tmux attach -d || tmux new
