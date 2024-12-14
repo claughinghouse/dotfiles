@@ -36,7 +36,6 @@ return {
     "neovim/nvim-lspconfig",
     lazy = false,
     config = function()
-      -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
       local capabilities = require('blink.cmp').get_lsp_capabilities()
       local lspconfig = require("lspconfig")
       lspconfig.ansiblels.setup({ capabilities = capabilities })
@@ -54,24 +53,6 @@ return {
       lspconfig.ts_ls.setup({ capabilities = capabilities })
       lspconfig.html.setup({ capabilities = capabilities })
       lspconfig.lua_ls.setup({ capabilities = capabilities })
-      -- vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-      -- vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
-      -- vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
-      -- vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
     end,
-  },
-  -- {
-  --   "nvim-telescope/telescope-ui-select.nvim",
-  --   config = function()
-  --     require("telescope").setup({
-  --       extensions = {
-  --         ["ui-select"] = {
-  --           require("telescope.themes").get_dropdown {
-  --           }
-  --         }
-  --       }
-  --     })
-  --       require("telescope").load_extension("ui-select")
-  --   end
-  -- },
+  }
 }
