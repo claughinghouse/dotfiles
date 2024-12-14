@@ -13,7 +13,21 @@ return {
       require("mason-lspconfig").setup({
         opts = { auto_install = true },
         ensure_installed = {
+          "ansiblels",
+          "astro",
           "lua_ls",
+          "biome",
+          "bashls",
+          "cssls",
+          "dockerls",
+          -- "helm_ls",
+          "html",
+          "marksman",
+          "tflint",
+          "terraformls",
+          "tailwindcss",
+          "yamlls",
+          "ts_ls",
         },
       })
     end,
@@ -22,7 +36,7 @@ return {
     "neovim/nvim-lspconfig",
     lazy = false,
     config = function()
-      local capabilities = require("blink.cmp").get_lsp_capabilities()
+      local capabilities = require('blink.cmp').get_lsp_capabilities()
       local lspconfig = require("lspconfig")
       lspconfig.ansiblels.setup({ capabilities = capabilities })
       lspconfig.astro.setup({ capabilities = capabilities })
@@ -40,5 +54,5 @@ return {
       lspconfig.html.setup({ capabilities = capabilities })
       lspconfig.lua_ls.setup({ capabilities = capabilities })
     end,
-  },
+  }
 }
