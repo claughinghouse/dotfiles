@@ -12,6 +12,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     os.exit(1)
   end
 end
+
 vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = " "
@@ -46,8 +47,6 @@ vim.cmd("set rtp+=/usr/local/opt/fzf")
 vim.g.mapleader = " "
 vim.g.background = "light"
 
-vim.opt.swapfile = false
-
 -- Navigate vim panes better
 vim.keymap.set("n", "<c-k>", ":wincmd k<CR>")
 vim.keymap.set("n", "<c-j>", ":wincmd j<CR>")
@@ -62,6 +61,8 @@ require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    { import = "lazyvim.plugins.extras.editor.telescope" },
+
     -- import/override with your plugins
     { import = "plugins" },
   },
