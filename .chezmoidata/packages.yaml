@@ -6,7 +6,7 @@ packages:
       - "asciinema"
       - "awscli"
       - "biome"
-      - "bruno"
+      - "bruno-cli"
       - "oven-sh/bun/bun"
       - "chezmoi"
       - "cloudflared"
@@ -86,7 +86,8 @@ packages:
       - "803453959" # "Slack"
       - "1519867270" # Refined GitHub Safari Extension
       - "1447330651" # Copilot Money
-      - "1458969831" #JSON Peep for Safari
+      - "1458969831" # JSON Peep for Safari
+      - "6446215341" # Cookie-Editor for Safari
   linux:
     apt:
       - "build-essential"
