@@ -40,6 +40,7 @@ packages:
       - "nss"
       - "mosh"
       - "neovim"
+      - "pearcleaner"
       - "pinentry"
       - "podman"
       - "podman-compose"
