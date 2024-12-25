@@ -1,7 +1,7 @@
 {{- if (eq .chezmoi.os "darwin") -}}
 #!/bin/zsh
 
-brew bundle --no-lock --file=/dev/stdin <<EOF
+brew bundle --no-lock --force cleanup --file=/dev/stdin <<EOF
 {{ range .packages.darwin.taps -}}
 tap {{ . | quote }}
 {{ end -}}
