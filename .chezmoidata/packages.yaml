@@ -73,6 +73,7 @@ packages:
       - "ollama"
       - "powershell"
       - "viscosity"
+      - "wezterm"
       - "zoom"
     taps:
       - "charmbracelet/tap"
