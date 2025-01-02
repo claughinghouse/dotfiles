@@ -143,7 +143,8 @@ declare -a apps=(
 	'/System/Applications/Messages.app'
 	'/Applications/Safari.app'
 	'/Applications/Slack.app'
-	'/Applications/Alacritty.app'
+	'/Applications/iTerm.app'
+  '/Applications/WezTerm.app'
 	'/Applications/Discord.app'
 	'/System/Applications/Mail.app'
 	'/System/Applications/Reminders.app'
@@ -157,7 +158,7 @@ declare -a apps=(
 )
 
 declare -a folders=(
-	'~/Downloads' -a 2
+	'{{ .chezmoi.homeDir }}/Downloads'
 )
 
 printf '\n\nSetting Global Mac Settings...\n'
