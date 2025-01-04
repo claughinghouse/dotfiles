@@ -68,6 +68,7 @@ packages:
       - "discord"
       - "font-intone-mono-nerd-font"
       - "flameshot"
+      - "ghostty"
       - "iterm2"
       - "lens"
       - "ollama"
