@@ -18,6 +18,6 @@ return {
   -- vim.cmd([[colorscheme tokyonight]])
   -- end,
 
-  { "catppuccin/nvim", name = "catppuccin" },
+  { "catppuccin/nvim", name = "catppuccin", lazy = false },
   vim.cmd([[colorscheme catppuccin]]),
 }
