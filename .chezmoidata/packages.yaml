@@ -111,6 +111,7 @@ packages:
       - "ninja-build"
       - "nodejs"
       - "npm"
+      - "postgresql-client"
       - "ripgrep"
       - "tmux"
       - "unzip"
