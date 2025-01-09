@@ -43,6 +43,7 @@ packages:
       - "pinentry"
       - "podman"
       - "podman-compose"
+      - "postgresql"
       - "pre-commit"
       - "prettyping"
       - "ripgrep"
