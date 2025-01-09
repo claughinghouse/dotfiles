@@ -33,6 +33,7 @@ packages:
       - "kubectl"
       - "kubernetes-cli"
       - "kustomize"
+      - "libpq"
       - "luarocks"
       - "mas"
       - "mkcert"
@@ -43,7 +44,6 @@ packages:
       - "pinentry"
       - "podman"
       - "podman-compose"
-      - "postgresql"
       - "pre-commit"
       - "prettyping"
       - "ripgrep"
@@ -85,13 +85,25 @@ packages:
       - "oven-sh/bun"
       - "siderolabs/tap"
     mas:
-      - "497799835" # "Xcode"
-      - "1136220934" # "Infuse"
-      - "803453959" # "Slack"
+      - "417375580" # BetterSnapTool
+      - "497799835" # Xcode
+      - "1136220934" # Infuse
+      - "803453959" # Slack
       - "1519867270" # Refined GitHub Safari Extension
       - "1447330651" # Copilot Money
       - "1458969831" # JSON Peep for Safari
       - "6446215341" # Cookie-Editor for Safari
+      - "1451685025" # Wireguard
+      - "425424353" # The Unarchiver
+      - "409201541"  # Pages
+      - "409203825" # Numbers
+      - "409183694" # Keynote
+      - "462058435" # Microsoft Excel
+      - "462062816" # Microsoft PowerPoint
+      - "1295203466" # Microsoft Remote Desktop
+      - "462054704" # Microsoft Word
+    brewlink:
+      - "libpq"
   linux:
     apt:
       - "build-essential"

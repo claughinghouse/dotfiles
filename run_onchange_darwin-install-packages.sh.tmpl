@@ -1,7 +1,7 @@
 {{- if (eq .chezmoi.os "darwin") -}}
 #!/bin/zsh
 
-brew bundle --no-lock --force cleanup --file=/dev/stdin <<EOF
+brew bundle --force --file=/dev/stdin <<EOF
 {{ range .packages.darwin.taps -}}
 tap {{ . | quote }}
 {{ end -}}
@@ -12,6 +12,26 @@ brew {{ . | quote }}
 cask {{ . | quote }}
 {{ end -}}
 EOF
+
+printf '\nRemoving apps not managed in Chezmoi...\n'
+
+brew bundle cleanup --force --file=/dev/stdin <<EOF
+{{ range .packages.darwin.taps -}}
+tap {{ . | quote }}
+{{ end -}}
+{{ range .packages.darwin.brews -}}
+brew {{ . | quote }}
+{{ end -}}
+{{ range .packages.darwin.casks -}}
+cask {{ . | quote }}
+{{ end -}}
+EOF
+
+printf '\nLinking apps with keg-only formulae...\n'
+
+{{ range .packages.darwin.brewlink -}}
+brew link --force {{ . | quote }}
+{{ end -}}
 
 printf '\nInstalling MacAppStore apps...\n'
 
