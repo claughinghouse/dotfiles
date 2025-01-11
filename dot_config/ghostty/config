@@ -1,5 +1,5 @@
 font-family = "IntoneMono Nerd Font Mono"
 minimum-contrast = 2
 font-size = 14
-theme = dark:catppuccin-mocha,light:Night Owlish Light
-# theme = dark:catppuccin-frappe,light:iTerm2 Light Background
+# theme = dark:catppuccin-mocha,light:Night Owlish Light
+theme = catppuccin-mocha

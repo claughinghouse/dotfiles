@@ -71,6 +71,7 @@ packages:
       - "flameshot"
       - "ghostty"
       - "iterm2"
+      - "json-viewer"
       - "lens"
       - "ollama"
       - "pearcleaner"
