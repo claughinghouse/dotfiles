@@ -27,6 +27,7 @@ packages:
       - "helmfile"
       - "httpie"
       - "jesseduffield/lazygit/lazygit"
+      - "jwt-ui"
       - "jq"
       - "k9s"
       - "kubeconform"
@@ -83,6 +84,7 @@ packages:
       - "charmbracelet/tap"
       - "fluxcd/tap"
       - "go-task/tap"
+      - "jwt-rs/jwt-ui"
       - "oven-sh/bun"
       - "siderolabs/tap"
     mas:
