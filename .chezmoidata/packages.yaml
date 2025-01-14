@@ -67,6 +67,7 @@ packages:
       - "yt-dlp"
     casks:
       - "alacritty"
+      - "bruno"
       - "discord"
       - "font-intone-mono-nerd-font"
       - "flameshot"
