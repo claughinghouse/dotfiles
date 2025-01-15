@@ -30,6 +30,7 @@ vim.opt.wrap = true
 vim.o.foldlevel = 99
 vim.o.foldmethod = "indent"
 vim.o.foldenable = true
+vim.o.termguicolors = true
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 vim.opt.swapfile = false
