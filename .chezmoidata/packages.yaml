@@ -106,6 +106,7 @@ packages:
       - "462062816" # Microsoft PowerPoint
       - "1295203466" # Microsoft Remote Desktop
       - "462054704" # Microsoft Word
+      - "1475387142" # Tailscale
     brewlink:
       - "libpq"
   linux:
