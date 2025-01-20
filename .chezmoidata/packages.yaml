@@ -85,6 +85,7 @@ packages:
       - "charmbracelet/tap"
       - "fluxcd/tap"
       - "go-task/tap"
+      - "jesseduffield/lazygit"
       - "jwt-rs/jwt-ui"
       - "oven-sh/bun"
       - "siderolabs/tap"
