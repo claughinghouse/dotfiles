@@ -26,6 +26,7 @@ packages:
       - "helm"
       - "helmfile"
       - "httpie"
+      - "huggingface-cli"
       - "iperf3"
       - "jesseduffield/lazygit/lazygit"
       - "jwt-ui"
