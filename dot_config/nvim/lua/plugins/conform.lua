@@ -13,6 +13,8 @@ return {
         ["typescriptreact"] = { "biome" },
         ["json"] = { "biome" },
         ["jsonc"] = { "biome" },
+        [ "lua" ] = { "stylua" },
+        [ "astro" ] = { "prettierd" }
       },
     },
   },

@@ -26,7 +26,7 @@ return {
       modules = {},
       -- ensure these language parsers are installed
       ensure_installed = {
-        "bash",
+       "astro", "bash",
         "html",
         "javascript",
         "jsdoc",
