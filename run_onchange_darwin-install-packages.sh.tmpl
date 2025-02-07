@@ -39,4 +39,10 @@ printf '\nInstalling MacAppStore apps...\n'
 mas install {{ . | quote }}
 {{ end -}}
 
+printf '\nInstalling Bun global packages...\n'
+
+{{ range .packages.bun.global -}}
+bun install --global {{ . | quote }}
+{{ end -}}
+
 {{ end -}}

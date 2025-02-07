@@ -145,3 +145,8 @@ packages:
       - "lazygit"
     snapclassic:
       - "aws-cli"
+  bun:
+    global:
+      - "@astrojs/language-server"
+      - "@biomejs/biome"
+      - "@fsouza/prettierd"
