@@ -61,7 +61,6 @@ packages:
       - "sqlite3"
       - "ssh-audit"
       - "stern"
-      - "stylua"
       - "tailscale"
       - "talhelper"
       - "tmux"
@@ -150,3 +149,4 @@ packages:
       - "@astrojs/language-server"
       - "@biomejs/biome"
       - "@fsouza/prettierd"
+      - "@johnnymorganz/stylua-bin"
