@@ -12,7 +12,7 @@ return {
     config = function()
       require("mason-lspconfig").setup({
         opts = {},
-        automatic_installation = true
+        automatic_installation = true,
       })
     end,
   },
@@ -22,7 +22,7 @@ return {
     config = function()
       local capabilities = require("blink.cmp").get_lsp_capabilities()
       local lspconfig = require("lspconfig")
-      lspconfig.astro.setup({ capabilities = capabilities})
+      lspconfig.astro.setup({ capabilities = capabilities })
       lspconfig.biome.setup({ capabilities = capabilities })
       lspconfig.cssls.setup({ capabilities = capabilities })
       lspconfig.tailwindcss.setup({ capabilities = capabilities })
