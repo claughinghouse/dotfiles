@@ -28,7 +28,7 @@ return {
       ensure_installed = {
         "astro",
         "bash",
-"css",
+        "css",
         "gitignore",
         "html",
         "javascript",
@@ -51,13 +51,13 @@ return {
           scope_incremental = false,
           node_decremental = "<bs>",
         },
-            -- MDX
-      vim.filetype.add({
-        extension = {
-          mdx = "mdx",
-        },
-      }),
-      vim.treesitter.language.register("markdown", "mdx")
+        -- MDX
+        vim.filetype.add({
+          extension = {
+            mdx = "mdx",
+          },
+        }),
+        vim.treesitter.language.register("markdown", "mdx"),
       },
     })
   end,
