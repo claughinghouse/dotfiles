@@ -64,7 +64,8 @@ require("lazy").setup({
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     { import = "lazyvim.plugins.extras.editor.telescope" },
     { import = "lazyvim.plugins.extras.lang.astro" },
-    -- { import = "lazyvim.plugins.extras.formatting.prettier" },
+    { import = "lazyvim.plugins.extras.formatting.prettier" },
+    { import = "lazyvim.plugins.extras.formatting.biome" },
     -- import/override with your plugins
     { import = "plugins" },
   },

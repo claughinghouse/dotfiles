@@ -14,7 +14,7 @@ return {
         ["json"] = { "biome" },
         ["jsonc"] = { "biome" },
         ["lua"] = { "stylua" },
-        ["astro"] = { "prettierd" },
+        -- ["astro"] = { "prettierd" },
       },
     },
   },

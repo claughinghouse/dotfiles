@@ -102,7 +102,7 @@ packages:
       - "6446215341" # Cookie-Editor for Safari
       - "1451685025" # Wireguard
       - "425424353" # The Unarchiver
-      - "409201541"  # Pages
+      - "409201541" # Pages
       - "409203825" # Numbers
       - "409183694" # Keynote
       - "462058435" # Microsoft Excel
@@ -148,5 +148,6 @@ packages:
     global:
       - "@astrojs/language-server"
       - "@biomejs/biome"
-      - "@fsouza/prettierd"
+      # - "@fsouza/prettierd"
       - "@johnnymorganz/stylua-bin"
+      - "prettier"
