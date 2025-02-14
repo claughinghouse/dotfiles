@@ -148,6 +148,6 @@ packages:
     global:
       - "@astrojs/language-server"
       - "@biomejs/biome"
-      # - "@fsouza/prettierd"
       - "@johnnymorganz/stylua-bin"
       - "prettier"
+      - "prettier-plugin-astro"
