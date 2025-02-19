@@ -110,6 +110,7 @@ packages:
       - "1295203466" # Microsoft Remote Desktop
       - "462054704" # Microsoft Word
       - "1475387142" # Tailscale
+      - "333903271" # X.com
     brewlink:
       - "libpq"
   linux:
