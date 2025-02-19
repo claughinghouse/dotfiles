@@ -83,6 +83,7 @@ packages:
       - "powershell"
       - "viscosity"
       - "wezterm"
+      - "xh"
       - "zoom"
     taps:
       - "charmbracelet/tap"
