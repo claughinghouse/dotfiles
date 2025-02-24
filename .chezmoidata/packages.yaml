@@ -86,13 +86,8 @@ packages:
       - "xh"
       - "zoom"
     taps:
-      - "charmbracelet/tap"
-      - "fluxcd/tap"
-      - "go-task/tap"
-      - "jesseduffield/lazygit"
       - "jwt-rs/jwt-ui"
       - "oven-sh/bun"
-      - "siderolabs/tap"
     mas:
       - "417375580" # BetterSnapTool
       - "497799835" # Xcode
