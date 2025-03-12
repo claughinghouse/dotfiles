@@ -17,7 +17,6 @@ packages:
       - "fd"
       - "ffmpeg"
       - "fluxcd/tap/flux"
-      - "charmbracelet/tap/freeze"
       - "fzf"
       - "gh"
       - "git"
@@ -28,7 +27,7 @@ packages:
       - "httpie"
       - "huggingface-cli"
       - "iperf3"
-      - "jesseduffield/lazygit/lazygit"
+      - "lazygit"
       - "jwt-ui"
       - "jq"
       - "k9s"
@@ -75,6 +74,7 @@ packages:
       - "discord"
       - "font-intone-mono-nerd-font"
       - "flameshot"
+      - "freeze"
       - "ghostty"
       - "iterm2"
       - "json-viewer"
@@ -106,7 +106,7 @@ packages:
       - "1295203466" # Microsoft Remote Desktop
       - "462054704" # Microsoft Word
       - "1475387142" # Tailscale
-      - "333903271" # X.com
+      # - "333903271" # X.com
     brewlink:
       - "libpq"
   linux:
