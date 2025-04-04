@@ -1,0 +1,32 @@
+{{- if (eq .chezmoi.os "linux") -}}
+
+#!/bin/bash
+
+# Check if nvim already exists
+if command -v nvim >/dev/null 2>&1; then
+    echo "Neovim is already installed"
+    nvim --version
+    exit 0
+fi
+
+# Download and install stable Neovim
+echo "Installing Neovim stable version..."
+curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux-{{ .chezmoi.arch }}.tar.gz
+tar xzf nvim-linux-{{ .chezmoi.arch }}.tar.gz
+mv nvim-linux-{{ .chezmoi.arch }}/bin/nvim /usr/local/bin/
+
+# Clean up
+rm -rf nvim-linux-{{ .chezmoi.arch }}.tar.gz nvim-linux-{{ .chezmoi.arch }}
+
+# Verify installation
+if command -v nvim >/dev/null 2>&1; then
+    echo "Neovim installed successfully!"
+    nvim --version
+else
+    echo "Neovim installation failed"
+    exit 1
+fi
+
+echo "Neovim Installation complete!"
+
+{{- end }}
