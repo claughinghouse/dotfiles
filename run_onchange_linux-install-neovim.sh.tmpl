@@ -13,7 +13,7 @@ fi
 echo "Installing Neovim stable version..."
 curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux-{{ .chezmoi.arch }}.tar.gz
 tar xzf nvim-linux-{{ .chezmoi.arch }}.tar.gz
-mv nvim-linux-{{ .chezmoi.arch }}/bin/nvim /usr/local/bin/
+sudo mv nvim-linux-{{ .chezmoi.arch }}/bin/nvim /usr/local/bin/
 
 # Clean up
 rm -rf nvim-linux-{{ .chezmoi.arch }}.tar.gz nvim-linux-{{ .chezmoi.arch }}
