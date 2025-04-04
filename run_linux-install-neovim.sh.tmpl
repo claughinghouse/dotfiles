@@ -2,18 +2,18 @@
 
 #!/bin/bash
 
-NVIM_VERSION="v0.10.2"
+NVIM_VERSION="v0.10.4"
 #NVIM_VERSION="nightly"
 #NVIM_VERSION="stable"
 
 # Download and install stable Neovim
-echo "Installing Neovim stable version..."
+echo "Installing Neovim ${NVIM_VERSION} version..."
 curl -LO https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/nvim-{{ .chezmoi.os }}-{{ .chezmoi.arch }}.tar.gz
-tar -xzf nvim-linux-{{ .chezmoi.arch }}.tar.gz
-sudo mv nvim-linux-{{ .chezmoi.arch }}/bin/nvim /usr/local/bin/
+tar -xzf nvim-{{ .chezmoi.os }}-{{ .chezmoi.arch }}.tar.gz
+sudo mv nvim-{{ .chezmoi.os }}-{{ .chezmoi.arch }}/bin/nvim /usr/local/bin/
 
 # Clean up
-rm -rf nvim-linux-{{ .chezmoi.arch }}.tar.gz nvim-linux-{{ .chezmoi.arch }}
+rm -rf nvim-{{ .chezmoi.os }}-{{ .chezmoi.arch }}.tar.gz nvim-{{ .chezmoi.os }}-{{ .chezmoi.arch }}
 
 # Verify installation
 if command -v nvim >/dev/null 2>&1; then
@@ -23,7 +23,5 @@ else
     echo "Neovim installation failed"
     exit 1
 fi
-
-echo "Neovim Installation complete!"
 
 {{- end }}
