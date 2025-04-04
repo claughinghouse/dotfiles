@@ -8,7 +8,7 @@ NVIM_VERSION="latest"
 # Download and install stable Neovim
 echo "Installing Neovim stable version..."
 curl -LO https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/nvim-linux-{{ .chezmoi.arch }}.tar.gz
-tar xzf nvim-linux-{{ .chezmoi.arch }}.tar.gz
+tar -xzf nvim-linux-{{ .chezmoi.arch }}.tar.gz
 sudo mv nvim-linux-{{ .chezmoi.arch }}/bin/nvim /usr/local/bin/
 
 # Clean up
