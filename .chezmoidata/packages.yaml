@@ -46,6 +46,7 @@ packages:
       - "mosh"
       - "neovim"
       - "pinentry"
+      - "pgcli"
       - "podman"
       - "podman-compose"
       - "pre-commit"
