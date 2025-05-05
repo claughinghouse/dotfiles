@@ -45,6 +45,7 @@ packages:
       - "nss"
       - "mosh"
       - "neovim"
+      - "opencode-ai/tap/opencode"
       - "pinentry"
       - "pgcli"
       - "podman"
@@ -89,6 +90,7 @@ packages:
     taps:
       - "jwt-rs/jwt-ui"
       - "oven-sh/bun"
+      - "opencode-ai/tap"
     mas:
       - "417375580" # BetterSnapTool
       - "497799835" # Xcode
