@@ -49,7 +49,21 @@ PROMPT="%m ${PROMPT}"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
+# tmux
+tmux-git-autofetch() {($HOME/.tmux/plugins/tmux-git-autofetch/git-autofetch.tmux --current &)}
+add-zsh-hook chpwd tmux-git-autofetch
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# laravel
+export PATH="$HOME/.config/herd-lite/bin:$PATH"
+export PHP_INI_SCAN_DIR="$HOME/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
+
 {{ end }}
+
 alias k=kubectl
 alias n=nvim
 alias n.="nvim ."
@@ -63,15 +77,6 @@ if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
     tmux attach -d || tmux new
 fi
 {{ end }}
-
-{{- if (eq .chezmoi.os "linux" )}}
-tmux-git-autofetch() {($HOME/.tmux/plugins/tmux-git-autofetch/git-autofetch.tmux --current &)}
-add-zsh-hook chpwd tmux-git-autofetch
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-{{- end }}
 
 {{- if (eq .chezmoi.os "darwin" )}}
 # Updated SQLite3
