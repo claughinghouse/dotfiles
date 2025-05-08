@@ -1,18 +1,19 @@
 return {
   {
     "williamboman/mason.nvim",
+    version = "^1.0.0", -- https://github.com/LazyVim/LazyVim/issues/6039
     lazy = false,
     config = function()
       require("mason").setup()
     end,
   },
   {
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason-lspconfig.nvim", version = "^1.0.0", -- https://github.com/mason-org/mason-lspconfig.nvim/issues/545
     lazy = false,
     config = function()
       require("mason-lspconfig").setup({
         opts = {},
-        automatic_installation = true,
+        automatic_enable = true,
       })
     end,
   },
