@@ -28,6 +28,7 @@ return {
       ensure_installed = {
         "astro",
         "bash",
+        "blade",
         "css",
         "gitignore",
         "html",
@@ -37,6 +38,7 @@ return {
         "lua",
         "markdown",
         "markdown_inline",
+        "php",
         "powershell",
         "query",
         "regex",

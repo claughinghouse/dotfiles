@@ -51,4 +51,8 @@ printf '\nInstalling NVM..\n'
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/refs/heads/master/install.sh | bash
 
+printf '\nInstalling Laravel-ls..\n'
+
+go install github.com/laravel-ls/laravel-ls/cmd/laravel-ls@latest
+
 {{ end -}}

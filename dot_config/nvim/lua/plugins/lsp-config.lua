@@ -8,7 +8,8 @@ return {
     end,
   },
   {
-    "mason-org/mason-lspconfig.nvim", version = "^1.0.0", -- https://github.com/mason-org/mason-lspconfig.nvim/issues/545
+    "mason-org/mason-lspconfig.nvim",
+    version = "^1.0.0", -- https://github.com/mason-org/mason-lspconfig.nvim/issues/545
     lazy = false,
     config = function()
       require("mason-lspconfig").setup({
@@ -30,6 +31,7 @@ return {
       lspconfig.ts_ls.setup({ capabilities = capabilities })
       lspconfig.html.setup({ capabilities = capabilities })
       lspconfig.lua_ls.setup({ capabilities = capabilities })
+      lspconfig.laravel_ls.setup({ capabilities = capabilities })
     end,
   },
 }

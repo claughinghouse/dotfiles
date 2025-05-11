@@ -125,6 +125,7 @@ packages:
       - "gettext"
       - "gh"
       - "git"
+      - "golang"
       - "luarocks"
       - "make"
       - "mkcert"

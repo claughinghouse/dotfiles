@@ -46,6 +46,11 @@ LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/re
  tar xf lazygit.tar.gz lazygit
  sudo install lazygit /usr/local/bin
  rm lazygit.tar.gz
+
+printf '\nInstalling Laravel-ls..\n'
+
+go install github.com/laravel-ls/laravel-ls/cmd/laravel-ls@latest
+
 {{- end }}
 
 {{- end }}
