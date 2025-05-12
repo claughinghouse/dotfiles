@@ -146,11 +146,12 @@ packages:
       - "lazygit"
     snapclassic:
       - "aws-cli"
+      - "task"
   bun:
     global:
       - "@astrojs/language-server"
       - "@biomejs/biome"
       - "@johnnymorganz/stylua-bin"
+      - "intelephense"
       - "prettier"
       - "prettier-plugin-astro"
-      - "intelephense"
