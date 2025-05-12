@@ -32,6 +32,16 @@ return {
       lspconfig.html.setup({ capabilities = capabilities })
       lspconfig.lua_ls.setup({ capabilities = capabilities })
       lspconfig.laravel_ls.setup({ capabilities = capabilities })
+      lspconfig.intelephense.setup({
+        commands = {
+          IntelephenseIndex = {
+            function()
+              vim.lsp.buf.execute_command({ command = "intelephense.index.workspace" })
+            end,
+          },
+        },
+        capabilities = capabilities,
+      })
     end,
   },
 }
