@@ -52,6 +52,32 @@ return {
         init_options = {
           licenceKey = get_intelephense_license(),
         },
+        settings = {
+          intelephense = {
+            diagnostics = {
+              enable = true,
+              run = "onType",
+            },
+            environment = {
+              phpVersion = "8.2",
+            },
+            files = {
+              maxSize = 5000000,
+            },
+            completion = {
+              insertUseDeclaration = true, -- Auto-import
+              fullyQualifyGlobalConstantsAndFunctions = true,
+              triggerParameterHints = true,
+              maxItems = 100,
+            },
+            format = {
+              enable = true,
+            },
+            references = {
+              exclude = {},
+            },
+          },
+        },
       })
     end,
   },

@@ -152,6 +152,7 @@ packages:
       - "@astrojs/language-server"
       - "@biomejs/biome"
       - "@johnnymorganz/stylua-bin"
+      - "blade-formatter"
       - "intelephense"
       - "prettier"
       - "prettier-plugin-astro"

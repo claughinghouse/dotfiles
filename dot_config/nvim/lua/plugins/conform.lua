@@ -17,6 +17,7 @@ return {
         -- ["astro"] = { "prettierd" },
         -- ["php"] = { "php" },
         ["php"] = { "pint", "php_cs_fixer", stop_after_first = true },
+        ["blade"] = { "blade-formatter" },
       },
     },
   },
