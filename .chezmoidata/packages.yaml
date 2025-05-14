@@ -92,7 +92,7 @@ packages:
       - "oven-sh/bun"
       - "opencode-ai/tap"
     mas:
-      - "417375580" # BetterSnapTool
+      # - "417375580" # BetterSnapTool
       - "497799835" # Xcode
       - "1136220934" # Infuse
       - "803453959" # Slack
