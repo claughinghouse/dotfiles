@@ -9,7 +9,7 @@ return {
       typescript = { "biomejs" },
       javascriptreact = { "biomejs" },
       typescriptreact = { "biomejs" },
-      php = { "phpstan" },
+      -- php = { "phpstan" },
     }
 
     local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })

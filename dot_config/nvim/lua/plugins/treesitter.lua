@@ -1,9 +1,23 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   event = { "BufReadPre", "BufNewFile" },
-  build = ":TSUpdate",
+  -- build = ":TSUpdate",
+  build = function()
+    require("nvim-treesitter.install").update({ with_sync = true })
+  end,
   dependencies = {
     { "windwp/nvim-ts-autotag" },
+    {
+      "JoosepAlviste/nvim-ts-context-commentstring",
+      opts = {
+        custom_calculation = function(_, language_tree)
+          if vim.bo.filetype == "blade" and language_tree._lang ~= "javascript" and language_tree._lang ~= "php" then
+            return "{{-- %s --}}"
+          end
+        end,
+      },
+    },
+    { "nvim-treesitter/nvim-treesitter-textobjects" },
   },
   config = function()
     -- import nvim-treesitter plugin
@@ -40,8 +54,8 @@ return {
         "markdown",
         "markdown_inline",
         "php",
-        "php_only",
-        "phpdoc",
+        -- "php_only",
+        -- "phpdoc",
         "powershell",
         "query",
         "regex",
@@ -63,11 +77,11 @@ return {
           },
         }),
         -- Livewire Volt
-        vim.filetype.add({
-          pattern = {
-            [".*%.blade%.php"] = "blade",
-          },
-        }),
+        -- vim.filetype.add({
+        --   pattern = {
+        --     [".*%.blade%.php"] = "blade",
+        --   },
+        -- }),
         vim.treesitter.language.register("markdown", "mdx"),
       },
     })

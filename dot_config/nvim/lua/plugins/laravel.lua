@@ -1,7 +1,7 @@
----@type LazySpec
-return {
-  {
-    "ricardoramirezr/blade-nav.nvim",
-    ft = { "blade", "blade.php" },
-  },
-}
+return {}
+-- return {
+--   {
+--     "ricardoramirezr/blade-nav.nvim",
+--     ft = { "blade", "blade.php" },
+--   },
+-- }
