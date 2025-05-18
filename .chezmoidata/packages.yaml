@@ -50,6 +50,7 @@ packages:
       - "pgcli"
       - "podman"
       - "podman-compose"
+      - "podman-desktop"
       - "pre-commit"
       - "prettierd"
       - "prettyping"
