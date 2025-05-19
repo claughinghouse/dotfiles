@@ -47,6 +47,7 @@ packages:
       - "neovim"
       - "opencode-ai/tap/opencode"
       - "pinentry"
+      - "pinentry-mac"
       - "pgcli"
       - "podman"
       - "podman-compose"
