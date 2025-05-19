@@ -22,6 +22,7 @@ packages:
       - "git"
       - "go"
       - "go-task"
+      - "gnupg"
       - "helm"
       - "helmfile"
       - "httpie"
