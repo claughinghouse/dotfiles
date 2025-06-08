@@ -16,7 +16,7 @@ packages:
       - "esbuild"
       - "fd"
       - "ffmpeg"
-      - "flux"
+      # - "flux"
       - "fzf"
       - "gh"
       - "git"
@@ -46,7 +46,6 @@ packages:
       - "nss"
       - "mosh"
       - "neovim"
-      - "opencode-ai/tap/opencode"
       - "pinentry"
       - "pinentry-mac"
       - "pgcli"
@@ -92,8 +91,9 @@ packages:
       - "zoom"
     taps:
       - "jwt-rs/jwt-ui"
+      - "go-task/tap"
       - "oven-sh/bun"
-      - "opencode-ai/tap"
+      - "sst/tap"
     mas:
       # - "417375580" # BetterSnapTool
       - "497799835" # Xcode
@@ -152,6 +152,7 @@ packages:
       - "task"
   bun:
     global:
+      - "@anthropic-ai/claude-code"
       - "@astrojs/language-server"
       - "@biomejs/biome"
       - "@johnnymorganz/stylua-bin"
