@@ -5,9 +5,10 @@ font-size = 14
 # theme = dark:catppuccin-mocha,light:Night Owlish Light
 theme = catppuccin-mocha
 
-
 copy-on-select = clipboard
 cursor-style = block
 
 window-padding-x = 10
 window-padding-y = 10
+
+keybind = shift+enter=text:\n
