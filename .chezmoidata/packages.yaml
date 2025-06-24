@@ -51,7 +51,6 @@ packages:
       - "pgcli"
       - "podman"
       - "podman-compose"
-      - "podman-mac-helper"
       - "pre-commit"
       - "prettierd"
       - "prettyping"
