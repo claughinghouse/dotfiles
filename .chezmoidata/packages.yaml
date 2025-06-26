@@ -139,6 +139,7 @@ packages:
       - "npm"
       - "postgresql-client"
       - "python3-podman"
+      - "qemu-system"
       - "qemu-user-static"
       - "ripgrep"
       - "tmux"

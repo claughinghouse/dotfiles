@@ -1,0 +1,15 @@
+{{- if (eq .chezmoi.os "linux") -}}
+
+#!/bin/bash
+
+# Create and configure multiarch builder for Docker Buildx
+if ! docker buildx ls | grep -q "multiarch"; then
+    echo "Setting up Docker Buildx multiarch builder..."
+    docker buildx create --name multiarch --driver docker-container --use
+    docker buildx inspect --bootstrap
+    echo "Docker Buildx multiarch builder configured successfully"
+else
+    echo "Docker Buildx multiarch builder already exists"
+fi
+
+{{- end }}
