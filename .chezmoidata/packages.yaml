@@ -4,6 +4,7 @@ packages:
       - "actionlint"
       - "age"
       - "asciinema"
+      - "aspell"
       - "awscli"
       - "biome"
       - "bruno-cli"
