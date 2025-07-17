@@ -55,6 +55,7 @@ packages:
       - "pre-commit"
       - "prettierd"
       - "prettyping"
+      - "qrencode"
       - "ripgrep"
       - "shfmt"
       - "siderolabs/tap/sidero-tools"
