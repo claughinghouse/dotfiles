@@ -66,6 +66,7 @@ packages:
       - "ssh-audit"
       - "sst/tap/opencode"
       - "stern"
+      - "supervisor"
       - "tailscale"
       - "talhelper"
       - "tmux"
