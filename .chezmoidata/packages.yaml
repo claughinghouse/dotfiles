@@ -56,7 +56,10 @@ packages:
       - "pre-commit"
       - "prettierd"
       - "prettyping"
+      - "pscale"
+      - "rfidresearchgroup/proxmark3/proxmark3"
       - "qrencode"
+      - "quartz-wm"
       - "ripgrep"
       - "shfmt"
       - "siderolabs/tap/sidero-tools"
@@ -99,6 +102,7 @@ packages:
       - "jwt-rs/jwt-ui"
       - "go-task/tap"
       - "oven-sh/bun"
+      - "RfidResearchGroup/proxmark3"
       - "sst/tap"
     mas:
       # - "417375580" # BetterSnapTool
