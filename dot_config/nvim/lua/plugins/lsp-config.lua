@@ -13,6 +13,15 @@ return {
     lazy = false,
     config = function()
       require("mason-lspconfig").setup({
+        ensure_installed = {
+          "astro",
+          "lua_ls",
+          "ts_ls",
+          "html",
+          "cssls",
+          "tailwindcss",
+          "biome",
+        },
         opts = {},
         automatic_enable = true,
       })
