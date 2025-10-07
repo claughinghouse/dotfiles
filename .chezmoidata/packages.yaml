@@ -83,6 +83,7 @@ packages:
     casks:
       - "alacritty"
       - "bruno"
+      - "coderabbit"
       - "discord"
       - "font-intone-mono-nerd-font"
       - "freeze"
@@ -141,7 +142,7 @@ packages:
       - "luarocks"
       - "make"
       - "mkcert"
-      # - "neovim" # disabled until nvim 0.10.1 is in the main repo
+      - "neovim"
       - "ninja-build"
       - "nodejs"
       - "npm"
