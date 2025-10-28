@@ -80,6 +80,7 @@ packages:
       - "yq"
       - "yt-dlp"
       - "xh"
+      - "zellij"
     casks:
       - "alacritty"
       - "bruno"
