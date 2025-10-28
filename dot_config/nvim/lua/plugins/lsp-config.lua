@@ -1,6 +1,6 @@
 return {
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     version = "^1.0.0", -- https://github.com/LazyVim/LazyVim/issues/6039
     lazy = false,
     config = function()

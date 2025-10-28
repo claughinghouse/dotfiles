@@ -4,9 +4,8 @@
  (arguments
   (argument
    (string
-    ((string_value) @injection.content
-     (#set! injection.language sql)
-    )
+    (string_content) @injection.content
+    (#set! injection.language sql)
    )
   )
  )

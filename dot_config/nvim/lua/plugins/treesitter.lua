@@ -19,12 +19,7 @@ return {
     },
     { "nvim-treesitter/nvim-treesitter-textobjects" },
   },
-  config = function()
-    -- import nvim-treesitter plugin
-    local treesitter = require("nvim-treesitter.configs")
-
-    -- configure treesitter
-    treesitter.setup({ -- enable syntax highlighting
+  opts = { -- enable syntax highlighting
       highlight = {
         enable = true,
       },
@@ -70,21 +65,22 @@ return {
           scope_incremental = false,
           node_decremental = "<bs>",
         },
-        -- MDX
-        vim.filetype.add({
-          extension = {
-            mdx = "mdx",
-          },
-        }),
-        -- Livewire Volt
-        -- vim.filetype.add({
-        --   pattern = {
-        --     [".*%.blade%.php"] = "blade",
-        --   },
-        -- }),
-        vim.treesitter.language.register("markdown", "mdx"),
+      },
+    },
+  config = function()
+    -- MDX
+    vim.filetype.add({
+      extension = {
+        mdx = "mdx",
       },
     })
+    -- Livewire Volt
+    -- vim.filetype.add({
+    --   pattern = {
+    --     [".*%.blade%.php"] = "blade",
+    --   },
+    -- }),
+    vim.treesitter.language.register("markdown", "mdx")
 
     -- local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
     -- parser_config.blade = {
