@@ -15,6 +15,7 @@ packages:
       - "direnv"
       - "dos2unix"
       - "esbuild"
+      - "exiftool"
       - "fd"
       - "ffmpeg"
       # - "flux"
