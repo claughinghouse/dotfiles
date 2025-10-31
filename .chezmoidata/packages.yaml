@@ -83,7 +83,6 @@ packages:
       - "xh"
       - "zellij"
     casks:
-      - "alacritty"
       - "bruno"
       - "coderabbit"
       - "discord"
