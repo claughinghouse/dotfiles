@@ -6,7 +6,6 @@ packages:
       - "asciinema"
       - "aspell"
       - "awscli"
-      - "biome"
       - "bruno-cli"
       - "oven-sh/bun/bun"
       - "chezmoi"
@@ -168,6 +167,7 @@ packages:
     global:
       - "@anthropic-ai/claude-code"
       - "@astrojs/language-server"
+      - "@biomejs/biome"
       - "@johnnymorganz/stylua-bin"
       - "@kilocode/cli@alpha"
       - "blade-formatter"
