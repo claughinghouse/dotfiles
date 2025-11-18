@@ -97,6 +97,7 @@ packages:
       - "podman-desktop"
       - "powershell"
       - "viscosity"
+      - "vlc"
       - "wezterm"
       - "zoom"
     taps:
