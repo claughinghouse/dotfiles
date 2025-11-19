@@ -1,4 +1,3 @@
--- return {}
 return {
   {
     "stevearc/conform.nvim",
