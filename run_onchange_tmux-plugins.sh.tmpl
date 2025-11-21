@@ -1,5 +1,5 @@
 {{- if (eq .chezmoi.os "darwin") -}}
-#!/bin/zsh
+#!/bin/bash
 
 tmuxPluginFolder="$HOME/.tmux/plugins/tpm"
 
@@ -7,15 +7,23 @@ tmuxPluginFolder="$HOME/.tmux/plugins/tpm"
 if [ -z "$(ls -A $tmuxPluginFolder)" ]; then
     echo "Directory is empty, proceeding with cloning..."
     git clone https://github.com/tmux-plugins/tpm $tmuxPluginFolder
+    
+    # Install tmux plugins
+    echo "Installing tmux plugins..."
+    $tmuxPluginFolder/bin/install_plugins
 else
     git -C $tmuxPluginFolder pull
     echo "Directory is not empty. Skipping cloning and pulling latest version."
+    
+    # Update tmux plugins
+    echo "Updating tmux plugins..."
+    $tmuxPluginFolder/bin/update_plugins all
 fi
 
 {{ end -}}
 
 {{- if (eq .chezmoi.os "linux") -}}
-#!/bin/zsh
+#!/bin/bash
 
 tmuxPluginFolder="$HOME/.tmux/plugins/tpm"
 
@@ -23,9 +31,17 @@ tmuxPluginFolder="$HOME/.tmux/plugins/tpm"
 if [ -z "$(ls -A $tmuxPluginFolder)" ]; then
     echo "Directory is empty, proceeding with cloning..."
     git clone https://github.com/tmux-plugins/tpm $tmuxPluginFolder
+    
+    # Install tmux plugins
+    echo "Installing tmux plugins..."
+    $tmuxPluginFolder/bin/install_plugins
 else
     git -C $tmuxPluginFolder pull
     echo "Directory is not empty. Skipping cloning and pulling latest version."
+    
+    # Update tmux plugins
+    echo "Updating tmux plugins..."
+    $tmuxPluginFolder/bin/update_plugins all
 fi
 
 {{ end -}}
