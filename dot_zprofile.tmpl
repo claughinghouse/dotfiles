@@ -7,3 +7,10 @@ eval "$(/usr/local/bin/brew shellenv)"
 {{ end }}
 
 {{ end -}}
+
+{{- if (eq .chezmoi.os "linux") -}}
+
+# Add ~/bin to PATH for local binaries (chezmoi, etc)
+export PATH="$HOME/bin:$PATH"
+
+{{ end -}}
