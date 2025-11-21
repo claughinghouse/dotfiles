@@ -6,7 +6,10 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
 #	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
   git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
 else
-  git -C "$HOME/.oh-my-zsh" pull https://github.com/ohmyzsh/ohmyzsh.git --quiet
+  # Check if it's a valid git repository before pulling
+  if git -C "$HOME/.oh-my-zsh" rev-parse --git-dir > /dev/null 2>&1; then
+    git -C "$HOME/.oh-my-zsh" pull https://github.com/ohmyzsh/ohmyzsh.git --quiet
+  fi
 	echo ".oh-my-zsh already found, skipping."
 fi
 
@@ -20,7 +23,10 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
 #	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
   git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
 else
-  git -C "$HOME/.oh-my-zsh" pull https://github.com/ohmyzsh/ohmyzsh.git --quiet
+  # Check if it's a valid git repository before pulling
+  if git -C "$HOME/.oh-my-zsh" rev-parse --git-dir > /dev/null 2>&1; then
+    git -C "$HOME/.oh-my-zsh" pull https://github.com/ohmyzsh/ohmyzsh.git --quiet
+  fi
 	echo ".oh-my-zsh already found, skipping."
 fi
 
