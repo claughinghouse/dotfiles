@@ -6,7 +6,6 @@ packages:
       - "asciinema"
       - "aspell"
       - "awscli"
-      - "bruno-cli"
       - "oven-sh/bun/bun"
       - "chezmoi"
       - "cloudflared"
@@ -83,7 +82,6 @@ packages:
       - "xh"
       - "zellij"
     casks:
-      - "bruno"
       - "coderabbit"
       - "discord"
       - "font-intone-mono-nerd-font"
@@ -155,15 +153,8 @@ packages:
       - "ripgrep"
       - "tmux"
       - "unzip"
-      - "zsh"
-    snap:
-      - "bruno"
       - "httpie"
-      - "httpstat"
-      - "lazygit"
-    snapclassic:
-      - "aws-cli"
-      - "task"
+      - "zsh"
   bun:
     global:
       - "@anthropic-ai/claude-code"
