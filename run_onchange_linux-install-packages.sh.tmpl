@@ -8,20 +8,30 @@ sudo apt update
 
 sudo apt install -y {{ range .packages.linux.apt }}{{ . }} {{ end }}
 
+# Install httpstat (lightweight HTTP benchmarking tool)
+echo "Installing httpstat..."
+curl -fsSL https://raw.githubusercontent.com/reorx/httpstat/master/httpstat.py > /tmp/httpstat
+sudo install /tmp/httpstat /usr/local/bin/httpstat
+rm /tmp/httpstat
 
-{{- if (eq .chezmoi.osRelease.id "ubuntu") -}}
+# Install AWS CLI v2 (official installer)
+if ! command -v aws &> /dev/null; then
+    echo "Installing AWS CLI v2..."
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-$(uname -m).zip" -o "/tmp/awscliv2.zip"
+    unzip -q /tmp/awscliv2.zip -d /tmp
+    sudo /tmp/aws/install
+    rm -rf /tmp/awscliv2.zip /tmp/aws
+else
+    echo "AWS CLI already installed"
+fi
 
-# Although you can install multiple snaps on one line, this errors if already installed
-{{- range .packages.linux.snap }}
-sudo snap install {{ . }}
-{{- end }}
-
-# Although you can install multiple snaps on one line, this errors if already installed
-{{- range .packages.linux.snapclassic }}
-sudo snap install {{ . }} --classic
-{{- end }}
-
-{{- end }}
+# Install go-task (task runner)
+if ! command -v task &> /dev/null; then
+    echo "Installing go-task..."
+    sh -c "$(curl -fsSL https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin
+else
+    echo "go-task already installed"
+fi
 
 # Install bun
 curl -fsSL https://bun.sh/install | bash
