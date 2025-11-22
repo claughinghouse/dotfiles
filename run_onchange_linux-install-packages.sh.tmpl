@@ -42,6 +42,22 @@ echo "Installing Bun global packages..."
 bun install --global {{ . | quote }}
 {{ end -}}
 
+# Install latest Neovim
+echo "Installing latest Neovim..."
+NVIM_VERSION=$(curl -s "https://api.github.com/repos/neovim/neovim/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+{{- if (eq .chezmoi.arch "arm64") }}
+# For ARM64, download the Linux ARM64 release
+curl -Lo /tmp/nvim-linux64.tar.gz "https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz"
+{{- else if (eq .chezmoi.arch "amd64") }}
+# For AMD64, download the Linux x86_64 release
+curl -Lo /tmp/nvim-linux64.tar.gz "https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz"
+{{- end }}
+sudo rm -rf /opt/nvim-linux64
+sudo tar -C /opt -xzf /tmp/nvim-linux64.tar.gz
+sudo ln -sf /opt/nvim-linux64/bin/nvim /usr/local/bin/nvim
+rm /tmp/nvim-linux64.tar.gz
+echo "Neovim ${NVIM_VERSION} installed successfully"
+
 {{- if (eq .chezmoi.arch "amd64") -}}
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
  curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
