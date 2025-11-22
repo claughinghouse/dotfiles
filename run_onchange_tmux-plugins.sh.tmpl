@@ -3,21 +3,22 @@
 
 tmuxPluginFolder="$HOME/.tmux/plugins/tpm"
 
-# Check if the directory is empty
-if [ -z "$(ls -A $tmuxPluginFolder)" ]; then
-    echo "Directory is empty, proceeding with cloning..."
-    git clone https://github.com/tmux-plugins/tpm $tmuxPluginFolder
+# Check if tpm is installed
+if [ ! -d "$tmuxPluginFolder" ] || [ -z "$(ls -A $tmuxPluginFolder 2>/dev/null)" ]; then
+    echo "Installing tmux plugin manager (tpm)..."
+    mkdir -p "$HOME/.tmux/plugins"
+    git clone https://github.com/tmux-plugins/tpm "$tmuxPluginFolder"
     
     # Install tmux plugins
     echo "Installing tmux plugins..."
-    $tmuxPluginFolder/bin/install_plugins
+    "$tmuxPluginFolder/bin/install_plugins"
 else
-    git -C $tmuxPluginFolder pull
-    echo "Directory is not empty. Skipping cloning and pulling latest version."
+    echo "Updating tmux plugin manager..."
+    git -C "$tmuxPluginFolder" pull
     
     # Update tmux plugins
     echo "Updating tmux plugins..."
-    $tmuxPluginFolder/bin/update_plugins all
+    "$tmuxPluginFolder/bin/update_plugins" all
 fi
 
 {{ end -}}
@@ -27,21 +28,22 @@ fi
 
 tmuxPluginFolder="$HOME/.tmux/plugins/tpm"
 
-# Check if the directory is empty
-if [ -z "$(ls -A $tmuxPluginFolder)" ]; then
-    echo "Directory is empty, proceeding with cloning..."
-    git clone https://github.com/tmux-plugins/tpm $tmuxPluginFolder
+# Check if tpm is installed
+if [ ! -d "$tmuxPluginFolder" ] || [ -z "$(ls -A $tmuxPluginFolder 2>/dev/null)" ]; then
+    echo "Installing tmux plugin manager (tpm)..."
+    mkdir -p "$HOME/.tmux/plugins"
+    git clone https://github.com/tmux-plugins/tpm "$tmuxPluginFolder"
     
     # Install tmux plugins
     echo "Installing tmux plugins..."
-    $tmuxPluginFolder/bin/install_plugins
+    "$tmuxPluginFolder/bin/install_plugins"
 else
-    git -C $tmuxPluginFolder pull
-    echo "Directory is not empty. Skipping cloning and pulling latest version."
+    echo "Updating tmux plugin manager..."
+    git -C "$tmuxPluginFolder" pull
     
     # Update tmux plugins
     echo "Updating tmux plugins..."
-    $tmuxPluginFolder/bin/update_plugins all
+    "$tmuxPluginFolder/bin/update_plugins" all
 fi
 
 {{ end -}}
