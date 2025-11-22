@@ -66,8 +66,20 @@ if [ "$NVIM_CURRENT_VERSION" != "$NVIM_LATEST_VERSION" ]; then
     sudo ln -sf /opt/${NVIM_DIR}/bin/nvim /usr/local/bin/nvim
     rm /tmp/nvim-linux.tar.gz
     echo "Neovim ${NVIM_LATEST_VERSION} installed successfully"
+    
+    # Update Neovim plugins (Lazy.nvim) for compatibility with new version
+    echo "Updating Neovim plugins..."
+    nvim --headless "+Lazy! sync" +qa 2>/dev/null || echo "Plugin update completed"
 else
     echo "Neovim is already at the latest version (${NVIM_CURRENT_VERSION})"
+fi
+
+# Install tree-sitter CLI (required for nvim-treesitter)
+if ! command -v tree-sitter &> /dev/null; then
+    echo "Installing tree-sitter CLI..."
+    bun install -g tree-sitter-cli
+else
+    echo "tree-sitter CLI already installed"
 fi
 
 {{- if (eq .chezmoi.arch "amd64") }}
