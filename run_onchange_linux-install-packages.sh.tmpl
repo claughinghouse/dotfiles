@@ -71,25 +71,24 @@ else
     echo "Neovim is already at the latest version (${NVIM_CURRENT_VERSION})"
 fi
 
-{{- if (eq .chezmoi.arch "amd64") -}}
+{{- if (eq .chezmoi.arch "amd64") }}
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
- curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
- tar xf lazygit.tar.gz lazygit
- sudo install lazygit /usr/local/bin
- rm lazygit.tar.gz
+curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+tar xf lazygit.tar.gz lazygit
+sudo install lazygit /usr/local/bin
+rm lazygit.tar.gz
 {{- end }}
 
-{{- if (eq .chezmoi.arch "arm64") -}}
+{{- if (eq .chezmoi.arch "arm64") }}
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
- curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_arm64.tar.gz"
- tar xf lazygit.tar.gz lazygit
- sudo install lazygit /usr/local/bin
- rm lazygit.tar.gz
+curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_arm64.tar.gz"
+tar xf lazygit.tar.gz lazygit
+sudo install lazygit /usr/local/bin
+rm lazygit.tar.gz
 
 printf '\nInstalling Laravel-ls..\n'
 
 go install github.com/laravel-ls/laravel-ls/cmd/laravel-ls@latest
-
 {{- end }}
 
 {{- end }}
