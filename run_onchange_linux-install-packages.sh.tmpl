@@ -42,21 +42,39 @@ echo "Installing Bun global packages..."
 bun install --global {{ . | quote }}
 {{ end -}}
 
-# Install latest Neovim
-echo "Installing latest Neovim..."
-NVIM_VERSION=$(curl -s "https://api.github.com/repos/neovim/neovim/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
-{{- if (eq .chezmoi.arch "arm64") }}
-# For ARM64, download the Linux ARM64 release
-curl -Lo /tmp/nvim-linux64.tar.gz "https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz"
-{{- else if (eq .chezmoi.arch "amd64") }}
-# For AMD64, download the Linux x86_64 release
-curl -Lo /tmp/nvim-linux64.tar.gz "https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz"
-{{- end }}
-sudo rm -rf /opt/nvim-linux64
-sudo tar -C /opt -xzf /tmp/nvim-linux64.tar.gz
-sudo ln -sf /opt/nvim-linux64/bin/nvim /usr/local/bin/nvim
-rm /tmp/nvim-linux64.tar.gz
-echo "Neovim ${NVIM_VERSION} installed successfully"
+# Install/Update Neovim to latest release
+echo "Checking for latest Neovim release..."
+NVIM_LATEST_VERSION=$(curl -s "https://api.github.com/repos/neovim/neovim/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+
+# Get currently installed version (if any)
+if command -v nvim &> /dev/null; then
+    NVIM_CURRENT_VERSION=$(nvim --version | head -n1 | grep -Po 'v\K[0-9]+\.[0-9]+\.[0-9]+')
+    echo "Current Neovim version: ${NVIM_CURRENT_VERSION}"
+else
+    NVIM_CURRENT_VERSION="none"
+    echo "Neovim not currently installed"
+fi
+
+echo "Latest Neovim version: ${NVIM_LATEST_VERSION}"
+
+# Compare versions and install if newer version available
+if [ "$NVIM_CURRENT_VERSION" != "$NVIM_LATEST_VERSION" ]; then
+    echo "Installing Neovim ${NVIM_LATEST_VERSION}..."
+    {{- if (eq .chezmoi.arch "arm64") }}
+    # For ARM64, download the Linux ARM64 release
+    curl -Lo /tmp/nvim-linux64.tar.gz "https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz"
+    {{- else if (eq .chezmoi.arch "amd64") }}
+    # For AMD64, download the Linux x86_64 release
+    curl -Lo /tmp/nvim-linux64.tar.gz "https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz"
+    {{- end }}
+    sudo rm -rf /opt/nvim-linux64
+    sudo tar -C /opt -xzf /tmp/nvim-linux64.tar.gz
+    sudo ln -sf /opt/nvim-linux64/bin/nvim /usr/local/bin/nvim
+    rm /tmp/nvim-linux64.tar.gz
+    echo "Neovim ${NVIM_LATEST_VERSION} installed successfully"
+else
+    echo "Neovim is already at the latest version (${NVIM_CURRENT_VERSION})"
+fi
 
 {{- if (eq .chezmoi.arch "amd64") -}}
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
