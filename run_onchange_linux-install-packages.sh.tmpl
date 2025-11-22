@@ -25,14 +25,6 @@ else
     echo "AWS CLI already installed"
 fi
 
-# Install go-task (task runner)
-if ! command -v task &> /dev/null; then
-    echo "Installing go-task..."
-    sh -c "$(curl -fsSL https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin
-else
-    echo "go-task already installed"
-fi
-
 # Install bun
 curl -fsSL https://bun.sh/install | bash
 
@@ -60,12 +52,19 @@ echo "Latest Neovim version: ${NVIM_LATEST_VERSION}"
 # Compare versions and install if newer version available
 if [ "$NVIM_CURRENT_VERSION" != "$NVIM_LATEST_VERSION" ]; then
     echo "Installing Neovim ${NVIM_LATEST_VERSION}..."
-    # Download the latest Neovim release (same binary for ARM64 and AMD64)
-    curl -Lo /tmp/nvim-linux64.tar.gz "https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz"
-    sudo rm -rf /opt/nvim-linux64
-    sudo tar -C /opt -xzf /tmp/nvim-linux64.tar.gz
-    sudo ln -sf /opt/nvim-linux64/bin/nvim /usr/local/bin/nvim
-    rm /tmp/nvim-linux64.tar.gz
+{{- if (eq .chezmoi.arch "arm64") }}
+    # For ARM64, download the ARM64 release
+    curl -Lo /tmp/nvim-linux.tar.gz "https://github.com/neovim/neovim/releases/download/v${NVIM_LATEST_VERSION}/nvim-linux-arm64.tar.gz"
+    NVIM_DIR="nvim-linux-arm64"
+{{- else if (eq .chezmoi.arch "amd64") }}
+    # For AMD64, download the x86_64 release
+    curl -Lo /tmp/nvim-linux.tar.gz "https://github.com/neovim/neovim/releases/download/v${NVIM_LATEST_VERSION}/nvim-linux-x86_64.tar.gz"
+    NVIM_DIR="nvim-linux-x86_64"
+{{- end }}
+    sudo rm -rf /opt/${NVIM_DIR}
+    sudo tar -C /opt -xzf /tmp/nvim-linux.tar.gz
+    sudo ln -sf /opt/${NVIM_DIR}/bin/nvim /usr/local/bin/nvim
+    rm /tmp/nvim-linux.tar.gz
     echo "Neovim ${NVIM_LATEST_VERSION} installed successfully"
 else
     echo "Neovim is already at the latest version (${NVIM_CURRENT_VERSION})"
