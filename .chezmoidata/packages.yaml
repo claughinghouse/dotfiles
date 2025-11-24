@@ -142,6 +142,7 @@ packages:
       - "luarocks"
       - "make"
       - "mkcert"
+      - "mosh"
       - "ninja-build"
       - "nodejs"
       - "npm"
