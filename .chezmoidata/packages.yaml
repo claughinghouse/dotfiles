@@ -160,6 +160,7 @@ packages:
       - "@anthropic-ai/claude-code"
       - "@astrojs/language-server"
       - "@biomejs/biome"
+      - "@google/gemini-cli"
       - "@johnnymorganz/stylua-bin"
       - "blade-formatter"
       - "intelephense"
