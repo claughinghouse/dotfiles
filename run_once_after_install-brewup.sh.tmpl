@@ -18,6 +18,10 @@ brew cleanup
 # Show problems if any
 printf "Checking for issues...\n"
 brew doctor
+
+# Update bun global dependencies
+printf "Updating bun global dependencies...\n"
+bun update --global
 EOF
 
 sudo chmod +x /usr/local/bin/brewup
