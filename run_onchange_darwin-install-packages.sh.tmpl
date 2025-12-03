@@ -44,6 +44,10 @@ mas install {{ . | quote }}
 printf '\nInstalling Bun global packages...\n'
 
 {{ range .packages.bun.global -}}
+bun pm trust {{ . | quote }}
+{{ end -}}
+
+{{ range .packages.bun.global -}}
 bun install --global {{ . | quote }}
 {{ end -}}
 

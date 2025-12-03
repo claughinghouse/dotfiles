@@ -31,6 +31,10 @@ curl -fsSL https://bun.sh/install | bash
 echo "Installing Bun global packages..."
 
 {{ range .packages.bun.global -}}
+bun pm trust {{ . | quote }}
+{{ end -}}
+
+{{ range .packages.bun.global -}}
 bun install --global {{ . | quote }}
 {{ end -}}
 
@@ -77,6 +81,7 @@ fi
 # Install tree-sitter CLI (required for nvim-treesitter)
 if ! command -v tree-sitter &> /dev/null; then
     echo "Installing tree-sitter CLI..."
+    bun pm trust tree-sitter-cli
     bun install -g tree-sitter-cli
 else
     echo "tree-sitter CLI already installed"

@@ -21,6 +21,9 @@ brew doctor
 
 # Update bun global dependencies
 printf "Updating bun global dependencies...\n"
+{{ range .packages.bun.global -}}
+bun pm trust {{ . | quote }}
+{{ end -}}
 bun update --global
 EOF
 
