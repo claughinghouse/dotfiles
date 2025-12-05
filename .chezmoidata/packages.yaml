@@ -159,7 +159,6 @@ packages:
     global:
       - "@anthropic-ai/claude-code"
       - "@astrojs/language-server"
-      - "@beads/bd"
       - "@biomejs/biome"
       - "@google/gemini-cli"
       - "@johnnymorganz/stylua-bin"
