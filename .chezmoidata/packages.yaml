@@ -30,6 +30,7 @@ packages:
       - "iperf3"
       - "lazygit"
       - "jless"
+      - "jj"
       - "jwt-ui"
       - "jq"
       - "k9s"
@@ -82,7 +83,7 @@ packages:
       - "xh"
       - "zellij"
     casks:
-      - "coderabbit"
+      - "audacity"
       - "discord"
       - "font-intone-mono-nerd-font"
       - "freeze"
