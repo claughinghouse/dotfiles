@@ -47,11 +47,11 @@ alias ar="php artisan"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-{{ if (eq .chezmoi.hostname "dev") }}
-if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
-    tmux attach -d || tmux new
-fi
-{{ end }}
+# {{ if (eq .chezmoi.hostname "dev") }}
+# if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+#    tmux attach -d || tmux new
+#fi
+#{{ end }}
 
 {{- if (eq .chezmoi.os "darwin" )}}
 # Updated SQLite3
