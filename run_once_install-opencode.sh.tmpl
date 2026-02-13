@@ -1,0 +1,12 @@
+{{- if (and (eq .chezmoi.os "linux") (contains "dev" .chezmoi.hostname)) -}}
+#!/bin/bash
+
+if command -v opencode &> /dev/null; then
+    echo "opencode is already installed"
+    exit 0
+fi
+
+echo "Installing opencode..."
+curl -fsSL https://opencode.ai/install | bash
+
+{{ end -}}
