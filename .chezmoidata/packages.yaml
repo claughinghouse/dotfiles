@@ -166,6 +166,7 @@ packages:
       - "@beads/bd"
       - "beads-ui"
       - "@biomejs/biome"
+      - "counselors"
       - "@google/gemini-cli"
       - "@johnnymorganz/stylua-bin"
       - "blade-formatter"
