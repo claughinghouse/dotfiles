@@ -11,6 +11,7 @@ return {
       servers = {
         -- tsserver will be automatically installed with mason and loaded with lspconfig
         tsserver = {},
+        oxlint = {},
       },
       -- you can do any additional lsp server setup here
       -- return true if you don't want this server to be setup with lspconfig
@@ -26,7 +27,12 @@ return {
       },
     },
     keys = {
-      { "<leader>co", "<cmd>TypescriptOrganizeImports<cr>", desc = "Organize Imports", ft = { "typescript", "typescriptreact" } },
+      {
+        "<leader>co",
+        "<cmd>TypescriptOrganizeImports<cr>",
+        desc = "Organize Imports",
+        ft = { "typescript", "typescriptreact" },
+      },
       { "<leader>cR", "<cmd>TypescriptRenameFile<cr>", desc = "Rename File", ft = { "typescript", "typescriptreact" } },
     },
   },

@@ -172,5 +172,6 @@ packages:
       - "blade-formatter"
       - "greptile"
       - "intelephense"
+      - "oxlint"
       - "prettier"
       - "prettier-plugin-astro"
