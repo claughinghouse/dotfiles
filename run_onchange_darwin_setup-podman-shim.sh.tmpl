@@ -1,0 +1,21 @@
+#!/bin/bash
+{{- if (eq .chezmoi.os "darwin") }}
+set -e
+
+mkdir -p ~/bin
+
+cat <<'EOF' > ~/bin/docker
+#!/bin/bash
+ARGS=()
+for arg in "$@"; do
+  if [[ "$arg" != --provenance* ]]; then
+    ARGS+=("$arg")
+  fi
+done
+exec podman "${ARGS[@]}"
+EOF
+
+chmod +x ~/bin/docker
+
+echo "Podman shim installed at ~/bin/docker"
+{{- end }}

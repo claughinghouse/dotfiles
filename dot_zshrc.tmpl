@@ -70,4 +70,9 @@ export HERD_PHP_85_INI_SCAN_DIR="$HOME/Library/Application Support/Herd/config/p
 # Set composer global bin path
 export COMPOSER_HOME="$HOME/.config/composer";
 
+# Podman shim for wrangler (replaces docker CLI)
+export PATH="$HOME/bin:$PATH"
+export WRANGLER_DOCKER_BIN=docker
+export WRANGLER_DOCKER_HOST="unix://$(podman info --format '{{ "{{" }}.Host.RemoteSocket.Path{{ "}}" }}' 2>/dev/null)"
+
 {{- end }}
