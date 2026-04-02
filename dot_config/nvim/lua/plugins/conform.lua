@@ -4,14 +4,14 @@ return {
     optional = true,
     opts = {
       -- for language support
-      -- @see https://biomejs.dev/internals/language-support/
+      -- @see https://oxc.rs/docs/guide/usage/linter.html
       formatters_by_ft = {
-        ["javascript"] = { "biome" },
-        ["javascriptreact"] = { "biome" },
-        ["typescript"] = { "biome" },
-        ["typescriptreact"] = { "biome" },
-        ["json"] = { "biome" },
-        ["jsonc"] = { "biome" },
+        ["javascript"] = { "oxfmt" },
+        ["javascriptreact"] = { "oxfmt" },
+        ["typescript"] = { "oxfmt" },
+        ["typescriptreact"] = { "oxfmt" },
+        ["json"] = { "oxfmt" },
+        ["jsonc"] = { "oxfmt" },
         ["lua"] = { "stylua" },
         -- ["astro"] = { "prettierd" },
         -- ["php"] = { "pint", "php_cs_fixer", stop_after_first = true },
