@@ -31,10 +31,6 @@ curl -fsSL https://bun.sh/install | bash
 echo "Installing Bun global packages..."
 
 {{ range .packages.bun.global -}}
-bun pm trust {{ . | quote }}
-{{ end -}}
-
-{{ range .packages.bun.global -}}
 bun install --global {{ . | quote }}
 {{ end -}}
 
