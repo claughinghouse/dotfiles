@@ -1,7 +1,7 @@
 font-family = "TX-02"
 minimum-contrast = 1
 font-size = 14
-theme = Catppuccin Frappe
+theme = Catppuccin Mocha
 
 copy-on-select = clipboard
 cursor-style = block
