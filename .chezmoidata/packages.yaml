@@ -160,6 +160,8 @@ packages:
       - "unzip"
       - "httpie"
       - "zsh"
+    bun:
+      - "opencode-ai"
   bun:
     global:
       - "@anthropic-ai/claude-code"
