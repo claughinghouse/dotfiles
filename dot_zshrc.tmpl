@@ -16,6 +16,12 @@ export ZSH_THEME_GIT_PROMPT_CACHE=yes
 
 {{ if eq .chezmoi.os "linux" }}
 PROMPT="%m ${PROMPT}"
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 

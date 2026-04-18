@@ -25,6 +25,16 @@ else
     echo "AWS CLI already installed"
 fi
 
+# Install nvm (Node Version Manager)
+if [ ! -s "$HOME/.nvm/nvm.sh" ]; then
+    echo "Installing nvm..."
+    NVM_LATEST_VERSION=$(curl -s "https://api.github.com/repos/nvm-sh/nvm/releases/latest" | grep -Po '"tag_name": "\K[^"]*')
+    curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_LATEST_VERSION}/install.sh" | PROFILE=/dev/null bash
+    echo "nvm ${NVM_LATEST_VERSION} installed"
+else
+    echo "nvm already installed"
+fi
+
 # Install bun
 curl -fsSL https://bun.sh/install | bash
 

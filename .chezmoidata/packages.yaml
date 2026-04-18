@@ -151,8 +151,6 @@ packages:
       - "mkcert"
       - "mosh"
       - "ninja-build"
-      - "nodejs"
-      - "npm"
       - "postgresql-client"
       - "python3-podman"
       - "qemu-system"
