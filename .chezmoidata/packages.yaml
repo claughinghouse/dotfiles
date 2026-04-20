@@ -172,6 +172,7 @@ packages:
       - "cf"
       - "counselors"
       - "@google/gemini-cli"
+      - "@jdxcode/mise"
       - "@johnnymorganz/stylua-bin"
       - "blade-formatter"
       - "greptile"
