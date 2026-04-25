@@ -35,6 +35,28 @@ else
     echo "nvm already installed"
 fi
 
+# Install/Update mise
+echo "Checking for latest mise version..."
+MISE_LATEST_VERSION=$(curl -s "https://api.github.com/repos/jdx/mise/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+
+if command -v mise &> /dev/null; then
+    MISE_CURRENT_VERSION=$(mise --version 2>/dev/null | grep -Po '\d+\.\d+\.\d+' | head -1)
+    echo "Current mise version: ${MISE_CURRENT_VERSION}"
+else
+    MISE_CURRENT_VERSION="none"
+    echo "mise not currently installed"
+fi
+
+echo "Latest mise version: ${MISE_LATEST_VERSION}"
+
+if [ "$MISE_CURRENT_VERSION" != "$MISE_LATEST_VERSION" ]; then
+    echo "Installing mise ${MISE_LATEST_VERSION}..."
+    curl -fsSL https://mise.run | sh
+    echo "mise ${MISE_LATEST_VERSION} installed successfully"
+else
+    echo "mise is already at the latest version (${MISE_CURRENT_VERSION})"
+fi
+
 # Install bun
 curl -fsSL https://bun.sh/install | bash
 
@@ -119,5 +141,9 @@ printf '\nInstalling Laravel-ls..\n'
 
 go install github.com/laravel-ls/laravel-ls/cmd/laravel-ls@latest
 {{- end }}
+
+printf '\nInstalling mise tools...\n'
+
+mise install -y
 
 {{- end }}

@@ -13,6 +13,8 @@ source $ZSH/oh-my-zsh.sh
 RPROMPT=
 export EDITOR=nvim
 export ZSH_THEME_GIT_PROMPT_CACHE=yes
+
+eval "$(mise activate zsh)"
 # User configuration
 
 {{ if eq .chezmoi.os "linux" }}

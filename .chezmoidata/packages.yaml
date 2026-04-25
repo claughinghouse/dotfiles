@@ -47,6 +47,7 @@ packages:
       - "luarocks"
       - "mas"
       - "matthart1983/tap/netwatch"
+      - "mise"
       - "mkcert"
       - "moreutils"
       - "mosh"
@@ -121,15 +122,11 @@ packages:
       - "6446215341" # Cookie-Editor for Safari
       - "1451685025" # Wireguard
       - "425424353" # The Unarchiver
-      - "409201541" # Pages
-      - "409203825" # Numbers
-      - "409183694" # Keynote
       - "462058435" # Microsoft Excel
       - "462062816" # Microsoft PowerPoint
       - "1295203466" # Microsoft Remote Desktop
       - "462054704" # Microsoft Word
       - "1475387142" # Tailscale
-      # - "333903271" # X.com
     brewlink:
       - "libpq"
   linux:
@@ -172,12 +169,9 @@ packages:
       - "cf"
       - "counselors"
       - "@google/gemini-cli"
-      - "@jdxcode/mise"
       - "@johnnymorganz/stylua-bin"
       - "blade-formatter"
       - "greptile"
       - "intelephense"
       - "oxlint"
-      - "prettier"
-      - "prettier-plugin-astro"
       - "vite-plus"

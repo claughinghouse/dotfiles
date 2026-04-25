@@ -22,6 +22,10 @@ brew doctor
 # Update bun global dependencies
 printf "Updating bun global dependencies...\n"
 bun update --global
+
+# Update mise global tools
+printf "Updating mise global tools...\n"
+mise upgrade -y
 EOF
 
 sudo chmod +x /usr/local/bin/brewup
