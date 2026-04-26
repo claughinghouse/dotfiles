@@ -57,6 +57,8 @@ else
     echo "mise is already at the latest version (${MISE_CURRENT_VERSION})"
 fi
 
+export PATH="$HOME/.local/bin:$PATH"
+
 # Install bun
 curl -fsSL https://bun.sh/install | bash
 
