@@ -1,3 +1,5 @@
 # Managed by Chezmoi
 [tools]
 aube = "latest"
+node = "lts"
+
