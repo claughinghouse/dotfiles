@@ -59,21 +59,21 @@ fi
 
 export PATH="$HOME/.local/bin:$PATH"
 
+# NOTE: Moving away from bun for global tool install. Using aube and mise instead.
 # Install bun
-curl -fsSL https://bun.sh/install | bash
+# curl -fsSL https://bun.sh/install | bash
 
-echo "Installing Bun global packages..."
+# echo "Installing Bun global packages..."
+# {{ range .packages.bun.global -}}
+# bun install --global {{ . | quote }}
+# {{ end -}}
 
-{{ range .packages.bun.global -}}
-bun install --global {{ . | quote }}
-{{ end -}}
-
-{{ if hasKey .packages.linux "bun" -}}
-echo "Installing Linux-only Bun global packages..."
-{{ range .packages.linux.bun -}}
-bun install --global {{ . | quote }}
-{{ end -}}
-{{- end }}
+# {{ if hasKey .packages.linux "bun" -}}
+# echo "Installing Linux-only Bun global packages..."
+# {{ range .packages.linux.bun -}}
+# bun install --global {{ . | quote }}
+# {{ end -}}
+# {{- end }}
 
 # Install/Update Neovim to latest release
 echo "Checking for latest Neovim release..."
@@ -115,14 +115,7 @@ else
     echo "Neovim is already at the latest version (${NVIM_CURRENT_VERSION})"
 fi
 
-# Install tree-sitter CLI (required for nvim-treesitter)
-if ! command -v tree-sitter &> /dev/null; then
-    echo "Installing tree-sitter CLI..."
-    bun pm trust tree-sitter-cli
-    bun install -g tree-sitter-cli
-else
-    echo "tree-sitter CLI already installed"
-fi
+# tree-sitter-cli is now managed by mise
 
 {{- if (eq .chezmoi.arch "amd64") }}
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')

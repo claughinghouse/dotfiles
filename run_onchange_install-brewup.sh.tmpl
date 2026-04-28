@@ -20,12 +20,19 @@ printf "Checking for issues...\n"
 brew doctor
 
 # Update bun global dependencies
-printf "Updating bun global dependencies...\n"
-bun update --global
+# NOTE: Moving away from bun for global tool install. Using aube and mise instead.
+# printf "Updating bun global dependencies...\n"
+# bun update --global
 
 # Update mise global tools
 printf "Updating mise global tools...\n"
 mise upgrade -y
+
+# Update plannotator if installed
+if command -v plannotator &> /dev/null; then
+  printf "Updating plannotator...\n"
+  curl -fsSL https://plannotator.ai/install.sh | bash
+fi
 EOF
 
 sudo chmod +x /usr/local/bin/brewup

@@ -41,13 +41,11 @@ printf '\nInstalling MacAppStore apps...\n'
 mas install {{ . | quote }}
 {{ end -}}
 
-printf '\nInstalling Bun global packages...\n'
-
-{{ range .packages.bun.global -}}
-bun install --global {{ . | quote }}
-{{ end -}}
-
-
+# NOTE: Moving away from bun for global tool install. Using aube and mise instead.
+# printf '\nInstalling Bun global packages...\n'
+# {{ range .packages.bun.global -}}
+# bun install --global {{ . | quote }}
+# {{ end -}}
 
 printf '\nInstalling Laravel-ls..\n'
 
