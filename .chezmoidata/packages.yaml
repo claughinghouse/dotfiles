@@ -177,17 +177,5 @@ packages:
     global:
       aube: "latest"
       node: "lts"
-      "npm:@anthropic-ai/claude-code": "latest"
-      "npm:@astrojs/language-server": "latest"
-      "npm:@beads/bd": "latest"
-      "npm:beads-ui": "latest"
-      "npm:@biomejs/biome": "latest"
       "npm:cf": "latest"
-      "npm:counselors": "latest"
-      "npm:@google/gemini-cli": "latest"
-      "npm:@johnnymorganz/stylua-bin": "latest"
-      "npm:intelephense": "latest"
-      "npm:oxlint": "latest"
-      "npm:tree-sitter-cli": "latest"
-      "npm:vite-plus": "latest"
 
