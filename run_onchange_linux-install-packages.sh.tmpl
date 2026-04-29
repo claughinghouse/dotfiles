@@ -2,6 +2,9 @@
 
 #!/bin/bash
 
+# Ensure locally-installed binaries (e.g. mise) are discoverable
+export PATH="$HOME/.local/bin:$PATH"
+
 echo "Installing packages"
 
 sudo apt update
@@ -56,8 +59,6 @@ if [ "$MISE_CURRENT_VERSION" != "$MISE_LATEST_VERSION" ]; then
 else
     echo "mise is already at the latest version (${MISE_CURRENT_VERSION})"
 fi
-
-export PATH="$HOME/.local/bin:$PATH"
 
 # NOTE: Moving away from bun for global tool install. Using aube and mise instead.
 # Install bun

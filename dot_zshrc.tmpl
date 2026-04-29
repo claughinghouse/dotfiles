@@ -18,6 +18,8 @@ eval "$(mise activate zsh)"
 # User configuration
 
 {{ if eq .chezmoi.os "linux" }}
+# Ensure locally-installed tools (like mise) are on PATH
+export PATH="$HOME/.local/bin:$PATH"
 PROMPT="%m ${PROMPT}"
 
 # nvm
