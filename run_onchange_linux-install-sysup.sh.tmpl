@@ -1,0 +1,133 @@
+{{- if (eq .chezmoi.os "linux") -}}
+#!/bin/zsh
+
+cat <<'SCRIPT' | sudo tee /usr/local/bin/sysup > /dev/null
+#!/bin/bash
+set -euo pipefail
+
+export PATH="$HOME/.local/bin:$PATH"
+
+# ── apt ──
+printf "\nUpdating apt packages...\n"
+sudo apt update
+sudo apt upgrade -y
+sudo apt autoremove -y
+sudo apt clean
+
+# ── mise (self-update + global tools) ──
+printf "\nUpdating mise...\n"
+mise self-update -y 2>/dev/null || true
+
+printf "\nUpdating mise global tools...\n"
+mise upgrade -y
+
+# ── mise install any missing tools from config ──
+printf "\nInstalling missing mise tools...\n"
+mise install -y
+
+# ── nvm + default node ──
+if [ -s "$HOME/.nvm/nvm.sh" ]; then
+    printf "\nUpdating nvm...\n"
+    source "$HOME/.nvm/nvm.sh"
+    NVM_LATEST=$(curl -s "https://api.github.com/repos/nvm-sh/nvm/releases/latest" | grep -Po '"tag_name": "\K[^"]*')
+    if [ "$(nvm --version)" != "${NVM_LATEST#v}" ]; then
+        curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_LATEST}/install.sh" | PROFILE=/dev/null bash
+        source "$HOME/.nvm/nvm.sh"
+        echo "nvm updated to ${NVM_LATEST}"
+    else
+        echo "nvm already at latest"
+    fi
+fi
+
+# ── Neovim ──
+if command -v nvim &> /dev/null; then
+    printf "\nChecking Neovim updates...\n"
+    NVIM_LATEST=$(curl -s "https://api.github.com/repos/neovim/neovim/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+    NVIM_CURRENT=$(nvim --version | head -n1 | grep -Po 'v\K[0-9]+\.[0-9]+\.[0-9]+')
+    if [ "$NVIM_CURRENT" != "$NVIM_LATEST" ]; then
+        echo "Updating Neovim ${NVIM_CURRENT} -> ${NVIM_LATEST}..."
+        ARCH=$(uname -m)
+        if [ "$ARCH" = "aarch64" ]; then
+            NVIM_DIR="nvim-linux-arm64"
+        else
+            NVIM_DIR="nvim-linux-x86_64"
+        fi
+        curl -Lo /tmp/nvim-linux.tar.gz "https://github.com/neovim/neovim/releases/download/v${NVIM_LATEST}/${NVIM_DIR}.tar.gz"
+        sudo rm -rf /opt/${NVIM_DIR}
+        sudo tar -C /opt -xzf /tmp/nvim-linux.tar.gz
+        sudo ln -sf /opt/${NVIM_DIR}/bin/nvim /usr/local/bin/nvim
+        rm /tmp/nvim-linux.tar.gz
+        echo "Neovim updated to ${NVIM_LATEST}"
+        nvim --headless "+Lazy! sync" +qa 2>/dev/null || true
+    else
+        echo "Neovim already at latest (${NVIM_CURRENT})"
+    fi
+fi
+
+# ── lazygit ──
+if command -v lazygit &> /dev/null; then
+    printf "\nChecking lazygit updates...\n"
+    LAZYGIT_LATEST=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+    LAZYGIT_CURRENT=$(lazygit --version 2>/dev/null | grep -Po 'version=\K[0-9]+\.[0-9]+\.[0-9]+' || echo "0")
+    if [ "$LAZYGIT_CURRENT" != "$LAZYGIT_LATEST" ]; then
+        echo "Updating lazygit ${LAZYGIT_CURRENT} -> ${LAZYGIT_LATEST}..."
+        ARCH=$(uname -m)
+        if [ "$ARCH" = "aarch64" ]; then
+            SUFFIX="arm64"
+        else
+            SUFFIX="x86_64"
+        fi
+        curl -Lo /tmp/lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_LATEST}_Linux_${SUFFIX}.tar.gz"
+        tar xf /tmp/lazygit.tar.gz lazygit -C /tmp
+        sudo install /tmp/lazygit /usr/local/bin
+        rm /tmp/lazygit.tar.gz /tmp/lazygit
+        echo "lazygit updated to ${LAZYGIT_LATEST}"
+    else
+        echo "lazygit already at latest (${LAZYGIT_CURRENT})"
+    fi
+fi
+
+# ── AWS CLI ──
+if command -v aws &> /dev/null; then
+    printf "\nChecking AWS CLI updates...\n"
+    AWS_CURRENT=$(aws --version 2>&1 | grep -Po 'aws-cli/\K[0-9]+\.[0-9]+\.[0-9]+')
+    AWS_LATEST=$(curl -s "https://api.github.com/repos/aws/aws-cli/releases/latest" | grep -Po '"tag_name": "\K[^"]*')
+    if [ "$AWS_CURRENT" != "$AWS_LATEST" ]; then
+        echo "Updating AWS CLI ${AWS_CURRENT} -> ${AWS_LATEST}..."
+        curl "https://awscli.amazonaws.com/awscli-exe-linux-$(uname -m).zip" -o "/tmp/awscliv2.zip"
+        unzip -q -o /tmp/awscliv2.zip -d /tmp
+        sudo /tmp/aws/update
+        rm -rf /tmp/awscliv2.zip /tmp/aws
+        echo "AWS CLI updated to ${AWS_LATEST}"
+    else
+        echo "AWS CLI already at latest (${AWS_CURRENT})"
+    fi
+fi
+
+# ── piped installers ──
+printf "\nChecking piped installers...\n"
+
+# httpstat
+HTTPSTAT_URL="https://raw.githubusercontent.com/reorx/httpstat/master/httpstat.py"
+curl -fsSL "${HTTPSTAT_URL}" | sudo tee /usr/local/bin/httpstat > /dev/null
+sudo chmod +x /usr/local/bin/httpstat
+echo "httpstat updated"
+
+# plannotator
+if command -v plannotator &> /dev/null; then
+    printf "Updating plannotator...\n"
+    curl -fsSL https://plannotator.ai/install.sh | bash
+fi
+
+# ── oh-my-zsh ──
+if [ -d "$HOME/.oh-my-zsh" ]; then
+    printf "\nUpdating oh-my-zsh...\n"
+    ZSH="$HOME/.oh-my-zsh" zsh -c 'source $ZSH/tools/upgrade.sh' 2>/dev/null || true
+fi
+
+printf "\n✓ System update complete\n"
+SCRIPT
+
+sudo chmod +x /usr/local/bin/sysup
+
+{{ end -}}
