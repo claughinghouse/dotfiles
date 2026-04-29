@@ -19,6 +19,7 @@ export ZSH_THEME_GIT_PROMPT_CACHE=yes
 {{ if eq .chezmoi.os "linux" }}
 # Ensure locally-installed tools (like mise) are on PATH
 export PATH="$HOME/.local/bin:$PATH"
+eval "$(mise activate zsh)"
 PROMPT="%m ${PROMPT}"
 
 # nvm
