@@ -4,5 +4,5 @@ npm.package_manager = "auto"
 
 [tools]
 {{ range $tool, $version := .packages.mise.global -}}
-"{{ $tool }}" = "{{ $version }}"
+{{ if contains ":" $tool }}"{{ $tool }}"{{ else }}{{ $tool }}{{ end }} = "{{ $version }}"
 {{ end -}}

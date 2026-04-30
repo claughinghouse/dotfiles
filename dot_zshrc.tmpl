@@ -60,6 +60,8 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 #{{ end }}
 
 {{- if (eq .chezmoi.os "darwin" )}}
+eval "$(mise activate zsh)"
+
 # Updated SQLite3
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
 export PATH="$HOME/.bun/bin:$PATH"
