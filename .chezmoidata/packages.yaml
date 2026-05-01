@@ -178,4 +178,5 @@ packages:
       aube: "latest"
       node: "lts"
       "npm:cf": "latest"
+      "npm:@kitlangton/ghui": "latest"
 
