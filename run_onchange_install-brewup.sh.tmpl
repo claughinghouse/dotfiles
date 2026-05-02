@@ -33,6 +33,12 @@ if [ -x "$HOME/.local/bin/plannotator" ]; then
   printf "Updating plannotator...\n"
   curl -fsSL https://plannotator.ai/install.sh | bash
 fi
+
+# Update vp (vite-plus) if installed
+if command -v vp &> /dev/null; then
+  printf "Updating vp (vite-plus)...\n"
+  vp upgrade
+fi
 EOF
 
 sudo chmod +x /usr/local/bin/brewup

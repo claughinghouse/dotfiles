@@ -119,6 +119,12 @@ if command -v plannotator &> /dev/null; then
     curl -fsSL https://plannotator.ai/install.sh | bash
 fi
 
+# vp (vite-plus)
+if command -v vp &> /dev/null; then
+    printf "Updating vp (vite-plus)...\n"
+    vp upgrade
+fi
+
 # ── oh-my-zsh ──
 if [ -d "$HOME/.oh-my-zsh" ]; then
     printf "\nUpdating oh-my-zsh...\n"
