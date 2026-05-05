@@ -1,8 +1,0 @@
-# Managed by Chezmoi — generated from .chezmoidata/packages.yaml
-[settings]
-npm.package_manager = "auto"
-
-[tools]
-{{ range $tool, $version := .packages.mise.global -}}
-{{ if contains ":" $tool }}"{{ $tool }}"{{ else }}{{ $tool }}{{ end }} = "{{ $version }}"
-{{ end -}}

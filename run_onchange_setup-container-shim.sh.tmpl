@@ -1,8 +1,27 @@
-{{- if (eq .chezmoi.os "linux") -}}
+{{- if (eq .chezmoi.os "darwin") -}}
+#!/bin/bash
+set -e
 
+mkdir -p ~/bin
+
+cat <<'EOF' > ~/bin/docker
+#!/bin/bash
+ARGS=()
+for arg in "$@"; do
+  if [[ "$arg" != --provenance* ]]; then
+    ARGS+=("$arg")
+  fi
+done
+exec podman "${ARGS[@]}"
+EOF
+
+chmod +x ~/bin/docker
+
+echo "Podman shim installed at ~/bin/docker"
+{{- end -}}
+{{- if (eq .chezmoi.os "linux") -}}
 #!/bin/bash
 
-# Create and configure multiarch builder for Docker Buildx
 if ! docker buildx ls | grep -q "multiarch"; then
     echo "Setting up Docker Buildx multiarch builder..."
     docker buildx create --name multiarch --driver docker-container --use
@@ -11,5 +30,4 @@ if ! docker buildx ls | grep -q "multiarch"; then
 else
     echo "Docker Buildx multiarch builder already exists"
 fi
-
 {{- end }}

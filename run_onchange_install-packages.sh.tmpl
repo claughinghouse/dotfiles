@@ -1,8 +1,82 @@
-{{- if (eq .chezmoi.os "linux") -}}
+{{- if (eq .chezmoi.os "darwin") -}}
+#!/bin/zsh
 
+echo "Checking Command Line Tools for Xcode"
+xcode-select -p &> /dev/null
+if [ $? -ne 0 ]; then
+  echo "Command Line Tools for Xcode not found. Installing from softwareupdate…"
+  touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress;
+  PROD=$(softwareupdate -l | grep "\*.*Command Line" | tail -n 1 | sed 's/^[^C]* //')
+  softwareupdate -i "$PROD" --verbose;
+else
+  echo "Command Line Tools for Xcode have been installed."
+fi
+
+if test ! $(which brew); then
+   printf '\n\n\eHomebrew not found. Installing Homebrew...'
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+   {{ if eq .chezmoi.arch "arm64" }}
+     (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ${HOME}/.zprofile
+     eval "$(/opt/homebrew/bin/brew shellenv)"
+   {{ else if eq .chezmoi.arch "amd64" }}
+     (echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> ${HOME}/.zprofile
+     eval "$(/usr/local/bin/brew shellenv)"
+   {{ end }}
+else
+  printf '\n\nHomebrew found. Continuing...'
+fi
+
+printf '\nInstalling Homebrew packages...\n'
+
+brew bundle --force --file=/dev/stdin <<EOF
+{{ range .packages.darwin.taps -}}
+tap {{ . | quote }}
+{{ end -}}
+{{ range .packages.darwin.brews -}}
+brew {{ . | quote }}
+{{ end -}}
+{{ range .packages.darwin.casks -}}
+cask {{ . | quote }}
+{{ end -}}
+EOF
+
+printf '\nRemoving apps not managed in Chezmoi...\n'
+
+brew bundle cleanup --force --file=/dev/stdin <<EOF
+{{ range .packages.darwin.taps -}}
+tap {{ . | quote }}
+{{ end -}}
+{{ range .packages.darwin.brews -}}
+brew {{ . | quote }}
+{{ end -}}
+{{ range .packages.darwin.casks -}}
+cask {{ . | quote }}
+{{ end -}}
+EOF
+
+printf '\nLinking apps with keg-only formulae...\n'
+
+{{ range .packages.darwin.brewlink -}}
+brew link --force {{ . | quote }}
+{{ end -}}
+
+printf '\nInstalling MacAppStore apps...\n'
+
+{{ range .packages.darwin.mas -}}
+mas install {{ . | quote }}
+{{ end -}}
+
+printf '\nInstalling Bun global packages...\n'
+
+{{ range .packages.bun.global -}}
+bun install --global {{ . | quote }}
+{{ end -}}
+
+{{- end -}}
+{{- if (eq .chezmoi.os "linux") -}}
 #!/bin/bash
 
-# Ensure locally-installed binaries (e.g. mise) are discoverable
 export PATH="$HOME/.local/bin:$PATH"
 
 echo "Installing packages"
@@ -11,13 +85,11 @@ sudo apt update
 
 sudo apt install -y {{ range .packages.linux.apt }}{{ . }} {{ end }}
 
-# Install httpstat (lightweight HTTP benchmarking tool)
 echo "Installing httpstat..."
 curl -fsSL https://raw.githubusercontent.com/reorx/httpstat/master/httpstat.py > /tmp/httpstat
 sudo install /tmp/httpstat /usr/local/bin/httpstat
 rm /tmp/httpstat
 
-# Install AWS CLI v2 (official installer)
 if ! command -v aws &> /dev/null; then
     echo "Installing AWS CLI v2..."
     curl "https://awscli.amazonaws.com/awscli-exe-linux-$(uname -m).zip" -o "/tmp/awscliv2.zip"
@@ -28,7 +100,6 @@ else
     echo "AWS CLI already installed"
 fi
 
-# Install nvm (Node Version Manager)
 if [ ! -s "$HOME/.nvm/nvm.sh" ]; then
     echo "Installing nvm..."
     NVM_LATEST_VERSION=$(curl -s "https://api.github.com/repos/nvm-sh/nvm/releases/latest" | grep -Po '"tag_name": "\K[^"]*')
@@ -38,49 +109,9 @@ else
     echo "nvm already installed"
 fi
 
-# Install/Update mise
-echo "Checking for latest mise version..."
-MISE_LATEST_VERSION=$(curl -s "https://api.github.com/repos/jdx/mise/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
-
-if command -v mise &> /dev/null; then
-    MISE_CURRENT_VERSION=$(mise --version 2>/dev/null | grep -Po '\d+\.\d+\.\d+' | head -1)
-    echo "Current mise version: ${MISE_CURRENT_VERSION}"
-else
-    MISE_CURRENT_VERSION="none"
-    echo "mise not currently installed"
-fi
-
-echo "Latest mise version: ${MISE_LATEST_VERSION}"
-
-if [ "$MISE_CURRENT_VERSION" != "$MISE_LATEST_VERSION" ]; then
-    echo "Installing mise ${MISE_LATEST_VERSION}..."
-    curl -fsSL https://mise.run | sh
-    echo "mise ${MISE_LATEST_VERSION} installed successfully"
-else
-    echo "mise is already at the latest version (${MISE_CURRENT_VERSION})"
-fi
-
-# NOTE: Moving away from bun for global tool install. Using aube and mise instead.
-# Install bun
-# curl -fsSL https://bun.sh/install | bash
-
-# echo "Installing Bun global packages..."
-# {{ range .packages.bun.global -}}
-# bun install --global {{ . | quote }}
-# {{ end -}}
-
-# {{ if hasKey .packages.linux "bun" -}}
-# echo "Installing Linux-only Bun global packages..."
-# {{ range .packages.linux.bun -}}
-# bun install --global {{ . | quote }}
-# {{ end -}}
-# {{- end }}
-
-# Install/Update Neovim to latest release
 echo "Checking for latest Neovim release..."
 NVIM_LATEST_VERSION=$(curl -s "https://api.github.com/repos/neovim/neovim/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
 
-# Get currently installed version (if any)
 if command -v nvim &> /dev/null; then
     NVIM_CURRENT_VERSION=$(nvim --version | head -n1 | grep -Po 'v\K[0-9]+\.[0-9]+\.[0-9]+')
     echo "Current Neovim version: ${NVIM_CURRENT_VERSION}"
@@ -91,15 +122,12 @@ fi
 
 echo "Latest Neovim version: ${NVIM_LATEST_VERSION}"
 
-# Compare versions and install if newer version available
 if [ "$NVIM_CURRENT_VERSION" != "$NVIM_LATEST_VERSION" ]; then
     echo "Installing Neovim ${NVIM_LATEST_VERSION}..."
 {{- if (eq .chezmoi.arch "arm64") }}
-    # For ARM64, download the ARM64 release
     curl -Lo /tmp/nvim-linux.tar.gz "https://github.com/neovim/neovim/releases/download/v${NVIM_LATEST_VERSION}/nvim-linux-arm64.tar.gz"
     NVIM_DIR="nvim-linux-arm64"
 {{- else if (eq .chezmoi.arch "amd64") }}
-    # For AMD64, download the x86_64 release
     curl -Lo /tmp/nvim-linux.tar.gz "https://github.com/neovim/neovim/releases/download/v${NVIM_LATEST_VERSION}/nvim-linux-x86_64.tar.gz"
     NVIM_DIR="nvim-linux-x86_64"
 {{- end }}
@@ -108,15 +136,11 @@ if [ "$NVIM_CURRENT_VERSION" != "$NVIM_LATEST_VERSION" ]; then
     sudo ln -sf /opt/${NVIM_DIR}/bin/nvim /usr/local/bin/nvim
     rm /tmp/nvim-linux.tar.gz
     echo "Neovim ${NVIM_LATEST_VERSION} installed successfully"
-    
-    # Update Neovim plugins (Lazy.nvim) for compatibility with new version
     echo "Updating Neovim plugins..."
     nvim --headless "+Lazy! sync" +qa 2>/dev/null || echo "Plugin update completed"
 else
     echo "Neovim is already at the latest version (${NVIM_CURRENT_VERSION})"
 fi
-
-# tree-sitter-cli is now managed by mise
 
 {{- if (eq .chezmoi.arch "amd64") }}
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
@@ -133,13 +157,12 @@ tar xf lazygit.tar.gz lazygit
 sudo install lazygit /usr/local/bin
 rm lazygit.tar.gz
 
-printf '\nInstalling Laravel-ls..\n'
-
-go install github.com/laravel-ls/laravel-ls/cmd/laravel-ls@latest
 {{- end }}
 
-printf '\nInstalling mise tools...\n'
+printf '\nInstalling Bun global packages...\n'
 
-mise install -y
+{{ range .packages.bun.global -}}
+bun install --global {{ . | quote }}
+{{ end -}}
 
 {{- end }}

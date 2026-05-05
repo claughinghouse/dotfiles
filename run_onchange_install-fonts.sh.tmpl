@@ -1,23 +1,26 @@
+{{- if (eq .chezmoi.os "darwin") -}}
+#!/bin/zsh
+
+cp .fonts/TX-02/* ~/Library/Fonts/
+
+{{- end -}}
 {{- if (eq .chezmoi.os "linux") -}}
 #!/bin/bash
 
 echo "Installing Nerd Fonts..."
 
-# Clone nerd-fonts repository to temp location
 if [ -d "/tmp/nerd-fonts" ]; then
     rm -rf /tmp/nerd-fonts
 fi
 
 git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git /tmp/nerd-fonts
 
-# Install IntoneMono Nerd Font
 cd /tmp/nerd-fonts
 ./install.sh IntoneMono
 
-# Cleanup
 cd ~
 rm -rf /tmp/nerd-fonts
 
 echo "Nerd Fonts installation complete"
 
-{{- end -}}
+{{- end }}

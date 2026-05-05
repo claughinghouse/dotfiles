@@ -17,9 +17,8 @@ export ZSH_THEME_GIT_PROMPT_CACHE=yes
 # User configuration
 
 {{ if eq .chezmoi.os "linux" }}
-# Ensure locally-installed tools (like mise) are on PATH
+# Ensure locally-installed tools are on PATH
 export PATH="$HOME/.local/bin:$PATH"
-eval "$(mise activate zsh)"
 PROMPT="%m ${PROMPT}"
 
 # nvm
@@ -33,10 +32,6 @@ export NVM_DIR="$HOME/.nvm"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-
-# laravel
-export PATH="$HOME/.config/herd-lite/bin:$PATH"
-export PHP_INI_SCAN_DIR="$HOME/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
 
 # go
 export GOPATH=$HOME/go
@@ -60,8 +55,6 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 #{{ end }}
 
 {{- if (eq .chezmoi.os "darwin" )}}
-eval "$(mise activate zsh)"
-
 # Updated SQLite3
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
 export PATH="$HOME/.bun/bin:$PATH"
@@ -69,16 +62,6 @@ source <(fzf --zsh)
 
 # set gopath
 export PATH=$PATH:$(go env GOPATH)/bin
-
-# Herd injected PHP 8.4 configuration.
-export HERD_PHP_84_INI_SCAN_DIR="$HOME/Library/Application Support/Herd/config/php/84/"
-
-
-# Herd injected PHP binary.
-export PATH="$HOME/Library/Application Support/Herd/bin/":$PATH
-
-# Herd injected PHP 8.5 configuration.
-export HERD_PHP_85_INI_SCAN_DIR="$HOME/Library/Application Support/Herd/config/php/85/"
 
 # Set composer global bin path
 export COMPOSER_HOME="$HOME/.config/composer";

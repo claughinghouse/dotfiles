@@ -47,9 +47,9 @@ packages:
       - "luarocks"
       - "mas"
       - "matthart1983/tap/netwatch"
-      - "mise"
       - "mkcert"
       - "moreutils"
+      - "node"
       - "mosh"
       - "mtr"
       - "neovim"
@@ -157,26 +157,8 @@ packages:
       - "unzip"
       - "httpie"
       - "zsh"
-    bun:
-      - "opencode-ai"
   bun:
     global:
-      - "@anthropic-ai/claude-code"
-      - "@astrojs/language-server"
-      - "@beads/bd"
-      - "beads-ui"
-      - "@biomejs/biome"
       - "cf"
-      - "counselors"
-      - "@google/gemini-cli"
-      - "@johnnymorganz/stylua-bin"
-      - "intelephense"
-      - "oxlint"
-      - "vite-plus"
-  mise:
-    global:
-      aube: "latest"
-      node: "lts"
-      "npm:cf": "latest"
-      "npm:@kitlangton/ghui": "latest"
+      - "@kitlangton/ghui"
 

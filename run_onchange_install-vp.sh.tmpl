@@ -1,4 +1,3 @@
-{{- if (or (eq .chezmoi.os "darwin") (and (eq .chezmoi.os "linux") (contains "dev" .chezmoi.hostname))) -}}
 #!/bin/zsh
 
 if command -v vp &> /dev/null; then
@@ -8,5 +7,3 @@ fi
 
 echo "Installing vp (vite-plus)..."
 curl -fsSL https://vite.plus | bash
-
-{{ end -}}

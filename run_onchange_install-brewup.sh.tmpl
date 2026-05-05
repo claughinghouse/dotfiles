@@ -20,13 +20,8 @@ printf "Checking for issues...\n"
 brew doctor
 
 # Update bun global dependencies
-# NOTE: Moving away from bun for global tool install. Using aube and mise instead.
-# printf "Updating bun global dependencies...\n"
-# bun update --global
-
-# Update mise global tools
-printf "Updating mise global tools...\n"
-mise upgrade -y
+printf "Updating bun global dependencies...\n"
+bun update --global
 
 # Update plannotator if installed (check direct path since ~/.local/bin may not be in PATH)
 if [ -x "$HOME/.local/bin/plannotator" ]; then
