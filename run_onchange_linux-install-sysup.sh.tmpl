@@ -57,7 +57,7 @@ fi
 if command -v lazygit &> /dev/null; then
     printf "\nChecking lazygit updates...\n"
     LAZYGIT_LATEST=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
-    LAZYGIT_CURRENT=$(lazygit --version 2>/dev/null | grep -Po 'version=\K[0-9]+\.[0-9]+\.[0-9]+' || echo "0")
+    LAZYGIT_CURRENT=$(lazygit --version 2>/dev/null | grep -Po 'version \K[0-9]+\.[0-9]+\.[0-9]+' || echo "0")
     if [ "$LAZYGIT_CURRENT" != "$LAZYGIT_LATEST" ]; then
         echo "Updating lazygit ${LAZYGIT_CURRENT} -> ${LAZYGIT_LATEST}..."
         ARCH=$(uname -m)
@@ -66,8 +66,9 @@ if command -v lazygit &> /dev/null; then
         else
             SUFFIX="x86_64"
         fi
+        rm -f /tmp/lazygit /tmp/lazygit.tar.gz
         curl -Lo /tmp/lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_LATEST}_Linux_${SUFFIX}.tar.gz"
-        tar xf /tmp/lazygit.tar.gz lazygit -C /tmp
+        tar xzf /tmp/lazygit.tar.gz lazygit -C /tmp
         sudo install /tmp/lazygit /usr/local/bin
         rm /tmp/lazygit.tar.gz /tmp/lazygit
         echo "lazygit updated to ${LAZYGIT_LATEST}"
