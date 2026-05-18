@@ -101,6 +101,7 @@ packages:
       - "pearcleaner"
       - "podman-desktop"
       - "powershell"
+      - "tablepro"
       - "viscosity"
       - "vlc"
       - "wezterm"
