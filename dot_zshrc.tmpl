@@ -55,6 +55,9 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 #{{ end }}
 
 {{- if (eq .chezmoi.os "darwin" )}}
+# Homebrew on PATH (for predictable ordering)
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+
 # Updated SQLite3
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
 export PATH="$HOME/.bun/bin:$PATH"
@@ -71,6 +74,5 @@ export PATH="$HOME/bin:$PATH"
 export WRANGLER_DOCKER_BIN=docker
 export WRANGLER_DOCKER_HOST="unix://$(podman info --format '{{ "{{" }}.Host.RemoteSocket.Path{{ "}}" }}' 2>/dev/null)"
 
-# Vite+ bin (https://viteplus.dev)
-. "$HOME/.vite-plus/env"
 {{- end }}
+typeset -U PATH
