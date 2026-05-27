@@ -77,6 +77,7 @@ packages:
       - "ssh-audit"
       - "sst/tap/opencode"
       - "stern"
+      - "stripe-cli"
       - "supervisor"
       - "tailscale"
       - "talhelper"
