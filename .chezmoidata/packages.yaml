@@ -167,5 +167,6 @@ packages:
   bun:
     global:
       - "cf"
+      - "@earendil-works/pi-coding-agent"
       - "@kitlangton/ghui"
 
