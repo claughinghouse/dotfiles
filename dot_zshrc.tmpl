@@ -46,6 +46,9 @@ alias t=tmux
 alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'
 alias ar="php artisan"
 
+# Protect npm package installs with Socket Firewall.
+alias npm="sfw npm"
+
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # {{ if (eq .chezmoi.hostname "dev") }}

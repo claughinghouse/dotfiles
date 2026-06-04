@@ -166,7 +166,9 @@ packages:
       - "zsh"
   bun:
     global:
+      - "vite-plus"
       - "cf"
+      - "sfw"
       - "@earendil-works/pi-coding-agent"
       - "@kitlangton/ghui"
 
