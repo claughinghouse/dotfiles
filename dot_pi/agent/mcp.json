@@ -1,0 +1,10 @@
+{
+	"mcpServers": {
+		"cody-mcp": {
+			"transport": "streamable-http",
+			"url": "https://mcp.timmoc.dev/mcp",
+			"auth": { "type": "oauth" },
+			"lifecycle": "lazy"
+		}
+	}
+}
