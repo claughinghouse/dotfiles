@@ -26,6 +26,7 @@ packages:
       - "gnupg"
       - "helm"
       - "helmfile"
+      - "hledger"
       - "httpie"
       - "huggingface-cli"
       - "iperf3"
