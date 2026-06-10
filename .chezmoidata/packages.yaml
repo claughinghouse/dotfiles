@@ -139,6 +139,7 @@ packages:
       - "curl"
       - "direnv"
       - "fd-find"
+      - "fish"
       - "fontconfig"
       - "fzf"
       - "gcc"
@@ -161,10 +162,11 @@ packages:
       - "qemu-system"
       - "qemu-user-static"
       - "ripgrep"
+      - "starship"
       - "tmux"
       - "unzip"
       - "virtiofsd"
-      - "zsh"
+      # - "zsh"
   bun:
     global:
       - "vite-plus"
