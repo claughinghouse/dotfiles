@@ -73,6 +73,7 @@ packages:
       - "shfmt"
       - "siderolabs/tap/sidero-tools"
       - "talosctl"
+      - "starship"
       - "sops"
       - "sqlite3"
       - "ssh-audit"
