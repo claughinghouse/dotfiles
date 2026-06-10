@@ -17,6 +17,7 @@ packages:
       - "exiftool"
       - "fd"
       - "ffmpeg"
+      - "fish"
       - "flux"
       - "fzf"
       - "gh"
