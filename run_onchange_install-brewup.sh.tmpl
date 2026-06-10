@@ -16,8 +16,14 @@ brew update
 
 printf "Installing/updating Homebrew packages managed by Chezmoi...\n"
 brew bundle --force --file=/dev/stdin <<EOF
+{{ range .packages.homebrew.taps -}}
+tap {{ . | quote }}
+{{ end -}}
 {{ range .packages.darwin.taps -}}
 tap {{ . | quote }}
+{{ end -}}
+{{ range .packages.homebrew.brews -}}
+brew {{ . | quote }}
 {{ end -}}
 {{ range .packages.darwin.brews -}}
 brew {{ . | quote }}
@@ -36,7 +42,7 @@ brew cleanup
 printf "Checking Homebrew for issues...\n"
 brew doctor || true
 
-{{ range .packages.darwin.brewlink -}}
+{{ range .packages.homebrew.brewlink -}}
 brew link --force {{ . | quote }}
 {{ end -}}
 
@@ -77,8 +83,14 @@ brew update
 
 printf "Installing/updating Homebrew packages managed by Chezmoi...\n"
 brew bundle --force --file=/dev/stdin <<EOF
+{{ range .packages.homebrew.taps -}}
+tap {{ . | quote }}
+{{ end -}}
 {{ range .packages.linux.taps -}}
 tap {{ . | quote }}
+{{ end -}}
+{{ range .packages.homebrew.brews -}}
+brew {{ . | quote }}
 {{ end -}}
 {{ range .packages.linux.brews -}}
 brew {{ . | quote }}
@@ -94,6 +106,9 @@ brew cleanup
 printf "Checking Homebrew for issues...\n"
 brew doctor || true
 
+{{ range .packages.homebrew.brewlink -}}
+brew link --force {{ . | quote }}
+{{ end -}}
 {{ range .packages.linux.brewlink -}}
 brew link --force {{ . | quote }}
 {{ end -}}

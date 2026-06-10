@@ -28,8 +28,14 @@ fi
 printf '\nInstalling Homebrew packages...\n'
 
 brew bundle --force --file=/dev/stdin <<EOF
+{{ range .packages.homebrew.taps -}}
+tap {{ . | quote }}
+{{ end -}}
 {{ range .packages.darwin.taps -}}
 tap {{ . | quote }}
+{{ end -}}
+{{ range .packages.homebrew.brews -}}
+brew {{ . | quote }}
 {{ end -}}
 {{ range .packages.darwin.brews -}}
 brew {{ . | quote }}
@@ -42,8 +48,14 @@ EOF
 printf '\nRemoving apps not managed in Chezmoi...\n'
 
 brew bundle cleanup --force --file=/dev/stdin <<EOF
+{{ range .packages.homebrew.taps -}}
+tap {{ . | quote }}
+{{ end -}}
 {{ range .packages.darwin.taps -}}
 tap {{ . | quote }}
+{{ end -}}
+{{ range .packages.homebrew.brews -}}
+brew {{ . | quote }}
 {{ end -}}
 {{ range .packages.darwin.brews -}}
 brew {{ . | quote }}
@@ -55,7 +67,7 @@ EOF
 
 printf '\nLinking apps with keg-only formulae...\n'
 
-{{ range .packages.darwin.brewlink -}}
+{{ range .packages.homebrew.brewlink -}}
 brew link --force {{ . | quote }}
 {{ end -}}
 
@@ -110,8 +122,14 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 printf '\nInstalling Homebrew packages...\n'
 
 brew bundle --force --file=/dev/stdin <<EOF
+{{ range .packages.homebrew.taps -}}
+tap {{ . | quote }}
+{{ end -}}
 {{ range .packages.linux.taps -}}
 tap {{ . | quote }}
+{{ end -}}
+{{ range .packages.homebrew.brews -}}
+brew {{ . | quote }}
 {{ end -}}
 {{ range .packages.linux.brews -}}
 brew {{ . | quote }}
@@ -121,8 +139,14 @@ EOF
 printf '\nRemoving Homebrew packages not managed in Chezmoi...\n'
 
 brew bundle cleanup --force --file=/dev/stdin <<EOF
+{{ range .packages.homebrew.taps -}}
+tap {{ . | quote }}
+{{ end -}}
 {{ range .packages.linux.taps -}}
 tap {{ . | quote }}
+{{ end -}}
+{{ range .packages.homebrew.brews -}}
+brew {{ . | quote }}
 {{ end -}}
 {{ range .packages.linux.brews -}}
 brew {{ . | quote }}
@@ -131,6 +155,9 @@ EOF
 
 printf '\nLinking apps with keg-only formulae...\n'
 
+{{ range .packages.homebrew.brewlink -}}
+brew link --force {{ . | quote }}
+{{ end -}}
 {{ range .packages.linux.brewlink -}}
 brew link --force {{ . | quote }}
 {{ end -}}
