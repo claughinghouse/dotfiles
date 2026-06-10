@@ -75,7 +75,7 @@ bun install --global {{ . | quote }}
 {{- if (eq .chezmoi.os "linux") -}}
 #!/bin/bash
 
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="/home/linuxbrew/.linuxbrew/bin:$HOME/.local/bin:$PATH"
 
 echo "Installing packages"
 
@@ -98,64 +98,45 @@ else
     echo "AWS CLI already installed"
 fi
 
-if [ ! -s "$HOME/.nvm/nvm.sh" ]; then
-    echo "Installing nvm..."
-    NVM_LATEST_VERSION=$(curl -s "https://api.github.com/repos/nvm-sh/nvm/releases/latest" | grep -Po '"tag_name": "\K[^"]*')
-    curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_LATEST_VERSION}/install.sh" | PROFILE=/dev/null bash
-    echo "nvm ${NVM_LATEST_VERSION} installed"
+if ! command -v brew &> /dev/null; then
+    echo "Installing Homebrew..."
+    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
-    echo "nvm already installed"
+    echo "Homebrew already installed"
 fi
 
-echo "Checking for latest Neovim release..."
-NVIM_LATEST_VERSION=$(curl -s "https://api.github.com/repos/neovim/neovim/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-if command -v nvim &> /dev/null; then
-    NVIM_CURRENT_VERSION=$(nvim --version | head -n1 | grep -Po 'v\K[0-9]+\.[0-9]+\.[0-9]+')
-    echo "Current Neovim version: ${NVIM_CURRENT_VERSION}"
-else
-    NVIM_CURRENT_VERSION="none"
-    echo "Neovim not currently installed"
-fi
+printf '\nInstalling Homebrew packages...\n'
 
-echo "Latest Neovim version: ${NVIM_LATEST_VERSION}"
+brew bundle --force --file=/dev/stdin <<EOF
+{{ range .packages.linux.taps -}}
+tap {{ . | quote }}
+{{ end -}}
+{{ range .packages.linux.brews -}}
+brew {{ . | quote }}
+{{ end -}}
+EOF
 
-if [ "$NVIM_CURRENT_VERSION" != "$NVIM_LATEST_VERSION" ]; then
-    echo "Installing Neovim ${NVIM_LATEST_VERSION}..."
-{{- if (eq .chezmoi.arch "arm64") }}
-    curl -Lo /tmp/nvim-linux.tar.gz "https://github.com/neovim/neovim/releases/download/v${NVIM_LATEST_VERSION}/nvim-linux-arm64.tar.gz"
-    NVIM_DIR="nvim-linux-arm64"
-{{- else if (eq .chezmoi.arch "amd64") }}
-    curl -Lo /tmp/nvim-linux.tar.gz "https://github.com/neovim/neovim/releases/download/v${NVIM_LATEST_VERSION}/nvim-linux-x86_64.tar.gz"
-    NVIM_DIR="nvim-linux-x86_64"
-{{- end }}
-    sudo rm -rf /opt/${NVIM_DIR}
-    sudo tar -C /opt -xzf /tmp/nvim-linux.tar.gz
-    sudo ln -sf /opt/${NVIM_DIR}/bin/nvim /usr/local/bin/nvim
-    rm /tmp/nvim-linux.tar.gz
-    echo "Neovim ${NVIM_LATEST_VERSION} installed successfully"
-    echo "Updating Neovim plugins..."
-    nvim --headless "+Lazy! sync" +qa 2>/dev/null || echo "Plugin update completed"
-else
-    echo "Neovim is already at the latest version (${NVIM_CURRENT_VERSION})"
-fi
+printf '\nRemoving Homebrew packages not managed in Chezmoi...\n'
 
-{{- if (eq .chezmoi.arch "amd64") }}
-LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
-curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
-tar xf lazygit.tar.gz lazygit
-sudo install lazygit /usr/local/bin
-rm lazygit.tar.gz
-{{- end }}
+brew bundle cleanup --force --file=/dev/stdin <<EOF
+{{ range .packages.linux.taps -}}
+tap {{ . | quote }}
+{{ end -}}
+{{ range .packages.linux.brews -}}
+brew {{ . | quote }}
+{{ end -}}
+EOF
 
-{{- if (eq .chezmoi.arch "arm64") }}
-LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
-curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_arm64.tar.gz"
-tar xf lazygit.tar.gz lazygit
-sudo install lazygit /usr/local/bin
-rm lazygit.tar.gz
+printf '\nLinking apps with keg-only formulae...\n'
 
-{{- end }}
+{{ range .packages.linux.brewlink -}}
+brew link --force {{ . | quote }}
+{{ end -}}
+
+printf '\nUpdating Neovim plugins...\n'
+nvim --headless "+Lazy! sync" +qa 2>/dev/null || echo "Plugin update completed"
 
 printf '\nInstalling Bun global packages...\n'
 

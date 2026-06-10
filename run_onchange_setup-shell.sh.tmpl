@@ -6,6 +6,13 @@
 
 set -euo pipefail
 
+{{- if eq .chezmoi.os "linux" }}
+export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+if [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+{{- end }}
+
 fish_path="$(command -v fish)"
 
 if [ "${SHELL:-}" != "$fish_path" ]; then

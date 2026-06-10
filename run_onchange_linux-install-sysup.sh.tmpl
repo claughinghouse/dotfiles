@@ -1,11 +1,11 @@
 {{- if (eq .chezmoi.os "linux") -}}
-#!/bin/zsh
+#!/bin/bash
 
 cat <<'SCRIPT' | sudo tee /usr/local/bin/sysup > /dev/null
 #!/bin/bash
 set -euo pipefail
 
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="/home/linuxbrew/.linuxbrew/bin:$HOME/.local/bin:$PATH"
 
 # ── apt ──
 printf "\nUpdating apt packages...\n"
@@ -14,68 +14,34 @@ sudo apt upgrade -y
 sudo apt autoremove -y
 sudo apt clean
 
-# ── nvm + default node ──
-if [ -s "$HOME/.nvm/nvm.sh" ]; then
-    printf "\nUpdating nvm...\n"
-    source "$HOME/.nvm/nvm.sh"
-    NVM_LATEST=$(curl -s "https://api.github.com/repos/nvm-sh/nvm/releases/latest" | grep -Po '"tag_name": "\K[^"]*')
-    if [ "$(nvm --version)" != "${NVM_LATEST#v}" ]; then
-        curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_LATEST}/install.sh" | PROFILE=/dev/null bash
-        source "$HOME/.nvm/nvm.sh"
-        echo "nvm updated to ${NVM_LATEST}"
-    else
-        echo "nvm already at latest"
-    fi
+# ── Homebrew ──
+if ! command -v brew &> /dev/null; then
+    printf "\nInstalling Homebrew...\n"
+    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
-# ── Neovim ──
-if command -v nvim &> /dev/null; then
-    printf "\nChecking Neovim updates...\n"
-    NVIM_LATEST=$(curl -s "https://api.github.com/repos/neovim/neovim/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
-    NVIM_CURRENT=$(nvim --version | head -n1 | grep -Po 'v\K[0-9]+\.[0-9]+\.[0-9]+')
-    if [ "$NVIM_CURRENT" != "$NVIM_LATEST" ]; then
-        echo "Updating Neovim ${NVIM_CURRENT} -> ${NVIM_LATEST}..."
-        ARCH=$(uname -m)
-        if [ "$ARCH" = "aarch64" ]; then
-            NVIM_DIR="nvim-linux-arm64"
-        else
-            NVIM_DIR="nvim-linux-x86_64"
-        fi
-        curl -Lo /tmp/nvim-linux.tar.gz "https://github.com/neovim/neovim/releases/download/v${NVIM_LATEST}/${NVIM_DIR}.tar.gz"
-        sudo rm -rf /opt/${NVIM_DIR}
-        sudo tar -C /opt -xzf /tmp/nvim-linux.tar.gz
-        sudo ln -sf /opt/${NVIM_DIR}/bin/nvim /usr/local/bin/nvim
-        rm /tmp/nvim-linux.tar.gz
-        echo "Neovim updated to ${NVIM_LATEST}"
-        nvim --headless "+Lazy! sync" +qa 2>/dev/null || true
-    else
-        echo "Neovim already at latest (${NVIM_CURRENT})"
-    fi
-fi
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-# ── lazygit ──
-if command -v lazygit &> /dev/null; then
-    printf "\nChecking lazygit updates...\n"
-    LAZYGIT_LATEST=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
-    LAZYGIT_CURRENT=$(lazygit --version 2>/dev/null | grep -Po ', version=\K[0-9]+\.[0-9]+\.[0-9]+' || echo "0")
-    if [ "$LAZYGIT_CURRENT" != "$LAZYGIT_LATEST" ]; then
-        echo "Updating lazygit ${LAZYGIT_CURRENT} -> ${LAZYGIT_LATEST}..."
-        ARCH=$(uname -m)
-        if [ "$ARCH" = "aarch64" ]; then
-            SUFFIX="arm64"
-        else
-            SUFFIX="x86_64"
-        fi
-        rm -f /tmp/lazygit /tmp/lazygit.tar.gz
-        curl -Lo /tmp/lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_LATEST}_Linux_${SUFFIX}.tar.gz"
-        tar xzf /tmp/lazygit.tar.gz -C /tmp lazygit
-        sudo install /tmp/lazygit /usr/local/bin
-        rm /tmp/lazygit.tar.gz /tmp/lazygit
-        echo "lazygit updated to ${LAZYGIT_LATEST}"
-    else
-        echo "lazygit already at latest (${LAZYGIT_CURRENT})"
-    fi
-fi
+printf "\nUpdating Homebrew packages...\n"
+brew update
+brew bundle --force --file=/dev/stdin <<EOF
+{{ range .packages.linux.taps -}}
+tap {{ . | quote }}
+{{ end -}}
+{{ range .packages.linux.brews -}}
+brew {{ . | quote }}
+{{ end -}}
+EOF
+brew upgrade
+brew cleanup
+brew doctor || true
+
+{{ range .packages.linux.brewlink -}}
+brew link --force {{ . | quote }}
+{{ end -}}
+
+printf "\nUpdating Neovim plugins...\n"
+nvim --headless "+Lazy! sync" +qa 2>/dev/null || true
 
 # ── AWS CLI ──
 if command -v aws &> /dev/null; then
