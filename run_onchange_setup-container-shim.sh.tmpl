@@ -1,11 +1,11 @@
 {{- if (eq .chezmoi.os "darwin") -}}
-#!/bin/bash
+#!/bin/zsh
 set -e
 
 mkdir -p ~/bin
 
 cat <<'EOF' > ~/bin/docker
-#!/bin/bash
+#!/bin/zsh
 ARGS=()
 for arg in "$@"; do
   if [[ "$arg" != --provenance* ]]; then

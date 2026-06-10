@@ -1,16 +1,21 @@
-{{- if (eq .chezmoi.os "linux") -}}
+{{- if (eq .chezmoi.os "darwin") -}}
+#!/bin/zsh
+{{- else -}}
 #!/bin/bash
+{{- end }}
 
-if [ "$SHELL" != "$(which zsh)" ]; then
-    echo "Changing default shell to zsh..."
-    if ! grep -q "$(which zsh)" /etc/shells; then
-        echo "Adding zsh to /etc/shells..."
-        echo "$(which zsh)" | sudo tee -a /etc/shells
+set -euo pipefail
+
+fish_path="$(command -v fish)"
+
+if [ "${SHELL:-}" != "$fish_path" ]; then
+    echo "Changing default shell to fish..."
+    if ! grep -qxF "$fish_path" /etc/shells; then
+        echo "Adding fish to /etc/shells..."
+        echo "$fish_path" | sudo tee -a /etc/shells > /dev/null
     fi
-    chsh -s $(which zsh)
-    echo "Default shell changed to zsh. Please log out and log back in for changes to take effect."
+    chsh -s "$fish_path"
+    echo "Default shell changed to fish. Please log out and log back in for changes to take effect."
 else
-    echo "Default shell is already zsh."
+    echo "Default shell is already fish."
 fi
-
-{{- end -}}
