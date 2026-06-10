@@ -48,3 +48,6 @@ disabled = true
 
 [direnv]
 disabled = false
+
+[username]
+disabled = true

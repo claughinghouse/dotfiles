@@ -1,5 +1,3 @@
-{{- if (eq .chezmoi.os "linux") -}}
-
 # Brew
 set --global --export HOMEBREW_PREFIX /opt/homebrew
 
@@ -17,4 +15,3 @@ if not contains /opt/homebrew/share/info $INFOPATH
     set --global --export INFOPATH /opt/homebrew/share/info $INFOPATH
 end
 
-{{ end -}}
