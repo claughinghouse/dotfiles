@@ -26,12 +26,12 @@ return {
       },
     },
     keys = {
-      {
-        "<leader>co",
-        "<cmd>TypescriptOrganizeImports<cr>",
-        desc = "Organize Imports",
-        ft = { "typescript", "typescriptreact" },
-      },
+      -- {
+      --   "<leader>co",
+      --   "<cmd>TypescriptOrganizeImports<cr>",
+      --   desc = "Organize Imports",
+      --   ft = { "typescript", "typescriptreact" },
+      -- },
       { "<leader>cR", "<cmd>TypescriptRenameFile<cr>", desc = "Rename File", ft = { "typescript", "typescriptreact" } },
     },
   },
