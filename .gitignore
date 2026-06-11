@@ -19,6 +19,7 @@ dot_pi/dot_pi/todos/*
 .pi/todos/*
 
 # pi secrets/auth/runtime caches
+dot_pi/node_modules/
 dot_pi/agent/auth.json
 dot_pi/agent/mcp-auth/
 dot_pi/agent/mcp-oauth/
@@ -31,17 +32,18 @@ dot_local/share/pi/mcp-auth.json
 
 # pi config/customization allowed in git
 !dot_pi/agent/mcp.json
+!dot_pi/agent/settings.json
 !dot_pi/agent/tsconfig.json
 !dot_pi/agent/package.json
 !dot_pi/agent/cloak.json
 !dot_pi/agent/APPEND_SYSTEM.md
+!dot_pi/agent/symlink_skills.tmpl
+!dot_pi/agent/npm/
+!dot_pi/agent/npm/dot_gitignore
 !dot_pi/agent/themes/
 !dot_pi/agent/themes/*.json
 !dot_pi/agent/extensions/
 !dot_pi/agent/extensions/**
-!dot_pi/agent/skills/
-!dot_pi/agent/skills/**
 
 # pi exclusions after broad customization unignore
 dot_pi/agent/extensions/**/node_modules/
-dot_pi/agent/skills/ui/
