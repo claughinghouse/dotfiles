@@ -22,7 +22,6 @@ packages:
       - "podman-compose"
       - "ripgrep"
       - "starship"
-      - "tmux"
     brewlink:
       - "libpq"
   darwin:
@@ -91,6 +90,7 @@ packages:
       - "supervisor"
       - "tailscale"
       - "talhelper"
+      - "tmux"
       - "tree"
       - "watch"
       - "wget"
@@ -152,6 +152,7 @@ packages:
       - "python3-podman"
       - "qemu-system"
       - "qemu-user-static"
+      - "tmux"
       - "virtiofsd"
     brews:
       - "cmake"
