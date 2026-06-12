@@ -5,6 +5,12 @@ cat <<'SCRIPT' | sudo tee /usr/local/bin/brewup > /dev/null
 #!/bin/zsh
 set -e
 
+# brewup is meant to be unattended; ignore shell/env settings that make
+# Homebrew ask before installs/upgrades.
+unset HOMEBREW_ASK
+export HOMEBREW_NO_ASK=1
+export NONINTERACTIVE=1
+
 {{- if eq .chezmoi.arch "arm64" }}
 eval "$(/opt/homebrew/bin/brew shellenv)"
 {{- else if eq .chezmoi.arch "amd64" }}
@@ -68,6 +74,12 @@ sudo chmod +x /usr/local/bin/brewup
 cat <<'SCRIPT' | sudo tee /usr/local/bin/brewup > /dev/null
 #!/bin/bash
 set -euo pipefail
+
+# brewup is meant to be unattended; ignore shell/env settings that make
+# Homebrew ask before installs/upgrades.
+unset HOMEBREW_ASK
+export HOMEBREW_NO_ASK=1
+export NONINTERACTIVE=1
 
 export PATH="/home/linuxbrew/.linuxbrew/bin:$HOME/.local/bin:$PATH"
 
