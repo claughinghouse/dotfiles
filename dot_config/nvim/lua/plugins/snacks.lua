@@ -8,6 +8,7 @@ return {
 
     ---@type snacks.Config
     opts = {
+      cmdline = { enabled = false },
       bigfile = { enabled = true },
       bufdelete = { enabled = true },
       dim = { enabled = true },
