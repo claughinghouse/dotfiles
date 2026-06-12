@@ -3,6 +3,7 @@ alias k kubectl
 alias n nvim
 alias n. 'nvim .'
 alias t tmux
+alias ta tmux attach
 
 # Protect npm package installs with Socket Firewall.
 alias npm 'sfw npm'
