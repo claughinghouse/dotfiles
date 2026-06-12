@@ -7,6 +7,12 @@ set -euo pipefail
 
 export PATH="/home/linuxbrew/.linuxbrew/bin:$HOME/.local/bin:$PATH"
 
+# sysup is meant to be unattended; ignore shell/env settings that make
+# Homebrew ask before installs/upgrades.
+unset HOMEBREW_ASK
+export HOMEBREW_NO_ASK=1
+export NONINTERACTIVE=1
+
 # ── apt ──
 printf "\nUpdating apt packages...\n"
 sudo apt update
@@ -32,7 +38,7 @@ tap {{ . | quote }}
 brew {{ . | quote }}
 {{ end -}}
 EOF
-brew upgrade
+brew upgrade --yes
 brew cleanup
 brew doctor || true
 
