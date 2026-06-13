@@ -14,6 +14,42 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local oxfmt_config_files = {
+  ".oxfmtrc.json",
+  ".oxfmtrc.jsonc",
+  "oxfmt.config.ts",
+  "oxfmt.config.mts",
+  "oxfmt.config.cts",
+  "oxfmt.config.js",
+  "oxfmt.config.mjs",
+  "oxfmt.config.cjs",
+}
+
+local function find_oxfmt_config(filename)
+  local root = vim.fs.root(filename, oxfmt_config_files)
+  if not root then
+    return nil
+  end
+
+  for _, name in ipairs(oxfmt_config_files) do
+    local path = root .. "/" .. name
+    if vim.uv.fs_stat(path) then
+      return path
+    end
+  end
+end
+
+local function oxfmt_args(_, ctx)
+  local args = { "--stdin-filepath", ctx.filename }
+  local config = find_oxfmt_config(ctx.filename)
+
+  if config then
+    vim.list_extend(args, { "--config", config, "--disable-nested-config" })
+  end
+
+  return args
+end
+
 require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
@@ -30,6 +66,17 @@ require("lazy").setup({
     -- colorscheme
     { "catppuccin/nvim", name = "catppuccin", opts = { flavour = "mocha" } },
     { "LazyVim/LazyVim", opts = { colorscheme = "catppuccin" } },
+
+    {
+      "stevearc/conform.nvim",
+      opts = {
+        formatters = {
+          oxfmt = {
+            args = oxfmt_args,
+          },
+        },
+      },
+    },
 
     -- import/override with your plugins
     { import = "plugins" },
