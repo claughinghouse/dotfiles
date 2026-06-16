@@ -64,6 +64,11 @@ if command -v vp &> /dev/null; then
   printf "Updating vp (vite-plus)...\n"
   vp update
 fi
+
+if command -v pi &> /dev/null; then
+  printf "Updating pi coding agent...\n"
+  pi update
+fi
 SCRIPT
 
 sudo chmod +x /usr/local/bin/brewup
@@ -136,6 +141,11 @@ fi
 if command -v vp &> /dev/null; then
   printf "Updating vp (vite-plus)...\n"
   vp upgrade
+fi
+
+if command -v pi &> /dev/null; then
+  printf "Updating pi coding agent...\n"
+  pi update
 fi
 SCRIPT
 

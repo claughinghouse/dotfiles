@@ -91,6 +91,12 @@ if command -v vp &> /dev/null; then
     vp update
 fi
 
+# pi coding agent
+if command -v pi &> /dev/null; then
+    printf "Updating pi coding agent...\n"
+    pi update
+fi
+
 # ── oh-my-zsh ──
 if [ -d "$HOME/.oh-my-zsh" ]; then
     printf "\nUpdating oh-my-zsh...\n"
