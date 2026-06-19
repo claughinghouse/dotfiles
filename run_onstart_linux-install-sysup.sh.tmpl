@@ -46,15 +46,12 @@ brew doctor || true
 brew link --force {{ . | quote }}
 {{ end -}}
 
-printf "\nUpdating Neovim plugins...\n"
-nvim --headless "+Lazy! sync" +qa 2>/dev/null || true
-
 # ── AWS CLI ──
 if command -v aws &> /dev/null; then
     printf "\nChecking AWS CLI updates...\n"
-    AWS_CURRENT=$(aws --version 2>&1 | grep -Po 'aws-cli/\K[0-9]+\.[0-9]+\.[0-9]+')
-    AWS_LATEST=$(curl -s "https://api.github.com/repos/aws/aws-cli/releases/latest" | grep -Po '"tag_name": "\K[^"]*')
-    if [ "$AWS_CURRENT" != "$AWS_LATEST" ]; then
+    AWS_CURRENT=$(aws --version 2>&1 | grep -Po 'aws-cli/\K[0-9]+\.[0-9]+\.[0-9]+' || true)
+    AWS_LATEST=$(curl -s "https://api.github.com/repos/aws/aws-cli/releases/latest" | grep -Po '"tag_name": "\K[^"]*' || true)
+    if [ -n "$AWS_CURRENT" ] && [ -n "$AWS_LATEST" ] && [ "$AWS_CURRENT" != "$AWS_LATEST" ]; then
         echo "Updating AWS CLI ${AWS_CURRENT} -> ${AWS_LATEST}..."
         curl "https://awscli.amazonaws.com/awscli-exe-linux-$(uname -m).zip" -o "/tmp/awscliv2.zip"
         unzip -q -o /tmp/awscliv2.zip -d /tmp
@@ -62,7 +59,7 @@ if command -v aws &> /dev/null; then
         rm -rf /tmp/awscliv2.zip /tmp/aws
         echo "AWS CLI updated to ${AWS_LATEST}"
     else
-        echo "AWS CLI already at latest (${AWS_CURRENT})"
+        echo "AWS CLI already at latest (${AWS_CURRENT:-unknown})"
     fi
 fi
 
@@ -80,21 +77,21 @@ sudo chmod +x /usr/local/bin/httpstat
 echo "httpstat updated"
 
 # plannotator
-if command -v plannotator &> /dev/null; then
-    printf "Updating plannotator...\n"
-    curl -fsSL https://plannotator.ai/install.sh | bash
+if [ -x "$HOME/.local/bin/plannotator" ]; then
+  printf "Updating plannotator...\n"
+  curl -fsSL https://plannotator.ai/install.sh | bash -s -- --non-interactive
 fi
 
 # vp (vite-plus)
 if command -v vp &> /dev/null; then
-    printf "Updating vp (vite-plus)...\n"
-    vp update
+  printf "Updating vp (vite-plus)...\n"
+  vp update
 fi
 
 # pi coding agent
 if command -v pi &> /dev/null; then
-    printf "Updating pi coding agent...\n"
-    pi update
+  printf "Updating pi coding agent...\n"
+  pi update
 fi
 
 # ── oh-my-zsh ──
