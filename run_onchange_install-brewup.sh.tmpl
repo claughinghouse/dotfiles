@@ -53,7 +53,7 @@ brew link --force {{ . | quote }}
 {{ end -}}
 
 printf "Updating bun global dependencies...\n"
-bun update --global
+bun update --global || true
 
 if [ -x "$HOME/.local/bin/plannotator" ]; then
   printf "Updating plannotator...\n"
@@ -86,7 +86,7 @@ unset HOMEBREW_ASK
 export HOMEBREW_NO_ASK=1
 export NONINTERACTIVE=1
 
-export PATH="/home/linuxbrew/.linuxbrew/bin:$HOME/.local/bin:$PATH"
+export PATH="$HOME/.bun/bin:/home/linuxbrew/.linuxbrew/bin:$HOME/.local/bin:$PATH"
 
 if ! command -v brew &> /dev/null; then
   printf "Installing Homebrew...\n"
@@ -131,7 +131,7 @@ brew link --force {{ . | quote }}
 {{ end -}}
 
 printf "Updating bun global dependencies...\n"
-bun update --global
+bun update --global || true
 
 if [ -x "$HOME/.local/bin/plannotator" ]; then
   printf "Updating plannotator...\n"

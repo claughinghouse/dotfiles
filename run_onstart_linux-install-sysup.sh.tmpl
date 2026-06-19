@@ -5,7 +5,7 @@ cat <<'SCRIPT' | sudo tee /usr/local/bin/sysup > /dev/null
 #!/bin/bash
 set -euo pipefail
 
-export PATH="/home/linuxbrew/.linuxbrew/bin:$HOME/.local/bin:$PATH"
+export PATH="$HOME/.bun/bin:/home/linuxbrew/.linuxbrew/bin:$HOME/.local/bin:$PATH"
 
 # sysup is meant to be unattended; ignore shell/env settings that make
 # Homebrew ask before installs/upgrades.
@@ -65,7 +65,7 @@ fi
 
 # ── bun global dependencies ──
 printf "\nUpdating bun global dependencies...\n"
-bun update --global
+bun update --global || true
 
 # ── piped installers ──
 printf "\nChecking piped installers...\n"
