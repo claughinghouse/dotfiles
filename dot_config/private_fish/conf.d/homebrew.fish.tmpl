@@ -1,6 +1,7 @@
 {{- if eq .chezmoi.os "linux" }}
 if test -x /home/linuxbrew/.linuxbrew/bin/brew
     eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+    fish_add_path --global --move --path /usr/bin
 end
 {{- else if eq .chezmoi.os "darwin" }}
 {{- if eq .chezmoi.arch "arm64" }}

@@ -152,6 +152,7 @@ packages:
       - "podman-compose"
       - "procps"
       - "python3-podman"
+      - "python3-yaml"
       - "qemu-system"
       - "qemu-user-static"
       - "tmux"
