@@ -168,6 +168,7 @@ packages:
     global:
       - "vite-plus"
       - "cf"
+      - "codex"
       - "opencode-ai"
       - "sfw"
       - "@earendil-works/pi-coding-agent"
