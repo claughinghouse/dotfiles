@@ -1,81 +1,214 @@
 ---
 name: improve-codebase-architecture
-description: Find deepening opportunities in a codebase, informed by the domain language in CONTEXT.md and the decisions in docs/adr/. Use when the user wants to improve architecture, find refactoring opportunities, consolidate tightly-coupled modules, or make a codebase more testable and AI-navigable.
+description: Find standards-backed architecture refactor opportunities.
+disable-model-invocation: true
 ---
 
 # Improve Codebase Architecture
 
-Surface architectural friction and propose **deepening opportunities** — refactors that turn shallow modules into deep ones. The aim is testability and AI-navigability.
+Scan a codebase for architecture improvement opportunities grounded in `../coding-standards/`. This is planning-only: do not edit code, run refactors, update docs, create ADRs, run tests, or run static checks unless the user explicitly asks after the scan.
 
-## Glossary
+The output is a globally ranked set of refactor candidates. Each candidate names the concrete friction, the standards areas involved, and the leverage the refactor would create.
 
-Use these terms exactly in every suggestion. Consistent language is the point — don't drift into "component," "service," "API," or "boundary." Full definitions in [LANGUAGE.md](LANGUAGE.md).
+## Principles
 
-- **Module** — anything with an interface and an implementation (function, class, package, slice).
-- **Interface** — everything a caller must know to use the module: types, invariants, error modes, ordering, config. Not just the type signature.
-- **Implementation** — the code inside.
-- **Depth** — leverage at the interface: a lot of behaviour behind a small interface. **Deep** = high leverage. **Shallow** = interface nearly as complex as the implementation.
-- **Seam** — where an interface lives; a place behaviour can be altered without editing in place. (Use this, not "boundary.")
-- **Adapter** — a concrete thing satisfying an interface at a seam.
-- **Leverage** — what callers get from depth.
-- **Locality** — what maintainers get from depth: change, bugs, knowledge concentrated in one place.
+- Look holistically across the coding standards; do not privilege one lens such as deepening.
+- Prefer architecture opportunities with concrete leverage: safer invariants, clearer boundaries, smaller caller burden, stronger locality, better test seams, clearer runtime ownership, or reduced duplicated policy.
+- Evidence beats vibes. Every candidate needs concrete files, call paths, caller burden, duplicated behavior, leaked DTOs, bad seams, test contortions, or runtime friction.
+- Do not estimate effort. Effort estimation is left to humans.
+- Do not produce a tech spec. Prepare a brief for `../tech-spec/` when the user chooses a candidate.
+- Do not design for backwards compatibility, migrations, rollout, backfill, dual-write/read paths, or deployment sequencing unless the user explicitly asks.
 
-Key principles (see [LANGUAGE.md](LANGUAGE.md) for the full list):
+## 1. Establish scan scope
 
-- **Deletion test**: imagine deleting the module. If complexity vanishes, it was a pass-through. If complexity reappears across N callers, it was earning its keep.
-- **The interface is the test surface.**
-- **One adapter = hypothetical seam. Two adapters = real seam.**
+Use the user's explicit scope when provided: repo, directory, feature area, module, file set, or concern.
 
-This skill is _informed_ by the project's domain model. The domain language gives names to good seams; ADRs record decisions the skill should not re-litigate.
+When no scope is provided:
 
-## Process
+1. Inspect the repository shape enough to understand size and major areas.
+2. If the repository is small or the likely area is obvious from the prompt, scan that scope.
+3. If the repository is large and the prompt gives no useful focus, ask one question to choose scope.
 
-### 1. Explore
+Do not ask for scope if code inspection can answer it.
 
-Read the project's domain glossary and any ADRs in the area you're touching first.
+Completion criterion: the scan scope is explicit, either from the user, inferred from repository structure, or chosen after one question.
 
-Then walk the codebase using your tools (`read`, `grep`, `find`, `bash`). Don't follow rigid heuristics — explore organically and note where you experience friction:
+## 2. Load standards and local context
 
-- Where does understanding one concept require bouncing between many small modules?
-- Where are modules **shallow** — interface nearly as complex as the implementation?
-- Where have pure functions been extracted just for testability, but the real bugs hide in how they're called (no **locality**)?
-- Where do tightly-coupled modules leak across their seams?
-- Which parts of the codebase are untested, or hard to test through their current interface?
+Read the core standards:
 
-Apply the **deletion test** to anything you suspect is shallow: would deleting it concentrate complexity, or just move it? A "yes, concentrates" is the signal you want.
+- `../coding-standards/SKILL.md`
+- `../coding-standards/VOCABULARY.md`
+- `../coding-standards/DESIGNING_MODULES.md`
+- `../coding-standards/DOMAIN_MODELING.md`
+- `../coding-standards/BOUNDARIES_AND_PARSING.md`
+- `../coding-standards/ERROR_HANDLING.md`
+- `../coding-standards/TESTING_AND_VERIFICATION.md`
 
-### 2. Present candidates as an HTML report
+Load optional standards when the repository or scan scope touches them:
 
-Write a self-contained HTML file to the OS temp directory so nothing lands in the repo. Resolve the temp dir from `$TMPDIR`, falling back to `/tmp` (or `%TEMP%` on Windows), and write to `<tmpdir>/architecture-review-<timestamp>.html` so each run gets a fresh file. Open it for the user — `xdg-open <path>` on Linux, `open <path>` on macOS, `start <path>` on Windows — and tell them the absolute path.
+- `../coding-standards/OBSERVABILITY.md` for tracing, logging, telemetry, redaction, or safe summaries.
+- `../coding-standards/ASYNC_AND_WORKFLOWS.md` for cancellation, promise ownership, concurrency, retries, idempotency, transactions, or workflows.
+- `../coding-standards/TYPESCRIPT_CONTRACTS.md` for casts, `any`, exported contracts, collection/object-shape friction, JSDoc, or toolchain architecture.
+- `../coding-standards/CLOUDFLARE_ARCHITECTURE.md` for Workers, bindings, Durable Objects, Agents, D1, KV/R2, Queues, Workflows, service bindings, or workerd runtime hops.
+- `../coding-standards/EFFECT.md` for Effect Services/Layers, typed error channels, Schema, Redacted values, Effect tests, or Effect RPC.
 
-The report uses **Tailwind via CDN** for layout and styling, and **Mermaid via CDN** for diagrams where a graph/flow/sequence reliably communicates the structure. Mix Mermaid with hand-crafted CSS/SVG visuals — use Mermaid when relationships are graph-shaped (call graphs, dependencies, sequences), and hand-built divs/SVG when you want something more editorial (mass diagrams, cross-sections, collapse animations). Each candidate gets a **before/after visualisation**. Be visual.
+Read local context when present and relevant:
 
-For each candidate, the same template as before, but rendered as a card:
+- `CONTEXT.md` or similar project domain language files.
+- ADRs near the scanned area.
+- Existing modules, adapters, tests, parsers, error types, and entrypoints around the scan scope.
 
-- **Files** — which files/modules are involved
-- **Problem** — why the current architecture is causing friction
-- **Solution** — plain English description of what would change
-- **Benefits** — explained in terms of locality and leverage, and how tests would improve
-- **Before / After diagram** — side-by-side, custom-drawn, illustrating the shallowness and the deepening
-- **Recommendation strength** — one of `Strong`, `Worth exploring`, `Speculative`, rendered as a badge
+Completion criterion: the scan uses project vocabulary and loaded standards, and it does not suggest a new pattern before checking local precedent in the scanned area.
 
-End the report with a **Top recommendation** section: which candidate you'd tackle first and why.
+## 3. Inspect code only
 
-**Use CONTEXT.md vocabulary for the domain, and [LANGUAGE.md](LANGUAGE.md) vocabulary for the architecture.** If `CONTEXT.md` defines "Order," talk about "the Order intake module" — not "the FooBarHandler," and not "the Order service."
+Explore the codebase with file reads and search. Do not run tests, type checks, lint, formatters, package scripts, build commands, or static analysis commands as part of this skill.
 
-**ADR conflicts**: if a candidate contradicts an existing ADR, only surface it when the friction is real enough to warrant revisiting the ADR. Mark it clearly in the card (e.g. a warning callout: _"contradicts ADR-0007 — but worth reopening because…"_). Don't list every theoretical refactor an ADR forbids.
+If subagents or parallel exploration are available and the scan scope is broad enough, use them only to gather observations. The final candidate ranking and recommendations remain your synthesis.
 
-See [HTML-REPORT.md](HTML-REPORT.md) for the full HTML scaffold, diagram patterns, and styling guidance.
+Look for architecture friction across standards areas:
 
-Do NOT propose interfaces yet. After the file is written, ask the user: "Which of these would you like to explore?"
+- domain invariants scattered across callers;
+- missing or weak domain types, value classes, operation inputs, or state machines;
+- boundary input that is validated but not parsed, repeatedly shape-checked, cast, or leaked inward;
+- storage rows, protocol DTOs, or runtime-hop payloads crossing into application/domain modules;
+- expected failures hidden as throws/rejections or broad error contracts;
+- custom errors without stable tags or safe context;
+- secrets, raw payloads, or unknown thrown values reaching diagnostics;
+- pass-through modules, accidental interfaces, adapter sprawl, dependency bags, hidden globals;
+- repeated orchestration or duplicated policy across entrypoints/callers;
+- ambient time, randomness, IDs, resources, or platform bindings outside composition seams;
+- missing cancellation propagation, floating promises, accidental sequential awaits, retry-unsafe mutation, or unclear workflow state;
+- tests reaching past interfaces, using module mocks/spies, or forcing poor seams;
+- TypeScript escape hatches, mutable exported contracts, unclear optionality, broad shapes, or object/projection hazards;
+- Cloudflare binding leakage, context loss at runtime hops, split stateful-object identity, hot-path coordinators, or storage topology friction;
+- Effect code bypassing established Services/Layers, typed channels, Schema, Redacted, or Effect-aware tests.
 
-### 3. Grilling loop
+Completion criterion: each potential candidate is tied to concrete files, call paths, interfaces, tests, values, or runtime seams.
 
-Once the user picks a candidate, drop into a grilling conversation. Walk the design tree with them — constraints, dependencies, the shape of the deepened module, what sits behind the seam, what tests survive.
+## 4. Form architecture candidates
 
-Side effects happen inline as decisions crystallize:
+A candidate is not a complaint. It is a refactor opportunity with a direction and expected leverage.
 
-- **Naming a deepened module after a concept not in `CONTEXT.md`?** Add the term to `CONTEXT.md` — same discipline as `/grill-with-docs` (see [CONTEXT-FORMAT.md](../grill-with-docs/CONTEXT-FORMAT.md)). Create the file lazily if it doesn't exist.
-- **Sharpening a fuzzy term during the conversation?** Update `CONTEXT.md` right there.
-- **User rejects the candidate with a load-bearing reason?** Offer an ADR, framed as: _"Want me to record this as an ADR so future architecture reviews don't re-suggest it?"_ Only offer when the reason would actually be needed by a future explorer to avoid re-suggesting the same thing — skip ephemeral reasons ("not worth it right now") and self-evident ones. See [ADR-FORMAT.md](../grill-with-docs/ADR-FORMAT.md).
-- **Want to explore alternative interfaces for the deepened module?** See [INTERFACE-DESIGN.md](INTERFACE-DESIGN.md).
+For each candidate, identify:
+
+- the module, cluster, boundary, flow, or topology to improve;
+- standards areas involved;
+- concrete evidence of current friction;
+- the refactor direction;
+- what complexity, invariant, policy, parsing, error handling, orchestration, or runtime knowledge moves where;
+- expected leverage, locality, safety, diagnosability, and testability gains;
+- likely test strategy through real seams;
+- recommendation strength: `Strong`, `Worth exploring`, or `Speculative`.
+
+Use lightweight ASCII diagrams only when they clarify a call stack, seam, or before/after ownership better than prose.
+
+Do not include effort estimates.
+
+Completion criterion: every candidate has evidence, standards tags, a refactor direction, expected gain, test strategy, and recommendation strength.
+
+## 5. Rank and prune
+
+Rank candidates globally by architectural leverage, not by standards area.
+
+Prefer candidates that:
+
+- remove caller burden from multiple sites;
+- make invalid states unconstructable or boundary trust explicit;
+- concentrate policy, invariants, or orchestration in the module that owns them;
+- replace implicit runtime/platform knowledge with explicit seams;
+- improve behavior testing through public interfaces or real adapters;
+- reduce repeated parsing, repeated error translation, repeated authorization, or repeated projection;
+- close correctness, safety, observability, async, or runtime risks.
+
+Downgrade or drop candidates that are:
+
+- only aesthetic;
+- speculative future flexibility;
+- local cleanup with no architecture leverage;
+- contradicted by a sound local convention;
+- impossible to support with concrete evidence;
+- really implementation work rather than architectural opportunity.
+
+Completion criterion: the final list contains only candidates worth a human choosing to explore.
+
+## 6. Suggest context or ADR updates, but do not write them
+
+If `CONTEXT.md` exists and the scan reveals stable domain language that should be named, suggest the exact term or clarification to add.
+
+If a candidate conflicts with an ADR, mention the conflict only when current friction is concrete enough to justify revisiting the decision.
+
+If the user rejects a candidate for a durable architectural reason that future scans would otherwise rediscover, suggest recording an ADR and summarize what it should capture.
+
+Do not create or update `CONTEXT.md` or ADR files unless the user explicitly asks.
+
+Completion criterion: documentation suggestions are specific and durable, not automatic artifact creation.
+
+## 7. Present candidates and ask what to explore
+
+Return candidate cards in globally ranked order. Tag each with standards areas.
+
+Candidate card shape:
+
+```md
+### <Candidate title> — <Strong | Worth exploring | Speculative>
+
+- **Standards areas:** Domain Modeling; Boundaries and Parsing; Designing Modules; ...
+- **Files/modules:** `path`, `path`
+- **Current friction:** <why the current architecture creates caller burden, risk, duplicated policy, poor seam, or test friction>
+- **Evidence:** <concrete files, call path, repeated pattern, leaked representation, invalid state path, or test contortion>
+- **Refactor direction:** <what changes at the architecture level; no full interface design yet>
+- **Expected leverage:** <what callers, maintainers, tests, or runtime behavior gain>
+- **Likely test strategy:** <how behavior would be verified through public interfaces or real seams>
+- **Context/ADR note:** <optional; only when durable>
+```
+
+If useful, add a small diagram:
+
+```txt
+Current:  Handler -> parse? -> raw DTO -> Service -> raw row -> callers branch
+Proposed: Handler -> Parser -> Domain Input -> Service Module -> Adapter -> Result
+```
+
+End with:
+
+```md
+Top recommendation: <candidate title> — <why this has the best leverage>
+
+Which candidate would you like to explore with a tech-spec brief?
+```
+
+Do not propose detailed final interfaces in the candidate scan unless a tiny sketch is necessary to explain the opportunity.
+
+Completion criterion: the user can choose a candidate without needing a full implementation design.
+
+## 8. When the user chooses a candidate
+
+Do not write the tech spec inside this skill. Prepare a concise brief for `../tech-spec/` with:
+
+- chosen candidate title;
+- files/modules involved;
+- problem and current friction;
+- standards areas to load;
+- known constraints and invariants;
+- suspected seams, boundaries, adapters, and call stacks;
+- evidence gathered;
+- open questions;
+- context/ADR suggestions, if any.
+
+Then tell the user to run the tech-spec workflow on that brief.
+
+If the chosen candidate needs more product/domain/ownership decisions before a spec can be written, recommend a grilling session first. Use `../grill-with-docs/` when durable discovery artifacts are desired; otherwise use `../grill-me/`.
+
+Completion criterion: the chosen candidate is handed off as a focused brief, not transformed into an implementation plan or code changes.
+
+## Rejected framings
+
+- **"Architecture scan means deepening only."** Deep modules are one lens; scan across all coding standards.
+- **"A candidate is a vibe."** No evidence, no candidate.
+- **"Run the tests to see what's wrong."** This skill inspects architecture; verification commands belong to other workflows.
+- **"Estimate effort."** Humans estimate effort.
+- **"Write the spec now."** Tech specs are owned by the tech-spec workflow.
+- **"Refactor while scanning."** Scanning is planning-only.
+- **"Add migrations/backwards compatibility just in case."** Target-state design is the default unless the user asks for migration planning.
