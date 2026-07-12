@@ -93,7 +93,7 @@ packages:
       - "sdl2"
       - "shfmt"
       - "siderolabs/tap/sidero-tools"
-      - "talosctl"
+      - "siderolabs/tap/talosctl"
       - "sops"
       - "sqlite3"
       - "ssh-audit"
@@ -136,6 +136,7 @@ packages:
       - "kavehtehrani/tap"
       - "go-task/tap"
       - "RfidResearchGroup/proxmark3"
+      - "siderolabs/tap"
       - "sst/tap"
     mas:
       # - "417375580" # BetterSnapTool

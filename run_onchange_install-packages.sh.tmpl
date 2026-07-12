@@ -25,23 +25,33 @@ else
   printf '\n\nHomebrew found. Continuing...'
 fi
 
+printf '\nTrusting Homebrew taps...\n'
+{{ range .packages.homebrew.taps -}}
+brew tap {{ . | quote }} 2>/dev/null || true
+brew trust {{ . | quote }} 2>/dev/null || true
+{{ end -}}
+{{ range .packages.darwin.taps -}}
+brew tap {{ . | quote }} 2>/dev/null || true
+brew trust {{ . | quote }} 2>/dev/null || true
+{{ end -}}
+
 printf '\nInstalling Homebrew packages...\n'
 
 brew bundle --force --file=/dev/stdin <<EOF
 {{ range .packages.homebrew.taps -}}
-tap {{ . | quote }}
+tap {{ . | quote }}, trusted: true
 {{ end -}}
 {{ range .packages.darwin.taps -}}
-tap {{ . | quote }}
+tap {{ . | quote }}, trusted: true
 {{ end -}}
 {{ range .packages.homebrew.brews -}}
-brew {{ . | quote }}
+brew {{ . | quote }}, trusted: true
 {{ end -}}
 {{ range .packages.darwin.brews -}}
-brew {{ . | quote }}
+brew {{ . | quote }}, trusted: true
 {{ end -}}
 {{ range .packages.darwin.casks -}}
-cask {{ . | quote }}
+cask {{ . | quote }}, trusted: true
 {{ end -}}
 EOF
 
@@ -49,19 +59,19 @@ printf '\nRemoving apps not managed in Chezmoi...\n'
 
 brew bundle cleanup --force --file=/dev/stdin <<EOF
 {{ range .packages.homebrew.taps -}}
-tap {{ . | quote }}
+tap {{ . | quote }}, trusted: true
 {{ end -}}
 {{ range .packages.darwin.taps -}}
-tap {{ . | quote }}
+tap {{ . | quote }}, trusted: true
 {{ end -}}
 {{ range .packages.homebrew.brews -}}
-brew {{ . | quote }}
+brew {{ . | quote }}, trusted: true
 {{ end -}}
 {{ range .packages.darwin.brews -}}
-brew {{ . | quote }}
+brew {{ . | quote }}, trusted: true
 {{ end -}}
 {{ range .packages.darwin.casks -}}
-cask {{ . | quote }}
+cask {{ . | quote }}, trusted: true
 {{ end -}}
 EOF
 
@@ -119,20 +129,30 @@ fi
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
+printf '\nTrusting Homebrew taps...\n'
+{{ range .packages.homebrew.taps -}}
+brew tap {{ . | quote }} 2>/dev/null || true
+brew trust {{ . | quote }} 2>/dev/null || true
+{{ end -}}
+{{ range .packages.linux.taps -}}
+brew tap {{ . | quote }} 2>/dev/null || true
+brew trust {{ . | quote }} 2>/dev/null || true
+{{ end -}}
+
 printf '\nInstalling Homebrew packages...\n'
 
 brew bundle --force --file=/dev/stdin <<EOF
 {{ range .packages.homebrew.taps -}}
-tap {{ . | quote }}
+tap {{ . | quote }}, trusted: true
 {{ end -}}
 {{ range .packages.linux.taps -}}
-tap {{ . | quote }}
+tap {{ . | quote }}, trusted: true
 {{ end -}}
 {{ range .packages.homebrew.brews -}}
-brew {{ . | quote }}
+brew {{ . | quote }}, trusted: true
 {{ end -}}
 {{ range .packages.linux.brews -}}
-brew {{ . | quote }}
+brew {{ . | quote }}, trusted: true
 {{ end -}}
 EOF
 
@@ -140,16 +160,16 @@ printf '\nRemoving Homebrew packages not managed in Chezmoi...\n'
 
 brew bundle cleanup --force --file=/dev/stdin <<EOF
 {{ range .packages.homebrew.taps -}}
-tap {{ . | quote }}
+tap {{ . | quote }}, trusted: true
 {{ end -}}
 {{ range .packages.linux.taps -}}
-tap {{ . | quote }}
+tap {{ . | quote }}, trusted: true
 {{ end -}}
 {{ range .packages.homebrew.brews -}}
-brew {{ . | quote }}
+brew {{ . | quote }}, trusted: true
 {{ end -}}
 {{ range .packages.linux.brews -}}
-brew {{ . | quote }}
+brew {{ . | quote }}, trusted: true
 {{ end -}}
 EOF
 
