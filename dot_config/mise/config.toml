@@ -3,7 +3,6 @@
 npm.package_manager = "auto"
 
 [tools]
-aube = "latest"
 node = "lts"
 "npm:@kitlangton/ghui" = "latest"
 "npm:cf" = "latest"

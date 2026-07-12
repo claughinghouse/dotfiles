@@ -3,6 +3,7 @@ packages:
     taps:
       - "oven-sh/bun"
     brews:
+      - "aube"
       - "direnv"
       - "fd"
       - "fish"
